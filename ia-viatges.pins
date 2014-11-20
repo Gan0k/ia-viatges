@@ -1,4 +1,8 @@
-; Thu Nov 20 15:58:31 CET 2014
+; Thu Nov 20 20:15:08 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
+
+([ia-viatges_Class19] of  Oceania
+
+	(name_city "Brunei"))

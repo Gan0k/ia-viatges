@@ -1,4 +1,4 @@
-; Thu Nov 20 15:58:31 CET 2014
+; Thu Nov 20 20:15:08 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -6,27 +6,196 @@
 
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
-	(role abstract))
+	(role abstract)
+	(single-slot name_poi
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot destinations_are
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(inverse-slot type_destination_is)
+		(create-accessor read-write))
+	(multislot accomodations_are
+		(type INSTANCE)
+;+		(allowed-classes Accomodation)
+;+		(inverse-slot is_in)
+		(create-accessor read-write))
+	(single-slot name_city
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot has_activities_kids
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot rating
+		(type INTEGER)
+		(range 0 5)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot is_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+;+		(inverse-slot accomodations_are)
+		(create-accessor read-write))
+	(single-slot has_war
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot type_hotel
+		(type SYMBOL)
+		(allowed-values Luxury Budget Regular)
+		(default Regular)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot has_ebola
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot type_dest_is
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot type_dest
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot poi_are
+		(type INSTANCE)
+;+		(allowed-classes PointOfInterest)
+;+		(inverse-slot poi_is_in)
+		(create-accessor read-write))
+	(single-slot name_accom
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot has_pool
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot inverse_of_destinations_are
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+		(create-accessor read-write))
+	(multislot type_city
+		(type SYMBOL)
+		(allowed-values BigEuropeanCity MediterraneanCity ScandinavianCity)
+		(create-accessor read-write))
+	(single-slot far_from_city
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot type_destination_is
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+;+		(cardinality 1 1)
+;+		(inverse-slot destinations_are)
+		(create-accessor read-write))
+	(single-slot poi_is_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+;+		(inverse-slot poi_are)
+		(create-accessor read-write))
+	(single-slot is_youth_hostel
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
 
 (defclass Accomodation
 	(is-a USER)
-	(role concrete))
+	(role concrete)
+	(single-slot rating
+		(type INTEGER)
+		(range 0 5)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot is_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot name_accom
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
 
 (defclass Hostel
 	(is-a Accomodation)
-	(role concrete))
+	(role concrete)
+	(single-slot is_youth_hostel
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
 
 (defclass Camping
 	(is-a Accomodation)
-	(role concrete))
+	(role concrete)
+	(single-slot has_activities_kids
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot far_from_city
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot has_pool
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
 
 (defclass Hotel
 	(is-a Accomodation)
-	(role concrete))
+	(role concrete)
+	(single-slot type_hotel
+		(type SYMBOL)
+		(allowed-values Luxury Budget Regular)
+		(default Regular)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
 
 (defclass Destination
 	(is-a USER)
-	(role concrete))
+	(role concrete)
+	(multislot inverse_of_destinations_are
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+		(create-accessor read-write))
+	(single-slot type_dest_is
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot name_city
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot poi_are
+		(type INSTANCE)
+;+		(allowed-classes PointOfInterest)
+		(create-accessor read-write))
+	(single-slot type_destination_is
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot accomodations_are
+		(type INSTANCE)
+;+		(allowed-classes Accomodation)
+		(create-accessor read-write)))
 
 (defclass City
 	(is-a Destination)
@@ -38,7 +207,11 @@
 
 (defclass Europe
 	(is-a City)
-	(role concrete))
+	(role concrete)
+	(multislot type_city
+		(type SYMBOL)
+		(allowed-values BigEuropeanCity MediterraneanCity ScandinavianCity)
+		(create-accessor read-write)))
 
 (defclass Oceania
 	(is-a City)
@@ -48,7 +221,7 @@
 	(is-a City)
 	(role concrete))
 
-(defclass SothAmerica
+(defclass SouthAmerica
 	(is-a City)
 	(role concrete))
 
@@ -56,9 +229,27 @@
 	(is-a City)
 	(role concrete))
 
+(defclass Africa
+	(is-a City)
+	(role concrete)
+	(single-slot has_ebola
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
 (defclass PointOfInterest
 	(is-a USER)
-	(role concrete))
+	(role concrete)
+	(single-slot name_poi
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot poi_is_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
 
 (defclass Cultural
 	(is-a PointOfInterest)
@@ -84,12 +275,12 @@
 	(is-a Leisure)
 	(role concrete))
 
-(defclass Night
+(defclass Nightlife
 	(is-a PointOfInterest)
 	(role concrete))
 
 (defclass Club
-	(is-a Night)
+	(is-a Nightlife)
 	(role concrete))
 
 (defclass Sport
@@ -100,8 +291,20 @@
 	(is-a Sport)
 	(role concrete))
 
-(defclass Stadium
+(defclass Event
 	(is-a Sport)
+	(role concrete))
+
+(defclass TuristPoint
+	(is-a PointOfInterest)
+	(role concrete))
+
+(defclass Building
+	(is-a TuristPoint)
+	(role concrete))
+
+(defclass Park
+	(is-a TuristPoint)
 	(role concrete))
 
 (defclass Transport
@@ -123,3 +326,15 @@
 (defclass Boat
 	(is-a Transport)
 	(role concrete))
+
+(defclass TypeDestination
+	(is-a USER)
+	(role concrete)
+	(multislot destinations_are
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+		(create-accessor read-write))
+	(single-slot type_dest
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
