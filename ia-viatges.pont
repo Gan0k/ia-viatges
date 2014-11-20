@@ -1,4 +1,4 @@
-; Thu Nov 20 15:17:19 CET 2014
+; Thu Nov 20 15:58:31 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -8,10 +8,118 @@
 	(is-a USER)
 	(role abstract))
 
-(defclass Administrative_Division "https://en.wikipedia.org/wiki/Administrative_division"
+(defclass Accomodation
 	(is-a USER)
 	(role concrete))
 
-(defclass Country
-	(is-a Administrative_Division)
+(defclass Hostel
+	(is-a Accomodation)
+	(role concrete))
+
+(defclass Camping
+	(is-a Accomodation)
+	(role concrete))
+
+(defclass Hotel
+	(is-a Accomodation)
+	(role concrete))
+
+(defclass Destination
+	(is-a USER)
+	(role concrete))
+
+(defclass City
+	(is-a Destination)
+	(role concrete))
+
+(defclass Asia
+	(is-a City)
+	(role concrete))
+
+(defclass Europe
+	(is-a City)
+	(role concrete))
+
+(defclass Oceania
+	(is-a City)
+	(role concrete))
+
+(defclass NorthAmerica
+	(is-a City)
+	(role concrete))
+
+(defclass SothAmerica
+	(is-a City)
+	(role concrete))
+
+(defclass CentralAmerica
+	(is-a City)
+	(role concrete))
+
+(defclass PointOfInterest
+	(is-a USER)
+	(role concrete))
+
+(defclass Cultural
+	(is-a PointOfInterest)
+	(role concrete))
+
+(defclass Museum
+	(is-a Cultural)
+	(role concrete))
+
+(defclass Theatre
+	(is-a Cultural)
+	(role concrete))
+
+(defclass Leisure "Relaxation"
+	(is-a PointOfInterest)
+	(role concrete))
+
+(defclass Beach
+	(is-a Leisure)
+	(role concrete))
+
+(defclass Spa
+	(is-a Leisure)
+	(role concrete))
+
+(defclass Night
+	(is-a PointOfInterest)
+	(role concrete))
+
+(defclass Club
+	(is-a Night)
+	(role concrete))
+
+(defclass Sport
+	(is-a PointOfInterest)
+	(role concrete))
+
+(defclass Mountain
+	(is-a Sport)
+	(role concrete))
+
+(defclass Stadium
+	(is-a Sport)
+	(role concrete))
+
+(defclass Transport
+	(is-a USER)
+	(role concrete))
+
+(defclass Bus
+	(is-a Transport)
+	(role concrete))
+
+(defclass Plane
+	(is-a Transport)
+	(role concrete))
+
+(defclass Train
+	(is-a Transport)
+	(role concrete))
+
+(defclass Boat
+	(is-a Transport)
 	(role concrete))
