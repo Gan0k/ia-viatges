@@ -1,4 +1,4 @@
-; Fri Nov 28 11:26:50 CET 2014
+; Fri Nov 28 12:44:01 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -25,6 +25,12 @@
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(single-slot departure
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+;+		(inverse-slot can_go_to)
+		(create-accessor read-write))
 	(single-slot has_activities_kids
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
@@ -50,11 +56,27 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(multislot can_be_reached
+		(type INSTANCE)
+;+		(allowed-classes Transport)
+;+		(inverse-slot arrival)
+		(create-accessor read-write))
 	(single-slot type_hotel
 		(type SYMBOL)
 		(allowed-values Luxury Budget Regular)
 		(default Regular)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot can_go_to
+		(type INSTANCE)
+;+		(allowed-classes Transport)
+;+		(inverse-slot departure)
+		(create-accessor read-write))
+	(single-slot arrival
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+;+		(inverse-slot can_be_reached)
 		(create-accessor read-write))
 	(single-slot has_ebola
 		(type SYMBOL)
@@ -174,6 +196,10 @@
 (defclass Destination
 	(is-a USER)
 	(role concrete)
+	(multislot can_be_reached
+		(type INSTANCE)
+;+		(allowed-classes Transport)
+		(create-accessor read-write))
 	(multislot inverse_of_destinations_are
 		(type INSTANCE)
 ;+		(allowed-classes TypeDestination)
@@ -195,6 +221,10 @@
 		(type INSTANCE)
 ;+		(allowed-classes TypeDestination)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot can_go_to
+		(type INSTANCE)
+;+		(allowed-classes Transport)
 		(create-accessor read-write))
 	(multislot accomodations_are
 		(type INSTANCE)
@@ -301,16 +331,7 @@
 
 (defclass TuristPoint
 	(is-a PointOfInterest)
-	(role concrete)
-	(single-slot name_poi
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot poi_is_in
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+	(role concrete))
 
 (defclass Building
 	(is-a TuristPoint)
@@ -322,7 +343,17 @@
 
 (defclass Transport
 	(is-a USER)
-	(role concrete))
+	(role concrete)
+	(single-slot arrival
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot departure
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
 
 (defclass Bus
 	(is-a Transport)
