@@ -12,6 +12,7 @@ Restriccions:
 	Num dies (min/max)
 	Num ciutats (min/max)
 	Num dies/ciutat (min/max)
+	Duracio del viatge (per evitar)
 	Presupost
 	Restriccions de transport
 	Minim qualitat allotjaments
@@ -26,3 +27,5 @@ Preferencies
 	Paisos segurs (malalties, seguretat)
 
 
+Solucio ha de tenir dos plans de viatge i imprimir les preferencies del usuari que s'han complert
+Tambe pot pasar que no es puguin complir les restriccions. En tal cal, notificar-ho.
