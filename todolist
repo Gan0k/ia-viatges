@@ -1,0 +1,28 @@
+TODO--
+
+Caracteristiques Usuaris:
+	Edad
+	Nivell cultural
+	Viatjara amb nens
+	Viatge especial (boda ^ fi de curs)
+    Num persones
+    Objectiu
+
+Restriccions:
+	Num dies (min/max)
+	Num ciutats (min/max)
+	Num dies/ciutat (min/max)
+	Presupost
+	Restriccions de transport
+	Minim qualitat allotjaments
+
+Preferencies
+	Importa mes presupost que duracio | qualitat (ratio de valoracio de cada cosa)
+	Preferencia de visitar ciutats/llocs menys coneguts
+	-- nostres
+	Continent de preferencia
+	Preferencia d'anar a llocs mes llunys de l'origen
+	Clima (Temperatura, pluja, etc.)
+	Paisos segurs (malalties, seguretat)
+
+

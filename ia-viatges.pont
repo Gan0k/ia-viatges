@@ -1,4 +1,4 @@
-; Thu Nov 20 20:15:08 CET 2014
+; Fri Nov 28 11:26:50 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -29,6 +29,10 @@
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot inverse_of_ia-viatges_Class1
+		(type INSTANCE)
+;+		(allowed-classes Camping)
 		(create-accessor read-write))
 	(single-slot rating
 		(type INTEGER)
@@ -297,7 +301,16 @@
 
 (defclass TuristPoint
 	(is-a PointOfInterest)
-	(role concrete))
+	(role concrete)
+	(single-slot name_poi
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot poi_is_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
 
 (defclass Building
 	(is-a TuristPoint)
