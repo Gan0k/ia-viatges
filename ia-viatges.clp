@@ -92,3 +92,43 @@
 ;;; Fi declaracio classes propies
 
 ;;; Main will have a multislot of 2 Trip instances
+
+;;; Declaracio de moduls ----------------------------
+
+;;; Modul principal d'utilitats, indiquem que exportem tot
+(defmodule MAIN (export ?ALL))
+
+;;; Modul de recopilacio de dades del usuari
+(defmodule recopilation-user
+    (import MAIN ?ALL)
+    (export ?ALL)
+)
+
+(defmodule recopilation-prefs
+    (import MAIN ?ALL)
+    (import recopilacion-usuario deftemplate ?ALL)
+    (export ?ALL)
+)
+
+;;; Modul de filtrat i procesat del contingut adequat del usuari
+(defmodule process-data
+    (import MAIN ?ALL)
+    (import recopilacion-usuario deftemplate ?ALL)
+    (import recopilacion-prefs deftemplate ?ALL)
+    (export ?ALL)
+)
+
+;;; Modul de generacio de solucions
+(defmodule generate-data
+    (import MAIN ?ALL)
+    (export ?ALL)
+)
+
+
+;;; Modul de presentacio de resultats
+(defmodule presentation
+    (import MAIN ?ALL)
+    (export ?ALL)
+)
+
+;;; Fin declaracion de modulos ------------------------
