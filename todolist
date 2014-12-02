@@ -29,3 +29,6 @@ Preferencies
 
 Solucio ha de tenir dos plans de viatge i imprimir les preferencies del usuari que s'han complert
 Tambe pot pasar que no es puguin complir les restriccions. En tal cal, notificar-ho.
+
+Idea: a la ontologia guaradar per cada destinació quin és el cost d'anar a 
+QUALSEVOL altre destinació??
