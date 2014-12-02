@@ -2,11 +2,11 @@ TODO--
 
 Caracteristiques Usuaris:
 	Edad
-	Nivell cultural
+	Nivell cultural nivell-cult sym
 	Viatjara amb nens
-	Viatge especial (boda ^ fi de curs)
-    Num persones
-    Objectiu
+	Viatge especial (boda ^ fi de curs) tipus-viatge
+    Num persones num-pers int
+    Objectiu objectiu-viatge descans, Cultural, romantic, diversion
 
 Restriccions:
 	Num dies (min/max)

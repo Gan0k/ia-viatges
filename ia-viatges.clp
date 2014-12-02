@@ -38,7 +38,7 @@
     (role concrete)
     (slot numero-dies
         (type INTEGER)
-        (create-acessor read-write))
+        (create-accessor read-write))
     (slot desti
         (type INSTANCE)
         (create-accessor read-write))
@@ -61,6 +61,7 @@
 (defclass Viatje
     (is-a USER)
     (role concrete)
+    ;; Llocs visitats
     (multislot destins-visitats
         (type INSTANCE)
         (create-accessor read-write))
@@ -83,11 +84,6 @@
     ;(multislot transports
     ;    (type INSTANCE)
     ;    (create-accessor read-write))
-
-    ; Llista de llocs visitats 
-    (multislot destins-visitats
-        (type INSTANCE)
-        (create-accessor read-write))
 )
 
 
@@ -101,21 +97,30 @@
 (defmodule MAIN (export ?ALL))
 
 ;;; Modul de recopilacio de dades del usuari
-(defmodule recopilarcio-usr
+(defmodule recopilacio-usuari
     (import MAIN ?ALL)
+    (export ?ALL)
+)
+
+;;; Modul de recopilacio de restriccions
+(defmodule recopilacio-restriccions
+    (import MAIN ?ALL)
+    (import recopilacio-usuari deftemplate ?ALL)
     (export ?ALL)
 )
 
 (defmodule recopilacio-prefs
     (import MAIN ?ALL)
-    (import recopilacio-usr deftemplate ?ALL)
+    (import recopilacio-usuari deftemplate ?ALL)
+    (import recopilacio-restriccions deftemplate ?ALL)
     (export ?ALL)
 )
 
 ;;; Modul de filtrat i procesat del contingut adequat del usuari
 (defmodule process-data
     (import MAIN ?ALL)
-    (import recopilacio-usr deftemplate ?ALL)
+    (import recopilacio-usuari deftemplate ?ALL)
+    (import recopilacio-restriccions deftemplate ?ALL)
     (import recopilacio-prefs deftemplate ?ALL)
     (export ?ALL)
 )
@@ -137,48 +142,13 @@
 ;;; Declaracio de missatges ---------------------------
 
 ;; Imprime los datos de un contenido
-(defmessage-handler MAIN::Contenido imprimir ()
-    (format t "Titulo: %s %n" ?self:titulo)
-    (format t "Formato: %s" (class ?self))
-    (printout t crlf)
-    (format t "Anyo: %d" ?self:anyo)
-    (printout t crlf)
-    (printout t "País: ")
-    (progn$ (?curr-pais (send ?self get-hecha_en))
-        (format t "%s " (send ?curr-pais get-nacionalidad))
-    )
-    (printout t crlf)
-    (format t "Idioma: %s" (send ?self:en_idioma get-idioma))   
-    (printout t crlf)
-    (format t "Duración: %d" ?self:duracion)
-    (printout t crlf)
-    (format t "Edad mínima recomendada: %d" ?self:clasificacion_edades)
-    (printout t crlf)
-    (format t "Puntuación de los usuarios: %d" ?self:puntuacion)
-    (printout t crlf)
+(defmessage-handler MAIN::Viatje imprimir ()
+    (printout t "Imprimint viatje")
 )
 
-(defmessage-handler MAIN::Recomendacion imprimir ()
-    (printout t "-----------------------------------" crlf)
-    (printout t (send ?self:contenido imprimir))
-    (printout t crlf)
-    (format t "Nivel de recomendación: %d %n" ?self:puntuacion)
-    (printout t "Justificación: " crlf)
-    (progn$ (?curr-just ?self:justificaciones)
-        (printout t ?curr-just crlf)
-    )
-    (printout t crlf)
-    (printout t "-----------------------------------" crlf)
-)
-
-(defmessage-handler MAIN::Dia imprimir ()
-    (printout t "============================================" crlf)
-    (printout t (instance-name ?self) crlf)
-    (bind $?recs ?self:recomendaciones)
-    (progn$ (?curr-rec $?recs)
-        (printout t (send ?curr-rec imprimir))
-    )
-    (printout t "============================================" crlf)
+;; Imprimir el dia
+(defmessage-handler MAIN::DestinacionsVisitades imprimir ()
+    (printout "Imprimint destinacions visitades")
 )
     
 
@@ -190,40 +160,217 @@
 ;; Template per guardar l'informacio de l'usuari
 (deftemplate MAIN::Usuari
     (slot nom (type STRING))
-    (slot sexe (type SYMBOL) (default desconegut))
     (slot edat (type INTEGER) (default -1))
+    (slot num-pers (type INTEGER) (default -1))
+    ;; Familia adolescents, Familia nens petits, FALSE
     (slot familia (type SYMBOL) (default desconegut))
+    ;; Alt, Normal , Baix
+    (slot nivell-cult (type SYMBOL) (default desconegut))
+    ;; Boda, fin de curso, 
+    (slot tipus-viatge (type SYMBOL) (default desconegut))
+    ;; descans, Cultural, romantic, diversion
+    (slot objectiu-viatge (type SYMBOL) (default desconegut))
+)
+
+;;; Template per les restriccions del usuari
+(deftemplate MAIN::restriccions
+    (slot num-dies (type INTEGER))
+    (slot num-ciutats (type INTEGER))
+    (slot num-dies-ciutat (type INTEGER))
+    (slot presupost (type INTEGER))
+    (multislot rest-transport (type INSTANCE))
+    (slot min-quaitat-allotjament (type INSTANCE))
+)
+
+;;; Template per les preferencies del usuari
+(deftemplate MAIN::preferencies
+    (slot ratio-qual-diners (type INTEGER))
+    (slot preferencia-llocs-exotics (type INTEGER))
+    (slot pref-continent (type INSTANCE))
+    (slot pref-clima (type SYMBOL))
 )
 
 ;;; Fi declaracio templates -----------------------
 
+;;; Declaracio de funcios ------------------------
+
+;;; funcio per fer preguntes generals
+(deffunction pregunta-general (?pregunta)
+    (format t "%s " ?pregunta)
+    (bind ?resposta (read))
+    (while (not (lexemep ?resposta)) do
+        (format t "%s " ?pregunta)
+        (bind ?resposta (read))
+    )
+    ?resposta
+)
+
+;;; Funcio per una pregunta general general con una serie de respostes admeses
+(deffunction MAIN::pregunta-opcions (?question $?allowed-values)
+   (format t "%s "?question)
+   (progn$ (?curr-value $?allowed-values)
+        (format t "[%s]" ?curr-value)
+    )
+   (printout t ": ")
+   (bind ?answer (read))
+   (if (lexemep ?answer) 
+       then (bind ?answer (lowcase ?answer)))
+   (while (not (member ?answer ?allowed-values)) do
+      (format t "%s "?question)
+      (progn$ (?curr-value $?allowed-values)
+        (format t "[%s]" ?curr-value)
+      )
+      (printout t ": ")
+      (bind ?answer (read))
+      (if (lexemep ?answer) 
+          then (bind ?answer (lowcase ?answer))))
+   ?answer
+)
+   
+;;; Funcio per fer una pregunta de tipus si/no
+(deffunction MAIN::pregunta-si-no (?question)
+   (bind ?response (pregunta-opcions ?question si no))
+   (if (or (eq ?response si) (eq ?response s))
+       then TRUE 
+       else FALSE)
+)
+
+;;; Funcio per fer una pregunta de resposta numerica unica
+(deffunction MAIN::pregunta-numerica (?pregunta ?rangini ?rangfi)
+    (format t "%s [%d, %d] " ?pregunta ?rangini ?rangfi)
+    (bind ?resposta (read))
+    (while (not(and(>= ?resposta ?rangini)(<= ?resposta ?rangfi))) do
+        (format t "%s [%d, %d] " ?pregunta ?rangini ?rangfi)
+        (bind ?resposta (read))
+    )
+    ?resposta
+)
+
+;;; Funcio para hacer pregunta con index de respostas possibles
+(deffunction MAIN::pregunta-index (?pregunta $?valors-possibles)
+    (bind ?linia (format nil "%s" ?pregunta))
+    (printout t ?linia crlf)
+    (progn$ (?var ?valors-possibles) 
+            (bind ?linia (format nil "  %d. %s" ?var-index ?var))
+            (printout t ?linia crlf)
+    )
+    (bind ?resposta (pregunta-numerica "Escoge una opción:" 1 (length$ ?valors-possibles)))
+    ?resposta
+)
+
+;;; Funcio para hacer una pregunta multi-resposta con indexs
+(deffunction pregunta-multi (?pregunta $?valors-possibles)
+    (bind ?linia (format nil "%s" ?pregunta))
+    (printout t ?linia crlf)
+    (progn$ (?var ?valors-possibles) 
+            (bind ?linia (format nil "  %d. %s" ?var-index ?var))
+            (printout t ?linia crlf)
+    )
+    (format t "%s" "Indica els numeros separats per espai: ")
+    (bind ?resp (readline))
+    (bind ?numeros (str-explode ?resp))
+    (bind $?llista (create$ ))
+    (progn$ (?var ?numeros) 
+        (if (and (integerp ?var) (and (>= ?var 1) (<= ?var (length$ ?valors-possibles))))
+            then 
+                (if (not (member$ ?var ?llista))
+                    then (bind ?llista (insert$ ?llista (+ (length$ ?llista) 1) ?var))
+                )
+        ) 
+    )
+    ?llista
+)
+
+;;; Fi declaracio de funcions
 
 
-
-;;; Declaracion de reglas y hechos
-
-;;; Declaracion de reglas y hechos ---------------------
+;;; Declaracio de regles i fets ---------------------
 
 ;; Primera regla que s'executa
 (defrule MAIN::initialRule "Regla inicial"
     (declare (salience 10))
     =>
     (printout t "====================================================================" crlf)
-    (printout t "=  Sistema de recomendacio de viatjes al fin del mundo y mas allá  =" crlf)
+    (printout t "=  Sistema de recomanacio de viatjes al fin del mundo y mas allá  =" crlf)
     (printout t "====================================================================" crlf)
     (printout t crlf)   
     (printout t "¡Benvingut al sistema de recomenacio de viatges. A continuacio se li formularan unes preguntes per poder recomenarli viatjes." crlf)
     (printout t crlf)
-    (focus recopilacio-usr)
+    (focus recopilacio-usuari)
 )
 
 ;; Modul recopilacio
-(defrule recopilacio-usr::establir-nom "Estableix el nom de l'usuari"
+
+(defrule recopilacio-usuari::establir-nom "Estableix el nom de l'usuari"
     (not (Usuari))
     =>
     (bind ?nom (pregunta-general "Com et dius? "))
     (assert (Usuari (nom ?nom)))
 )
 
+(defrule recopilacio-usuari::establir-numpers "Estableix el nombre de persones que faran el viatge"
+    ?u <- (Usuari (num-pers ?num))
+    (test (< ?num 0))
+    =>
+    (bind ?e (pregunta-numerica "Quates persones faran el viatge?" 1 10))
+    (modify ?u (num-pers ?e))
+)
+
+(defrule recopilacio-usuari::establir-edat "Estableix l'edat del usuari"
+    ?u <- (Usuari (edat ?edat))
+    (test (< ?edat 0))
+    =>
+    (bind ?e (pregunta-numerica "¿Quants anys tens? " 1 110))
+    (modify ?u (edat ?e))
+)
+
+(defrule recopilacio-usuari::establir-nivellcult "Estableix el nivell cultural del usuari"
+    ?u <- (Usuari (nivell-cult desconegut))
+    =>
+    (bind ?e (pregunta-opcions "Tens interes en la cultura?" alt normal baix))
+    (modify ?u (nivell-cult ?e))
+)
+
+(defrule recopilacio-usuari::establir-tipusviatge "Estableix el tipus de viatge del usuari"
+    ?u <- (Usuari (tipus-viatge desconegut))
+    =>
+    (bind ?e (pregunta-index "El teu viatge es tracta d'una celebracio especial?" boda "viatge de fi de curs" no))
+    (switch ?e
+        (case 1 then
+            (modify ?u (tipus-viatge boda))
+        )
+        (case 2 then
+            (modify ?u (tipus-viatge fi-curs))
+        )
+        (case 3 then
+            (modify ?u (tipus-viatge FALSE))
+        )
+    )
+)
+
+(defrule recopilacio-usuari::establir-objectiu "Estableix l'objectiu del viatge"
+    ?u <- (Usuari (objectiu-viatge desconegut))
+    =>
+    (bind ?e (pregunta-opcions "Quin es l'objectiu del viatge? " diversio romantic cultural descans))
+    (modify ?u (objectiu-viatge ?e))
+)
+
+(defrule recopilacio-usuari::familia "Estableix si viatja amb familia"
+    ?u <- (Usuari (familia desconegut))
+    =>
+    (bind ?r (pregunta-si-no "¿Viatjara amb fills?"))
+    (if (eq ?r TRUE) then
+        (bind ?s (pregunta-opcions "Com son els fills" adolescents petits))
+        (modify ?u (familia ?s))
+    else (modify ?u (familia FALSE))    
+    )
+)
 
 
+(defrule recopilacio-usuari::pasar-a-preferencies "Pasa a la recopilacio de preferencies"
+    (declare (salience 10))
+    ?u <- (Usuari (edat ?e)) ;Posar condicio per passar a preferencies
+    (test (> ?e 0))
+    =>
+    (focus recopilacio-prefs)
+)
