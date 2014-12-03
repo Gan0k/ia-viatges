@@ -4,7 +4,7 @@ Caracteristiques Usuaris:
 	Edad
 	Nivell cultural nivell-cult (alt, mitj baix)
 	Viatjara amb fill (si / no)
-    Edat dels nens (adolescents / nens)
+    Edat dels fills (1-100)
   
 	Viatge especial (boda XOR fi de curs) tipus-viatge
     Num persones num-pers int

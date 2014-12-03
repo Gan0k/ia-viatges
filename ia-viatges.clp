@@ -169,7 +169,6 @@
     ;; Boda, fin de curso, 
     (slot tipus-viatge (type SYMBOL) (default desconegut))
     ;; descans, Cultural, romantic, diversion
-    ;; es dedueix a partir dels POIS que te la destination
     (slot objectiu-viatge (type SYMBOL) (default desconegut))
 )
 
@@ -181,23 +180,30 @@
     (slot presupost (type INTEGER))
     (multislot rest-transport (type INSTANCE))
     (slot min-quaitat-allotjament (type INSTANCE))
-    (multislot restr-continent (type INSTANCE))
 )
 
 ;;; Template per les preferencies del usuari
 (deftemplate MAIN::preferencies
     (slot ratio-qual-diners (type INTEGER))
-    ;; boolean integer, only indicates preference to go far
     (slot preferencia-llocs-exotics (type INTEGER))
-    (slot pref-popularitat (type INTEGER))
-    (multislot pref-continent (type INSTANCE))
-    ;; tropical, mediterrani, escandinau etc. 
-    (multislot pref-clima (type SYMBOL))
+    (slot pref-continent (type INSTANCE))
+    (slot pref-clima (type SYMBOL))
 )
 
 ;;; Fi declaracio templates -----------------------
 
 ;;; Declaracio de funcios ------------------------
+
+;;; Funcio per obtenir el minim valor d'una llista numerica
+(deffunction minim-valor ($?lista)
+    (bind ?minim 100000000000)
+    (progn$ (?curr $?lista)
+        (if (< ?curr ?minim) then
+            (bind ?minim ?curr)
+        )
+		)
+    ?minim
+)
 
 ;;; funcio per fer preguntes generals
 (deffunction pregunta-general (?pregunta)
@@ -296,7 +302,7 @@
     (declare (salience 10))
     =>
     (printout t "====================================================================" crlf)
-    (printout t "=  Sistema de recomanacio de viatjes al fin del mundo y mas alla   =" crlf)
+    (printout t "=  Sistema de recomanacio de viatjes al fin del mundo y mas allá  =" crlf)
     (printout t "====================================================================" crlf)
     (printout t crlf)   
     (printout t "¡Benvingut al sistema de recomenacio de viatges. A continuacio se li formularan unes preguntes per poder recomenarli viatjes." crlf)
@@ -317,8 +323,33 @@
     ?u <- (Usuari (num-pers ?num))
     (test (< ?num 0))
     =>
-    (bind ?e (pregunta-numerica "Quates persones faran el viatge?" 1 10))
+    (bind ?e (pregunta-numerica "Quantes persones faran el viatge?" 1 10))
     (modify ?u (num-pers ?e))
+)
+
+;; check if this works, should be asked after numpers
+(defrule recopilacio-usuari::familia "Estableix si viatja amb familia"
+    ?u <- (Usuari (familia desconegut))
+    =>
+    (bind ?numFills (pregunta-numerica "Quants viatjants son menors?" 0 10))
+    (if (> ?numFills 0) then
+        (bind ?llista (create$))
+        (bind ?i 0)
+
+        (while (< ?i ?numFills) do
+            (bind ?e (pregunta-numerica "Edat del fill" 0 30))
+            (bind ?llista (insert$ ?llista 1 ?e))
+            (bind ?i (+ 1 ?i))
+        )
+
+        (bind ?minimEdat (minim-valor ?llista))
+        ;; Menys de 10 anys, nen, else, adolescents
+        (if (< ?minimEdat 10) then
+            (modify ?u (familia nens))
+        else
+            (modify ?u (familia adolescents))
+        )
+    )
 )
 
 (defrule recopilacio-usuari::establir-edat "Estableix l'edat del usuari"
@@ -353,6 +384,7 @@
     )
 )
 
+
 (defrule recopilacio-usuari::establir-objectiu "Estableix l'objectiu del viatge"
     ?u <- (Usuari (objectiu-viatge desconegut))
     =>
@@ -360,16 +392,6 @@
     (modify ?u (objectiu-viatge ?e))
 )
 
-(defrule recopilacio-usuari::familia "Estableix si viatja amb familia"
-    ?u <- (Usuari (familia desconegut))
-    =>
-    (bind ?r (pregunta-si-no "Viatjara amb fills?"))
-    (if (eq ?r TRUE) then
-        (bind ?s (pregunta-opcions "Com son els fills?" adolescents petits))
-        (modify ?u (familia ?s))
-    else (modify ?u (familia FALSE))    
-    )
-)
 
 
 (defrule recopilacio-usuari::pasar-a-preferencies "Pasa a la recopilacio de preferencies"
