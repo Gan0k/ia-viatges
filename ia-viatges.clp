@@ -358,9 +358,9 @@
 (defrule recopilacio-usuari::familia "Estableix si viatja amb familia"
     ?u <- (Usuari (familia desconegut))
     =>
-    (bind ?r (pregunta-si-no "¿Viatjara amb fills?"))
+    (bind ?r (pregunta-si-no "Viatjara amb fills?"))
     (if (eq ?r TRUE) then
-        (bind ?s (pregunta-opcions "Com son els fills" adolescents petits))
+        (bind ?s (pregunta-opcions "Com son els fills?" adolescents petits))
         (modify ?u (familia ?s))
     else (modify ?u (familia FALSE))    
     )
