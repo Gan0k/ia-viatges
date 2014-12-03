@@ -2,9 +2,11 @@ TODO--
 
 Caracteristiques Usuaris:
 	Edad
-	Nivell cultural nivell-cult sym
-	Viatjara amb nens
-	Viatge especial (boda ^ fi de curs) tipus-viatge
+	Nivell cultural nivell-cult (alt, mitj baix)
+	Viatjara amb fill (si / no)
+    Edat dels nens (adolescents / nens)
+  
+	Viatge especial (boda XOR fi de curs) tipus-viatge
     Num persones num-pers int
     Objectiu objectiu-viatge descans, Cultural, romantic, diversion
 
@@ -19,12 +21,10 @@ Restriccions:
 
 Preferencies
 	Importa mes presupost que duracio | qualitat (ratio de valoracio de cada cosa)
-	Preferencia de visitar ciutats/llocs menys coneguts
-	-- nostres
+	Preferencia de visitar ciutats/llocs menys coneguts (popularitat)
 	Continent de preferencia
-	Preferencia d'anar a llocs mes llunys de l'origen
 	Clima (Temperatura, pluja, etc.)
-	Paisos segurs (malalties, seguretat)
+  Preferencia de llocs exotics (llocs llunyans)
 
 
 Solucio ha de tenir dos plans de viatge i imprimir les preferencies del usuari que s'han complert
