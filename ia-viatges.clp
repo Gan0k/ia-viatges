@@ -187,7 +187,7 @@
 ;;; Template per les preferencies del usuari
 (deftemplate MAIN::preferencies
     (slot ratio-qual-diners (type INTEGER))
-    ;; boolean integer, only indicates if preference to go far
+    ;; boolean integer, only indicates preference to go far
     (slot preferencia-llocs-exotics (type INTEGER))
     (slot pref-popularitat (type INTEGER))
     (multislot pref-continent (type INSTANCE))
