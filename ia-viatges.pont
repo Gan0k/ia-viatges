@@ -1,4 +1,4 @@
-; Fri Nov 28 12:44:01 CET 2014
+; Wed Dec 03 12:08:03 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -25,6 +25,12 @@
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(single-slot has_climate
+		(type INSTANCE)
+;+		(allowed-classes Clima)
+;+		(cardinality 1 1)
+;+		(inverse-slot is_present_in)
+		(create-accessor read-write))
 	(single-slot departure
 		(type INSTANCE)
 ;+		(allowed-classes Destination)
@@ -36,14 +42,19 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot inverse_of_ia-viatges_Class1
-		(type INSTANCE)
-;+		(allowed-classes Camping)
-		(create-accessor read-write))
 	(single-slot rating
 		(type INTEGER)
 		(range 0 5)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot popularity
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot is_present_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(inverse-slot has_climate)
 		(create-accessor read-write))
 	(single-slot is_in
 		(type INSTANCE)
@@ -55,6 +66,10 @@
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot name_continent
+		(type STRING)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot can_be_reached
 		(type INSTANCE)
@@ -72,11 +87,22 @@
 ;+		(allowed-classes Transport)
 ;+		(inverse-slot departure)
 		(create-accessor read-write))
+	(single-slot is_in_continent
+		(type INSTANCE)
+;+		(allowed-classes Continent)
+;+		(cardinality 1 1)
+;+		(inverse-slot has_destinations)
+		(create-accessor read-write))
 	(single-slot arrival
 		(type INSTANCE)
 ;+		(allowed-classes Destination)
 ;+		(cardinality 1 1)
 ;+		(inverse-slot can_be_reached)
+		(create-accessor read-write))
+	(multislot has_destinations
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(inverse-slot is_in_continent)
 		(create-accessor read-write))
 	(single-slot has_ebola
 		(type SYMBOL)
@@ -105,6 +131,10 @@
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot name_cliamte
+		(type STRING)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot inverse_of_destinations_are
 		(type INSTANCE)
@@ -196,13 +226,17 @@
 (defclass Destination
 	(is-a USER)
 	(role concrete)
+	(multislot inverse_of_destinations_are
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+		(create-accessor read-write))
 	(multislot can_be_reached
 		(type INSTANCE)
 ;+		(allowed-classes Transport)
 		(create-accessor read-write))
-	(multislot inverse_of_destinations_are
-		(type INSTANCE)
-;+		(allowed-classes TypeDestination)
+	(single-slot popularity
+		(type INTEGER)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot type_dest_is
 		(type INSTANCE)
@@ -222,55 +256,32 @@
 ;+		(allowed-classes TypeDestination)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot can_go_to
+	(single-slot has_climate
 		(type INSTANCE)
-;+		(allowed-classes Transport)
+;+		(allowed-classes Clima)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot accomodations_are
 		(type INSTANCE)
 ;+		(allowed-classes Accomodation)
+		(create-accessor read-write))
+	(multislot can_go_to
+		(type INSTANCE)
+;+		(allowed-classes Transport)
+		(create-accessor read-write))
+	(single-slot is_in_continent
+		(type INSTANCE)
+;+		(allowed-classes Continent)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass City
 	(is-a Destination)
 	(role concrete))
 
-(defclass Asia
-	(is-a City)
+(defclass Mountain
+	(is-a Destination)
 	(role concrete))
-
-(defclass Europe
-	(is-a City)
-	(role concrete)
-	(multislot type_city
-		(type SYMBOL)
-		(allowed-values BigEuropeanCity MediterraneanCity ScandinavianCity)
-		(create-accessor read-write)))
-
-(defclass Oceania
-	(is-a City)
-	(role concrete))
-
-(defclass NorthAmerica
-	(is-a City)
-	(role concrete))
-
-(defclass SouthAmerica
-	(is-a City)
-	(role concrete))
-
-(defclass CentralAmerica
-	(is-a City)
-	(role concrete))
-
-(defclass Africa
-	(is-a City)
-	(role concrete)
-	(single-slot has_ebola
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write)))
 
 (defclass PointOfInterest
 	(is-a USER)
@@ -321,10 +332,6 @@
 	(is-a PointOfInterest)
 	(role concrete))
 
-(defclass Mountain
-	(is-a Sport)
-	(role concrete))
-
 (defclass Event
 	(is-a Sport)
 	(role concrete))
@@ -339,6 +346,10 @@
 
 (defclass Park
 	(is-a TuristPoint)
+	(role concrete))
+
+(defclass FamiliarPlace
+	(is-a PointOfInterest)
 	(role concrete))
 
 (defclass Transport
@@ -381,4 +392,28 @@
 	(single-slot type_dest
 		(type STRING)
 ;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Continent
+	(is-a USER)
+	(role concrete)
+	(multislot has_destinations
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+		(create-accessor read-write))
+	(single-slot name_continent
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Clima
+	(is-a USER)
+	(role concrete)
+	(single-slot name_cliamte
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot is_present_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
 		(create-accessor read-write)))

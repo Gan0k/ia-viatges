@@ -1,8 +1,48 @@
-; Fri Nov 28 12:44:01 CET 2014
+; Wed Dec 03 12:08:03 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
 
-([ia-viatges_Class19] of  Oceania
+([ia-viatges_Class1] of  Continent
 
-	(name_city "Brunei"))
+	(name_continent "Europe"))
+
+([ia-viatges_Class10004] of  Clima
+
+	(name_cliamte "Tropical"))
+
+([ia-viatges_Class10005] of  Clima
+
+	(name_cliamte "Mediterrani"))
+
+([ia-viatges_Class10006] of  Clima
+
+	(name_cliamte "Escandinau"))
+
+([ia-viatges_Class10007] of  Clima
+
+	(name_cliamte "Equatorial"))
+
+([ia-viatges_Class10008] of  Clima
+
+	(name_cliamte "Alta_Muntanya"))
+
+([ia-viatges_Class2] of  Continent
+
+	(name_continent "Africa"))
+
+([ia-viatges_Class3] of  Continent
+
+	(name_continent "Asia"))
+
+([ia-viatges_Class4] of  Continent
+
+	(name_continent "Oceania"))
+
+([ia-viatges_Class5] of  Continent
+
+	(name_continent "NorthAmerica"))
+
+([ia-viatges_Class6] of  Continent
+
+	(name_continent "SouthAmerica"))

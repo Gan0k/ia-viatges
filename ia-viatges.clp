@@ -169,6 +169,7 @@
     ;; Boda, fin de curso, 
     (slot tipus-viatge (type SYMBOL) (default desconegut))
     ;; descans, Cultural, romantic, diversion
+    ;; es dedueix a partir dels POIS que te la destination
     (slot objectiu-viatge (type SYMBOL) (default desconegut))
 )
 
@@ -180,14 +181,18 @@
     (slot presupost (type INTEGER))
     (multislot rest-transport (type INSTANCE))
     (slot min-quaitat-allotjament (type INSTANCE))
+    (multislot restr-continent (type INSTANCE))
 )
 
 ;;; Template per les preferencies del usuari
 (deftemplate MAIN::preferencies
     (slot ratio-qual-diners (type INTEGER))
+    ;; boolean integer, only indicates if preference to go far
     (slot preferencia-llocs-exotics (type INTEGER))
-    (slot pref-continent (type INSTANCE))
-    (slot pref-clima (type SYMBOL))
+    (slot pref-popularitat (type INTEGER))
+    (multislot pref-continent (type INSTANCE))
+    ;; tropical, mediterrani, escandinau etc. 
+    (multislot pref-clima (type SYMBOL))
 )
 
 ;;; Fi declaracio templates -----------------------
@@ -291,7 +296,7 @@
     (declare (salience 10))
     =>
     (printout t "====================================================================" crlf)
-    (printout t "=  Sistema de recomanacio de viatjes al fin del mundo y mas allá  =" crlf)
+    (printout t "=  Sistema de recomanacio de viatjes al fin del mundo y mas alla   =" crlf)
     (printout t "====================================================================" crlf)
     (printout t crlf)   
     (printout t "¡Benvingut al sistema de recomenacio de viatges. A continuacio se li formularan unes preguntes per poder recomenarli viatjes." crlf)
