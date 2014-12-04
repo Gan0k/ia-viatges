@@ -1,4 +1,4 @@
-; Wed Dec 03 12:08:03 CET 2014
+; Thu Dec 04 15:38:40 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -22,6 +22,11 @@
 ;+		(inverse-slot is_in)
 		(create-accessor read-write))
 	(single-slot name_city
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot name_type_dest
+;+		(comment "Ex: Gran Ciutat Europea")
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
@@ -49,6 +54,7 @@
 		(create-accessor read-write))
 	(single-slot popularity
 		(type INTEGER)
+		(range 1 10)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot is_present_in
@@ -132,13 +138,13 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot name_cliamte
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(multislot inverse_of_destinations_are
 		(type INSTANCE)
 ;+		(allowed-classes TypeDestination)
+		(create-accessor read-write))
+	(single-slot name_cliamte
+		(type STRING)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot type_city
 		(type SYMBOL)
@@ -226,21 +232,17 @@
 (defclass Destination
 	(is-a USER)
 	(role concrete)
-	(multislot inverse_of_destinations_are
-		(type INSTANCE)
-;+		(allowed-classes TypeDestination)
-		(create-accessor read-write))
 	(multislot can_be_reached
 		(type INSTANCE)
 ;+		(allowed-classes Transport)
 		(create-accessor read-write))
-	(single-slot popularity
-		(type INTEGER)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot type_dest_is
+	(multislot inverse_of_destinations_are
 		(type INSTANCE)
 ;+		(allowed-classes TypeDestination)
+		(create-accessor read-write))
+	(single-slot popularity
+		(type INTEGER)
+		(range 1 10)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot name_city
@@ -256,18 +258,18 @@
 ;+		(allowed-classes TypeDestination)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot has_climate
+	(multislot can_go_to
 		(type INSTANCE)
-;+		(allowed-classes Clima)
-;+		(cardinality 1 1)
+;+		(allowed-classes Transport)
 		(create-accessor read-write))
 	(multislot accomodations_are
 		(type INSTANCE)
 ;+		(allowed-classes Accomodation)
 		(create-accessor read-write))
-	(multislot can_go_to
+	(single-slot has_climate
 		(type INSTANCE)
-;+		(allowed-classes Transport)
+;+		(allowed-classes Clima)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot is_in_continent
 		(type INSTANCE)
@@ -389,7 +391,8 @@
 		(type INSTANCE)
 ;+		(allowed-classes Destination)
 		(create-accessor read-write))
-	(single-slot type_dest
+	(single-slot name_type_dest
+;+		(comment "Ex: Gran Ciutat Europea")
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))

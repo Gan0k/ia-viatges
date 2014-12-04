@@ -1,11 +1,22 @@
-; Wed Dec 03 12:08:03 CET 2014
+; Thu Dec 04 15:38:40 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
 
+([ia-viatges_Class0] of  City
+
+	(has_climate [ia-viatges_Class10006])
+	(is_in_continent [ia-viatges_Class3])
+	(name_city "Barcelona")
+	(popularity 10)
+	(type_destination_is [ia-viatges_Class20004]))
+
 ([ia-viatges_Class1] of  Continent
 
 	(name_continent "Europe"))
+
+([ia-viatges_Class10001] of  Clima
+)
 
 ([ia-viatges_Class10004] of  Clima
 
@@ -17,6 +28,7 @@
 
 ([ia-viatges_Class10006] of  Clima
 
+	(is_present_in [ia-viatges_Class0])
 	(name_cliamte "Escandinau"))
 
 ([ia-viatges_Class10007] of  Clima
@@ -31,8 +43,14 @@
 
 	(name_continent "Africa"))
 
+([ia-viatges_Class20004] of  TypeDestination
+
+	(destinations_are [ia-viatges_Class0])
+	(name_type_dest "ciutat_mediterranea"))
+
 ([ia-viatges_Class3] of  Continent
 
+	(has_destinations [ia-viatges_Class0])
 	(name_continent "Asia"))
 
 ([ia-viatges_Class4] of  Continent
