@@ -1,4 +1,4 @@
-; Thu Dec 04 15:38:40 CET 2014
+; Thu Dec 04 16:01:53 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -87,6 +87,11 @@
 		(allowed-values Luxury Budget Regular)
 		(default Regular)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ia-viatges_Class20007
+		(type SYMBOL)
+;+		(allowed-parents)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot can_go_to
 		(type INSTANCE)

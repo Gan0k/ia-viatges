@@ -1,4 +1,4 @@
-; Thu Dec 04 15:38:40 CET 2014
+; Thu Dec 04 16:01:53 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -20,9 +20,9 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ia-viatges_ProjectKB_Class10156]
-		[ia-viatges_ProjectKB_Class10157]
-		[ia-viatges_ProjectKB_Class10158]))
+		[ia-viatges_ProjectKB_Class10163]
+		[ia-viatges_ProjectKB_Class10164]
+		[ia-viatges_ProjectKB_Class10165]))
 
 ([CLSES_TAB] of  Widget
 
@@ -63,17 +63,45 @@
 ([ia-viatges_ProjectKB_Class10150] of  Property_List
 )
 
-([ia-viatges_ProjectKB_Class10156] of  String
+([ia-viatges_ProjectKB_Class10159] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "ia-viatges_Class20007")
+	(property_list [ia-viatges_ProjectKB_Class10160])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 360))
+
+([ia-viatges_ProjectKB_Class10160] of  Property_List
+)
+
+([ia-viatges_ProjectKB_Class10161] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "ia-viatges_Class20007")
+	(property_list [ia-viatges_ProjectKB_Class10162])
+	(widget_class_name "edu.stanford.smi.protege.widget.ClsFieldWidget")
+	(width 200)
+	(x 0)
+	(y 360))
+
+([ia-viatges_ProjectKB_Class10162] of  Property_List
+)
+
+([ia-viatges_ProjectKB_Class10163] of  String
 
 	(name ":INSTANCE-ANNOTATION")
 	(string_value "%3AANNOTATION-TEXT"))
 
-([ia-viatges_ProjectKB_Class10157] of  String
+([ia-viatges_ProjectKB_Class10164] of  String
 
 	(name ":PAL-CONSTRAINT")
 	(string_value "%3APAL-NAME"))
 
-([ia-viatges_ProjectKB_Class10158] of  String
+([ia-viatges_ProjectKB_Class10165] of  String
 
 	(name ":META-CLASS")
 	(string_value "%3ANAME"))
