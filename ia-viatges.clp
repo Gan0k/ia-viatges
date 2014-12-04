@@ -17,12 +17,515 @@
 
 ;; Aqui va el .pons
 
+; Thu Dec 04 16:47:46 CET 2014
+; 
+;+ (version "3.4.8")
+;+ (build "Build 629")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(single-slot name_poi
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot destinations_are
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(inverse-slot type_destination_is)
+		(create-accessor read-write))
+	(multislot accomodations_are
+		(type INSTANCE)
+;+		(allowed-classes Accomodation)
+;+		(inverse-slot is_in)
+		(create-accessor read-write))
+	(single-slot name_city
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot name_type_dest
+;+		(comment "Ex: Gran Ciutat Europea")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot has_climate
+		(type INSTANCE)
+;+		(allowed-classes Clima)
+;+		(cardinality 1 1)
+;+		(inverse-slot is_present_in)
+		(create-accessor read-write))
+	(single-slot departure
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+;+		(inverse-slot can_go_to)
+		(create-accessor read-write))
+	(single-slot has_activities_kids
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot rating
+		(type INTEGER)
+		(range 0 5)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot popularity
+		(type INTEGER)
+		(range 1 10)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot is_present_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(inverse-slot has_climate)
+		(create-accessor read-write))
+	(single-slot is_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+;+		(inverse-slot accomodations_are)
+		(create-accessor read-write))
+	(single-slot has_war
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot name_continent
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot can_be_reached
+		(type INSTANCE)
+;+		(allowed-classes Transport)
+;+		(inverse-slot arrival)
+		(create-accessor read-write))
+	(single-slot type_hotel
+		(type SYMBOL)
+		(allowed-values Luxury Budget Regular)
+		(default Regular)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot ia-viatges_Class20007
+		(type SYMBOL)
+;+		(allowed-parents)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot can_go_to
+		(type INSTANCE)
+;+		(allowed-classes Transport)
+;+		(inverse-slot departure)
+		(create-accessor read-write))
+	(single-slot is_in_continent
+		(type INSTANCE)
+;+		(allowed-classes Continent)
+;+		(cardinality 1 1)
+;+		(inverse-slot has_destinations)
+		(create-accessor read-write))
+	(single-slot arrival
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+;+		(inverse-slot can_be_reached)
+		(create-accessor read-write))
+	(multislot has_destinations
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(inverse-slot is_in_continent)
+		(create-accessor read-write))
+	(single-slot has_ebola
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot type_dest_is
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot type_dest
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot poi_are
+		(type INSTANCE)
+;+		(allowed-classes PointOfInterest)
+;+		(inverse-slot poi_is_in)
+		(create-accessor read-write))
+	(single-slot name_accom
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot has_pool
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot name_cliamte
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot inverse_of_destinations_are
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+		(create-accessor read-write))
+	(multislot type_city
+		(type SYMBOL)
+		(allowed-values BigEuropeanCity MediterraneanCity ScandinavianCity)
+		(create-accessor read-write))
+	(single-slot far_from_city
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot type_destination_is
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+;+		(cardinality 1 1)
+;+		(inverse-slot destinations_are)
+		(create-accessor read-write))
+	(single-slot poi_is_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+;+		(inverse-slot poi_are)
+		(create-accessor read-write))
+	(single-slot is_youth_hostel
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Accomodation
+	(is-a USER)
+	(role concrete)
+	(single-slot rating
+		(type INTEGER)
+		(range 0 5)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot is_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot name_accom
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Hostel
+	(is-a Accomodation)
+	(role concrete)
+	(single-slot is_youth_hostel
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Camping
+	(is-a Accomodation)
+	(role concrete)
+	(single-slot has_activities_kids
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot far_from_city
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot has_pool
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Hotel
+	(is-a Accomodation)
+	(role concrete)
+	(single-slot type_hotel
+		(type SYMBOL)
+		(allowed-values Luxury Budget Regular)
+		(default Regular)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Destination
+	(is-a USER)
+	(role concrete)
+	(multislot inverse_of_destinations_are
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+		(create-accessor read-write))
+	(multislot can_be_reached
+		(type INSTANCE)
+;+		(allowed-classes Transport)
+		(create-accessor read-write))
+	(single-slot popularity
+		(type INTEGER)
+		(range 1 10)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot name_city
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot poi_are
+		(type INSTANCE)
+;+		(allowed-classes PointOfInterest)
+		(create-accessor read-write))
+	(single-slot type_destination_is
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot has_climate
+		(type INSTANCE)
+;+		(allowed-classes Clima)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot accomodations_are
+		(type INSTANCE)
+;+		(allowed-classes Accomodation)
+		(create-accessor read-write))
+	(multislot can_go_to
+		(type INSTANCE)
+;+		(allowed-classes Transport)
+		(create-accessor read-write))
+	(single-slot is_in_continent
+		(type INSTANCE)
+;+		(allowed-classes Continent)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass City
+	(is-a Destination)
+	(role concrete))
+
+(defclass Mountain
+	(is-a Destination)
+	(role concrete))
+
+(defclass Town
+	(is-a Destination)
+	(role concrete))
+
+(defclass PointOfInterest
+	(is-a USER)
+	(role concrete)
+	(single-slot name_poi
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot poi_is_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Cultural
+	(is-a PointOfInterest)
+	(role concrete))
+
+(defclass Museum
+	(is-a Cultural)
+	(role concrete))
+
+(defclass Theatre
+	(is-a Cultural)
+	(role concrete))
+
+(defclass Leisure "Relaxation"
+	(is-a PointOfInterest)
+	(role concrete))
+
+(defclass Beach
+	(is-a Leisure)
+	(role concrete))
+
+(defclass Spa
+	(is-a Leisure)
+	(role concrete))
+
+(defclass Nightlife
+	(is-a PointOfInterest)
+	(role concrete))
+
+(defclass Club
+	(is-a Nightlife)
+	(role concrete))
+
+(defclass Sport
+	(is-a PointOfInterest)
+	(role concrete))
+
+(defclass Event
+	(is-a Sport)
+	(role concrete))
+
+(defclass TuristPoint
+	(is-a PointOfInterest)
+	(role concrete))
+
+(defclass Building
+	(is-a TuristPoint)
+	(role concrete))
+
+(defclass Park
+	(is-a TuristPoint)
+	(role concrete))
+
+(defclass FamiliarPlace
+	(is-a PointOfInterest)
+	(role concrete))
+
+(defclass Transport
+	(is-a USER)
+	(role concrete)
+	(single-slot arrival
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot departure
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Bus
+	(is-a Transport)
+	(role concrete))
+
+(defclass Plane
+	(is-a Transport)
+	(role concrete))
+
+(defclass Train
+	(is-a Transport)
+	(role concrete))
+
+(defclass Boat
+	(is-a Transport)
+	(role concrete))
+
+(defclass TypeDestination
+	(is-a USER)
+	(role concrete)
+	(multislot destinations_are
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+		(create-accessor read-write))
+	(single-slot name_type_dest
+;+		(comment "Ex: Gran Ciutat Europea")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Continent
+	(is-a USER)
+	(role concrete)
+	(multislot has_destinations
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+		(create-accessor read-write))
+	(single-slot name_continent
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Clima
+	(is-a USER)
+	(role concrete)
+	(single-slot name_cliamte
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot is_present_in
+		(type INSTANCE)
+;+		(allowed-classes Destination)
+		(create-accessor read-write)))
+
 ;;-------------------------------------------------------------------------------------------------------------
 ;;                    INSTANCIES
 ;;-------------------------------------------------------------------------------------------------------------
 
 ;; Aqui va el .pins
 
+; Thu Dec 04 16:47:46 CET 2014
+; 
+;+ (version "3.4.8")
+;+ (build "Build 629")
+
+(definstances instances
+
+([ia-viatges_Class0] of  City
+
+	(has_climate [ia-viatges_Class10006])
+	(is_in_continent [ia-viatges_Class3])
+	(name_city "Barcelona")
+	(popularity 10)
+	(type_destination_is [ia-viatges_Class20004]))
+
+([ia-viatges_Class1] of  Continent
+
+	(name_continent "Europe"))
+
+([ia-viatges_Class10001] of  Clima
+)
+
+([ia-viatges_Class10004] of  Clima
+
+	(name_cliamte "Tropical"))
+
+([ia-viatges_Class10005] of  Clima
+
+	(name_cliamte "Mediterrani"))
+
+([ia-viatges_Class10006] of  Clima
+
+	(is_present_in [ia-viatges_Class0])
+	(name_cliamte "Escandinau"))
+
+([ia-viatges_Class10007] of  Clima
+
+	(name_cliamte "Equatorial"))
+
+([ia-viatges_Class10008] of  Clima
+
+	(name_cliamte "Alta_Muntanya"))
+
+([ia-viatges_Class2] of  Continent
+
+	(name_continent "Africa"))
+
+([ia-viatges_Class20004] of  TypeDestination
+
+	(destinations_are [ia-viatges_Class0])
+	(name_type_dest "ciutat_mediterranea"))
+
+([ia-viatges_Class3] of  Continent
+
+	(has_destinations [ia-viatges_Class0])
+	(name_continent "Asia"))
+
+([ia-viatges_Class4] of  Continent
+
+	(name_continent "Oceania"))
+
+([ia-viatges_Class5] of  Continent
+
+	(name_continent "NorthAmerica"))
+
+([ia-viatges_Class6] of  Continent
+
+	(name_continent "SouthAmerica"))
+
+
+)
 
 ;;; Fi del codi generat per Protege -------------------
 ;;; ---------------------------------------------------
@@ -39,6 +542,7 @@
     (slot numero-dies
         (type INTEGER)
         (create-accessor read-write))
+    ; Ciutat/Poble que correspon
     (slot desti
         (type INSTANCE)
         (create-accessor read-write))
@@ -49,6 +553,7 @@
     (multislot justificacions
         (type STRING)
         (create-accessor read-write))
+    ; pois que visitarem
     (multislot pois
         (type INSTANCE)
         (create-accessor read-write))
@@ -117,7 +622,7 @@
 )
 
 ;;; Modul de filtrat i procesat del contingut adequat del usuari
-(defmodule process-data
+(defmodule processat-data
     (import MAIN ?ALL)
     (import recopilacio-usuari deftemplate ?ALL)
     (import recopilacio-restriccions deftemplate ?ALL)
@@ -404,3 +909,61 @@
     =>
     (focus recopilacio-restriccions)
 )
+
+
+; ------ MODUL PROCESSAT ----------
+
+;; exemple
+
+;  (defrule procesado::anadir-peliculas "Se añade todas las peliculas, luego se filtran"
+;    ?hecho <- (formato Pelicula)
+;    =>
+;    (bind $?lista (find-all-instances ((?inst Pelicula)) TRUE))
+;    (progn$ (?curr-con ?lista)
+;      (make-instance (gensym) of Recomendacion (contenido ?curr-con) (puntuacion (send ?curr-con get-puntuacion)))
+;    )	
+;    (retract ?hecho)
+;  )
+
+
+;; CIUTATS
+(defrule processat-data::afegir-ciutats "S'afageixen totes les ciutats"
+  ; Tipus ha de ser una regla preguntada anteriorment sobr eles preferencies
+	?fet <- (tipus Ciutat)
+	=>
+	(bind $?llista (find-all-instances ((?inst City)) TRUE))
+	(progn$ (?curr ?llista)
+		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+	)	
+	(retract ?fet)
+)
+
+
+;; POBLES
+(defrule processat-data::afegir-pobles "S'afageixen totes les pobles"
+	?fet <- (tipus Poble)
+	=>
+	(bind $?llista (find-all-instances ((?inst Town)) TRUE))
+	(progn$ (?curr ?llista)
+		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+	)	
+	(retract ?fet)
+)
+
+;; MUNTANYES
+(defrule processat-data::afegir-muntanyes "S'afageixen totes les muntanyes"
+	?fet <- (tipus Poble)
+	=>
+	(bind $?llista (find-all-instances ((?inst Mountain)) TRUE))
+	(progn$ (?curr ?llista)
+		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+	)	
+	(retract ?fet)
+)
+
+
+
+
+;; Valorar popularitat
+;(defrule processat-data::valorar-popularitat "Es valorara la popularitat del lloc"
+
