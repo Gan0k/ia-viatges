@@ -1,4 +1,4 @@
-; Thu Dec 04 18:57:15 CET 2014
+; Thu Dec 04 19:11:47 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -20,9 +20,9 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ia-viatges_ProjectKB_Class87]
-		[ia-viatges_ProjectKB_Class88]
-		[ia-viatges_ProjectKB_Class89]))
+		[ia-viatges_ProjectKB_Class90]
+		[ia-viatges_ProjectKB_Class91]
+		[ia-viatges_ProjectKB_Class92]))
 
 ([CLSES_TAB] of  Widget
 
@@ -398,26 +398,26 @@
 ([ia-viatges_ProjectKB_Class80] of  Property_List
 )
 
-([ia-viatges_ProjectKB_Class87] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([ia-viatges_ProjectKB_Class88] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([ia-viatges_ProjectKB_Class89] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
 ([ia-viatges_ProjectKB_Class9] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class10])
 	(widget_class_name "uk.ac.man.cs.mig.coode.debugger.test.DebuggerTestTab"))
+
+([ia-viatges_ProjectKB_Class90] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([ia-viatges_ProjectKB_Class91] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([ia-viatges_ProjectKB_Class92] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
 
 ([INSTANCE_ANNOTATION_FORM_WIDGET] of  Widget
 

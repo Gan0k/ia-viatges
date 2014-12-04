@@ -1,4 +1,4 @@
-; Thu Dec 04 18:57:15 CET 2014
+; Thu Dec 04 19:11:47 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -201,44 +201,6 @@
 		(create-accessor read-write))
 	(single-slot name_accom
 		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
-
-(defclass Hostel
-	(is-a Accomodation)
-	(role concrete)
-	(single-slot is_youth_hostel
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write)))
-
-(defclass Camping
-	(is-a Accomodation)
-	(role concrete)
-	(single-slot has_activities_kids
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot far_from_city
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot has_pool
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write)))
-
-(defclass Hotel
-	(is-a Accomodation)
-	(role concrete)
-	(single-slot type_hotel
-		(type SYMBOL)
-		(allowed-values Luxury Budget Regular)
-		(default Regular)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
