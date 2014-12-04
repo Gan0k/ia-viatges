@@ -1,4 +1,4 @@
-; Thu Dec 04 16:47:46 CET 2014
+; Thu Dec 04 18:57:15 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -61,6 +61,10 @@
 		(type INSTANCE)
 ;+		(allowed-classes Destination)
 ;+		(inverse-slot has_climate)
+		(create-accessor read-write))
+	(single-slot price_per_night
+		(type INTEGER)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot is_in
 		(type INSTANCE)
@@ -185,6 +189,10 @@
 		(type INTEGER)
 		(range 0 5)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot price_per_night
+		(type INTEGER)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot is_in
 		(type INSTANCE)
@@ -311,52 +319,20 @@
 	(is-a PointOfInterest)
 	(role concrete))
 
-(defclass Museum
-	(is-a Cultural)
-	(role concrete))
-
-(defclass Theatre
-	(is-a Cultural)
-	(role concrete))
-
 (defclass Leisure "Relaxation"
 	(is-a PointOfInterest)
-	(role concrete))
-
-(defclass Beach
-	(is-a Leisure)
-	(role concrete))
-
-(defclass Spa
-	(is-a Leisure)
 	(role concrete))
 
 (defclass Nightlife
 	(is-a PointOfInterest)
 	(role concrete))
 
-(defclass Club
-	(is-a Nightlife)
-	(role concrete))
-
 (defclass Sport
 	(is-a PointOfInterest)
 	(role concrete))
 
-(defclass Event
-	(is-a Sport)
-	(role concrete))
-
 (defclass TuristPoint
 	(is-a PointOfInterest)
-	(role concrete))
-
-(defclass Building
-	(is-a TuristPoint)
-	(role concrete))
-
-(defclass Park
-	(is-a TuristPoint)
 	(role concrete))
 
 (defclass FamiliarPlace

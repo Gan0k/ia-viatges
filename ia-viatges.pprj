@@ -1,4 +1,4 @@
-; Thu Dec 04 16:47:46 CET 2014
+; Thu Dec 04 18:57:15 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -20,9 +20,9 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ia-viatges_ProjectKB_Class81]
-		[ia-viatges_ProjectKB_Class82]
-		[ia-viatges_ProjectKB_Class83]))
+		[ia-viatges_ProjectKB_Class87]
+		[ia-viatges_ProjectKB_Class88]
+		[ia-viatges_ProjectKB_Class89]))
 
 ([CLSES_TAB] of  Widget
 
@@ -398,17 +398,17 @@
 ([ia-viatges_ProjectKB_Class80] of  Property_List
 )
 
-([ia-viatges_ProjectKB_Class81] of  String
+([ia-viatges_ProjectKB_Class87] of  String
 
 	(name ":INSTANCE-ANNOTATION")
 	(string_value "%3AANNOTATION-TEXT"))
 
-([ia-viatges_ProjectKB_Class82] of  String
+([ia-viatges_ProjectKB_Class88] of  String
 
 	(name ":META-CLASS")
 	(string_value "%3ANAME"))
 
-([ia-viatges_ProjectKB_Class83] of  String
+([ia-viatges_ProjectKB_Class89] of  String
 
 	(name ":PAL-CONSTRAINT")
 	(string_value "%3APAL-NAME"))
