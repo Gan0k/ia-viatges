@@ -679,21 +679,24 @@
 
 ;;; Template per les restriccions del usuari
 (deftemplate MAIN::restriccions
-    (slot num-dies (type INTEGER))
-    (slot num-ciutats (type INTEGER))
-    (slot num-dies-ciutat (type INTEGER))
-    (slot presupost (type INTEGER))
-    (multislot rest-transport (type INSTANCE))
-    (slot min-qualitat-allotjament (type INTEGER)) ;; Minim estrelles del allotjament
+
+    (slot min-dies (type INTEGER) (default -1)) ;;; primer
+    (slot max-dies (type INTEGER) (default -1)) ;;; segon
+    (slot num-ciutats (type INTEGER) (default -1))
+    (slot num-dies-ciutat (type INTEGER)) ;;; ha d'estar en consonancia amb valors min i max
+    (slot pressupost (type INTEGER))
+    (multislot rest-transport (type INSTANCE)) ;;;el que no agafes
+    (slot min-qualitat-allotjament (type INSTANCE))
 )
 
 ;;; Template per les preferencies del usuari
 (deftemplate MAIN::preferencies
-    (slot ratio-qual-diners (type INTEGER))
-    (slot preferencia-llocs-exotics (type INTEGER))
-    (slot popularitat (type SYMBOL))
+
+    (slot ratio-qual-diners (type SYMBOL) (default desconegut))
+    (slot preferencia-llocs-exotics (type SYMBOL) (default desconegut))
     (slot pref-continent (type INSTANCE))
     (slot pref-clima (type SYMBOL))
+    (slot pref-ciutat (type SYMBOL))
 )
 
 ;;; Fi declaracio templates -----------------------
@@ -808,10 +811,10 @@
     (declare (salience 10))
     =>
     (printout t "====================================================================" crlf)
-    (printout t "=  Sistema de recomanacio de viatjes al fin del mundo y mas allá  =" crlf)
+    (printout t "=  Sistema de recomanació de viatjes al fin del mundo y mas allá  =" crlf)
     (printout t "====================================================================" crlf)
     (printout t crlf)   
-    (printout t "¡Benvingut al sistema de recomenacio de viatges. A continuacio se li formularan unes preguntes per poder recomenarli viatjes." crlf)
+    (printout t "¡Benvingut al sistema de recomenació de viatges. A continuacio se li formularan unes preguntes per poder recomenarli viatjes." crlf)
     (printout t crlf)
     (focus recopilacio-usuari)
 )
@@ -871,7 +874,7 @@
 (defrule recopilacio-usuari::establir-nivellcult "Estableix el nivell cultural del usuari"
     ?u <- (Usuari (nivell-cult desconegut))
     =>
-    (bind ?e (pregunta-opcions "Tens interes en la cultura?" alt normal baix))
+    (bind ?e (pregunta-opcions "Quin interes tens en la cultura?" alt normal baix))
     (modify ?u (nivell-cult ?e))
 )
 
@@ -908,10 +911,100 @@
     (test (> ?e 0))
     (test (> ?n 0))
     =>
-    (focus recopilacio-restriccions)
+    (focus recopilacio-prefs)
+)
+
+(defrule recopilacio-prefs::ratio-qual-diners "Pregunta per la preferencia de major qualitat sobre menys pressupost"
+    ?u <- (preferencies (ratio-qual-diners desconegut))
+    =>
+    (bind ?e (pregunta-opcions "Quina importancia dones a la qualitat sobre el pressupost?" baixa mitjana alta))
+    (switch ?e
+        (case 1 then
+            (modify ?u (ratio-qual-diners baixa))
+        )
+        (case 2 then
+            (modify ?u (ratio-qual-diners mitjana))
+        )
+        (case 3 then
+            (modify ?u (ratio-qual-diners alta))
+        )
+    )
 )
 
 
+(defrule recopilacio-prefs::preferencia-llocs-exotics
+    ?u <- (preferencies (preferencia-llocs-exotics desconegut))
+    =>
+    (bind ?e (pregunta-si-no "Preferiries anar a llocs exotics?"))
+    (switch ?e
+        (case TRUE then
+            (modify ?u (preferencia-llocs-exotics TRUE))
+        )
+        (case FALSE then
+            (modify ?u (preferencia-llocs-exotics FALSE))
+        )
+    )
+)
+
+
+;; (defrule recopilacio-prefs::pref-continent
+
+;; )
+
+;; (defrule recopilacio-prefs::pref-clima
+;; 
+;; )
+
+(defrule recopilacio-restriccions::min-dies "Nombre minim de dies que voldriem que dures el viatge"
+    ?u <- (restriccions (min-dies -1))
+    =>
+    (bind ?e (pregunta-numerica "Quin es el nombre minim de dies que t'agradaria que dures el viatge?"))
+    (modify ?u (min-dies ?e))
+)
+
+
+(defrule recopilacio-restriccions::max-dies "Nombre minim de dies que voldriem que dures el viatge"
+    ?q <- (restriccions (min-dies ?d))
+    ?u <- (restriccions (max-dies -1))
+    test(> ?d -1)
+    =>
+    (bind ?e (pregunta-numerica "Quin es el nombre maxim de dies que t'agradaria que dures el viatge?" 0 99999999999))
+    (modify ?u (max-dies ?e))
+)
+
+(defrule recopilacio-restriccions::num-ciutats "Nombre de ciutats que hauria de tenir el viatge"
+    ?u <- (restriccions (num-ciutats -1))
+    =>
+    (bind ?e (pregunta-numerica "Quin es el nombre de ciutats que t'agradaria visitar?" 0 99999999999))
+    (modify ?u (num-ciutats ?e))
+)
+
+(defrule recopilacio-restriccions::num-dies-ciutats ;; nombre de dies minim que t'agradaria estar a cada ciutat
+    ?p <-thrth
+)
+
+(defrule recopilacio-restriccions::pressupost "Pressupost del qual disposa l'usuari"
+    ?u <- (restriccions (pressupost -1))
+    =>
+    (bind ?e (pregunta-numerica "De quin pressupost disposes?" 0 99999999999))
+    (modify ?u (pressupost ?e))
+)
+
+;; (defrule recopilacio-restriccions::rest-transport
+
+;; )
+
+;; (defrule recopilacio-restriccions::min-qualitat-allotjament
+;; 
+;; )
+
+;;; (defrule recopilacio-restriccions::num-dies "Preguntem pel numero de dies"
+;;;     ?u <- (restriccions (num-dies -1))
+;;;     =>
+;;;     (bind ?e (pregunta-numerica "Quants 
+;;; )
+
+;; (defrule recopilacio-prefs::pref-continent
 ; ------ MODUL PROCESSAT ----------
 
 ;; exemple
@@ -922,7 +1015,7 @@
 ;    (bind $?lista (find-all-instances ((?inst Pelicula)) TRUE))
 ;    (progn$ (?curr-con ?lista)
 ;      (make-instance (gensym) of Recomendacion (contenido ?curr-con) (puntuacion (send ?curr-con get-puntuacion)))
-;    )	
+;    )  
 ;    (retract ?hecho)
 ;  )
 
@@ -930,36 +1023,36 @@
 ;; CIUTATS
 (defrule processat-data::afegir-ciutats "S'afageixen totes les ciutats"
   ; Tipus ha de ser una regla preguntada anteriorment sobr eles preferencies
-	?fet <- (tipus City)
-	=>
-	(bind $?llista (find-all-instances ((?inst City)) TRUE))
-	(progn$ (?curr ?llista)
-		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
-	)	
-	(retract ?fet)
+    ?fet <- (tipus City)
+    =>
+    (bind $?llista (find-all-instances ((?inst City)) TRUE))
+    (progn$ (?curr ?llista)
+        (make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+    )   
+    (retract ?fet)
 )
 
 
 ;; POBLES
 (defrule processat-data::afegir-pobles "S'afageixen totes les pobles"
-	?fet <- (tipus Town)
-	=>
-	(bind $?llista (find-all-instances ((?inst Town)) TRUE))
-	(progn$ (?curr ?llista)
-		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
-	)	
-	(retract ?fet)
+    ?fet <- (tipus Town)
+    =>
+    (bind $?llista (find-all-instances ((?inst Town)) TRUE))
+    (progn$ (?curr ?llista)
+        (make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+    )   
+    (retract ?fet)
 )
 
 ;; MUNTANYES
 (defrule processat-data::afegir-muntanyes "S'afageixen totes les muntanyes"
-	?fet <- (tipus Mountain)
-	=>
-	(bind $?llista (find-all-instances ((?inst Mountain)) TRUE))
-	(progn$ (?curr ?llista)
-		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
-	)	
-	(retract ?fet)
+    ?fet <- (tipus Mountain)
+    =>
+    (bind $?llista (find-all-instances ((?inst Mountain)) TRUE))
+    (progn$ (?curr ?llista)
+        (make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+    )   
+    (retract ?fet)
 )
 
 
@@ -1002,4 +1095,3 @@
         )
     )
 )
-
