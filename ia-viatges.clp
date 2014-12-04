@@ -349,6 +349,8 @@
         else
             (modify ?u (familia adolescents))
         )
+    else
+        (modify ?u (familia FALSE))
     )
 )
 
