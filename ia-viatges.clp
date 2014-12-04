@@ -691,6 +691,7 @@
 (deftemplate MAIN::preferencies
     (slot ratio-qual-diners (type INTEGER))
     (slot preferencia-llocs-exotics (type INTEGER))
+    (slot popularitat (type SYMBOL))
     (slot pref-continent (type INSTANCE))
     (slot pref-clima (type SYMBOL))
 )
@@ -929,7 +930,7 @@
 ;; CIUTATS
 (defrule processat-data::afegir-ciutats "S'afageixen totes les ciutats"
   ; Tipus ha de ser una regla preguntada anteriorment sobr eles preferencies
-	?fet <- (tipus Ciutat)
+	?fet <- (tipus City)
 	=>
 	(bind $?llista (find-all-instances ((?inst City)) TRUE))
 	(progn$ (?curr ?llista)
@@ -941,7 +942,7 @@
 
 ;; POBLES
 (defrule processat-data::afegir-pobles "S'afageixen totes les pobles"
-	?fet <- (tipus Poble)
+	?fet <- (tipus Town)
 	=>
 	(bind $?llista (find-all-instances ((?inst Town)) TRUE))
 	(progn$ (?curr ?llista)
@@ -952,7 +953,7 @@
 
 ;; MUNTANYES
 (defrule processat-data::afegir-muntanyes "S'afageixen totes les muntanyes"
-	?fet <- (tipus Poble)
+	?fet <- (tipus Mountain)
 	=>
 	(bind $?llista (find-all-instances ((?inst Mountain)) TRUE))
 	(progn$ (?curr ?llista)
@@ -965,5 +966,20 @@
 
 
 ;; Valorar popularitat
-;(defrule processat-data::valorar-popularitat "Es valorara la popularitat del lloc"
+(defrule processat-data::valorar-popularitat "Es valorara la popularitat del lloc"
+    (preferencies (popularitat ?popDesitjada))
+    ?dest <- (object (is-a Destination) (popularity ?pop))
+    ?destVisitades <-(object (is-a DestinacionsVisitades) (puntuacio ?punt) (justificacions $?just))
+    (test (eq (instance-name ?dest) (instance-name ?destVisitades)))
+    (not (valorat-popularitat ?dest))
+    =>
+    (if (eq ?popDesitjada ?pop) then
+        (bind ?p (+ ?p 100))
+        (bind $?just (insert$ $?just (+ (length$ $?just) 1) "L'usuari vols una popularitat TODO add which"))
+    )
+
+    (send ?destVisitades put-puntuacio ?punt)
+    (send ?destVisitades put-justificacions $?just)
+    (assert (valorat-populariat ?dest))
+)
 
