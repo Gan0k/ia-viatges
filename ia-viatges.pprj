@@ -1,4 +1,4 @@
-; Thu Dec 04 16:01:53 CET 2014
+; Thu Dec 04 16:47:46 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -20,9 +20,9 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ia-viatges_ProjectKB_Class10163]
-		[ia-viatges_ProjectKB_Class10164]
-		[ia-viatges_ProjectKB_Class10165]))
+		[ia-viatges_ProjectKB_Class81]
+		[ia-viatges_ProjectKB_Class82]
+		[ia-viatges_ProjectKB_Class83]))
 
 ([CLSES_TAB] of  Widget
 
@@ -49,63 +49,6 @@
 ([ia-viatges_ProjectKB_Class10] of  Property_List
 )
 
-([ia-viatges_ProjectKB_Class10149] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "type_dest")
-	(property_list [ia-viatges_ProjectKB_Class10150])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 60))
-
-([ia-viatges_ProjectKB_Class10150] of  Property_List
-)
-
-([ia-viatges_ProjectKB_Class10159] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "ia-viatges_Class20007")
-	(property_list [ia-viatges_ProjectKB_Class10160])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 360))
-
-([ia-viatges_ProjectKB_Class10160] of  Property_List
-)
-
-([ia-viatges_ProjectKB_Class10161] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "ia-viatges_Class20007")
-	(property_list [ia-viatges_ProjectKB_Class10162])
-	(widget_class_name "edu.stanford.smi.protege.widget.ClsFieldWidget")
-	(width 200)
-	(x 0)
-	(y 360))
-
-([ia-viatges_ProjectKB_Class10162] of  Property_List
-)
-
-([ia-viatges_ProjectKB_Class10163] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([ia-viatges_ProjectKB_Class10164] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([ia-viatges_ProjectKB_Class10165] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
 ([ia-viatges_ProjectKB_Class107] of  String
 
 	(name "SearchTab_Query"))
@@ -114,7 +57,7 @@
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class12])
-	(widget_class_name "ca.uvic.csr.shrimp.jambalaya.JambalayaTab"))
+	(widget_class_name "ezpal.EZPalTab"))
 
 ([ia-viatges_ProjectKB_Class12] of  Property_List
 )
@@ -123,7 +66,7 @@
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class14])
-	(widget_class_name "ezpal.EZPalTab"))
+	(widget_class_name "ca.uvic.csr.shrimp.jambalaya.JambalayaTab"))
 
 ([ia-viatges_ProjectKB_Class14] of  Property_List
 )
@@ -141,7 +84,7 @@
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class18])
-	(widget_class_name "edu.stanford.smi.protege.widget.instance_tree.InstanceTreeTab"))
+	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalConstraintsTab"))
 
 ([ia-viatges_ProjectKB_Class18] of  Property_List
 )
@@ -150,7 +93,7 @@
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class20])
-	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalConstraintsTab"))
+	(widget_class_name "edu.stanford.smi.protege.widget.instance_tree.InstanceTreeTab"))
 
 ([ia-viatges_ProjectKB_Class2] of  Property_List
 )
@@ -189,7 +132,7 @@
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class28])
-	(widget_class_name "org.protege.owl.mm.protege3.MappingMasterTab"))
+	(widget_class_name "edu.stanford.smi.protegex.evaluation.MetaAnalysis"))
 
 ([ia-viatges_ProjectKB_Class28] of  Property_List
 )
@@ -198,7 +141,7 @@
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class30])
-	(widget_class_name "edu.stanford.smi.protegex.evaluation.MetaAnalysis"))
+	(widget_class_name "org.protege.owl.mm.protege3.MappingMasterTab"))
 
 ([ia-viatges_ProjectKB_Class3] of  Widget
 
@@ -213,7 +156,7 @@
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class32])
-	(widget_class_name "uk.ac.man.cs.mig.coode.owlviz.ui.OWLVizTab"))
+	(widget_class_name "edu.stanford.smi.protege.query.LuceneQueryPlugin"))
 
 ([ia-viatges_ProjectKB_Class32] of  Property_List
 )
@@ -222,7 +165,7 @@
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class34])
-	(widget_class_name "edu.stanford.smi.protege.query.LuceneQueryPlugin"))
+	(widget_class_name "uk.ac.man.cs.mig.coode.owlviz.ui.OWLVizTab"))
 
 ([ia-viatges_ProjectKB_Class34] of  Property_List
 )
@@ -270,7 +213,7 @@
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class44])
-	(widget_class_name "TGViztab.TGVizTab"))
+	(widget_class_name "org.algernon.kb.okbc.protege.plugins.AlgernonTab"))
 
 ([ia-viatges_ProjectKB_Class44] of  Property_List
 )
@@ -279,7 +222,7 @@
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class46])
-	(widget_class_name "org.algernon.kb.okbc.protege.plugins.AlgernonTab"))
+	(widget_class_name "TGViztab.TGVizTab"))
 
 ([ia-viatges_ProjectKB_Class46] of  Property_List
 )
@@ -455,38 +398,26 @@
 ([ia-viatges_ProjectKB_Class80] of  Property_List
 )
 
+([ia-viatges_ProjectKB_Class81] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([ia-viatges_ProjectKB_Class82] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([ia-viatges_ProjectKB_Class83] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
 ([ia-viatges_ProjectKB_Class9] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [ia-viatges_ProjectKB_Class10])
 	(widget_class_name "uk.ac.man.cs.mig.coode.debugger.test.DebuggerTestTab"))
-
-([ia-viatges_ProjectKB_Class94] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "type_dest_is")
-	(property_list [ia-viatges_ProjectKB_Class95])
-	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
-	(width 200)
-	(x 0)
-	(y 240))
-
-([ia-viatges_ProjectKB_Class95] of  Property_List
-
-	(properties
-		[ia-viatges_ProjectKB_Class96]
-		[ia-viatges_ProjectKB_Class97]))
-
-([ia-viatges_ProjectKB_Class96] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-View References to Value"))
-
-([ia-viatges_ProjectKB_Class97] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-Delete Instance"))
 
 ([INSTANCE_ANNOTATION_FORM_WIDGET] of  Widget
 
@@ -611,7 +542,7 @@
 ([KB_227129_Class99] of  Property_List
 )
 
-([KB_638735_Class0] of  Map
+([KB_570680_Class0] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List
@@ -697,8 +628,8 @@
 	(browser_slot_names [BROWSER_SLOT_NAMES])
 	(customized_instance_widgets
 		[INSTANCE_ANNOTATION_FORM_WIDGET]
-		[STANDARD_SLOT_FORM_WIDGET]
 		[STANDARD_FACET_FORM_WIDGET]
+		[STANDARD_SLOT_FORM_WIDGET]
 		[PAL_FORM_WIDGET]
 		[STANDARD_CLASS_FORM_WIDGET])
 	(default_cls_metaclass ":STANDARD-CLASS")

@@ -1,4 +1,4 @@
-; Thu Dec 04 16:01:53 CET 2014
+; Thu Dec 04 16:47:46 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -143,13 +143,13 @@
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot inverse_of_destinations_are
-		(type INSTANCE)
-;+		(allowed-classes TypeDestination)
-		(create-accessor read-write))
 	(single-slot name_cliamte
 		(type STRING)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot inverse_of_destinations_are
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
 		(create-accessor read-write))
 	(multislot type_city
 		(type SYMBOL)
@@ -237,13 +237,13 @@
 (defclass Destination
 	(is-a USER)
 	(role concrete)
-	(multislot can_be_reached
-		(type INSTANCE)
-;+		(allowed-classes Transport)
-		(create-accessor read-write))
 	(multislot inverse_of_destinations_are
 		(type INSTANCE)
 ;+		(allowed-classes TypeDestination)
+		(create-accessor read-write))
+	(multislot can_be_reached
+		(type INSTANCE)
+;+		(allowed-classes Transport)
 		(create-accessor read-write))
 	(single-slot popularity
 		(type INTEGER)
@@ -263,18 +263,18 @@
 ;+		(allowed-classes TypeDestination)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot can_go_to
+	(single-slot has_climate
 		(type INSTANCE)
-;+		(allowed-classes Transport)
+;+		(allowed-classes Clima)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot accomodations_are
 		(type INSTANCE)
 ;+		(allowed-classes Accomodation)
 		(create-accessor read-write))
-	(single-slot has_climate
+	(multislot can_go_to
 		(type INSTANCE)
-;+		(allowed-classes Clima)
-;+		(cardinality 1 1)
+;+		(allowed-classes Transport)
 		(create-accessor read-write))
 	(single-slot is_in_continent
 		(type INSTANCE)
@@ -287,6 +287,10 @@
 	(role concrete))
 
 (defclass Mountain
+	(is-a Destination)
+	(role concrete))
+
+(defclass Town
 	(is-a Destination)
 	(role concrete))
 
