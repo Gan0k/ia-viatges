@@ -394,10 +394,11 @@
 
 
 
-(defrule recopilacio-usuari::pasar-a-preferencies "Pasa a la recopilacio de preferencies"
+(defrule recopilacio-usuari::pasar-a-restriccions "Pasa a la recopilacio de restriccions"
     (declare (salience 10))
-    ?u <- (Usuari (edat ?e)) ;Posar condicio per passar a preferencies
+    ?u <- (Usuari (edat ?e) (num-pers ?n) (familia ~desconegut) (nivell-cult ~desconegut) (tipus-viatge ~desconegut) (objectiu-viatge ~desconegut)) ;Posar condicio per passar a preferencies
     (test (> ?e 0))
+    (test (> ?n 0))
     =>
-    (focus recopilacio-prefs)
+    (focus recopilacio-restriccions)
 )
