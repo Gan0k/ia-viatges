@@ -1,4 +1,4 @@
-; Thu Dec 04 19:11:47 CET 2014
+; Thu Dec 04 19:42:09 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -129,6 +129,10 @@
 ;+		(allowed-classes TypeDestination)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(single-slot name_climate
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(single-slot type_dest
 		(type STRING)
 ;+		(cardinality 1 1)
@@ -146,10 +150,6 @@
 		(type SYMBOL)
 		(allowed-values FALSE TRUE)
 ;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot name_cliamte
-		(type STRING)
-;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot inverse_of_destinations_are
 		(type INSTANCE)
@@ -359,11 +359,11 @@
 (defclass Clima
 	(is-a USER)
 	(role concrete)
-	(single-slot name_cliamte
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(multislot is_present_in
 		(type INSTANCE)
 ;+		(allowed-classes Destination)
+		(create-accessor read-write))
+	(single-slot name_climate
+		(type STRING)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))

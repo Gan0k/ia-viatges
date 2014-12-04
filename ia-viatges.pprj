@@ -1,4 +1,4 @@
-; Thu Dec 04 19:11:47 CET 2014
+; Thu Dec 04 19:42:09 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -20,9 +20,9 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ia-viatges_ProjectKB_Class90]
-		[ia-viatges_ProjectKB_Class91]
-		[ia-viatges_ProjectKB_Class92]))
+		[ia-viatges_ProjectKB_Class93]
+		[ia-viatges_ProjectKB_Class94]
+		[ia-viatges_ProjectKB_Class95]))
 
 ([CLSES_TAB] of  Widget
 
@@ -404,17 +404,17 @@
 	(property_list [ia-viatges_ProjectKB_Class10])
 	(widget_class_name "uk.ac.man.cs.mig.coode.debugger.test.DebuggerTestTab"))
 
-([ia-viatges_ProjectKB_Class90] of  String
+([ia-viatges_ProjectKB_Class93] of  String
 
 	(name ":INSTANCE-ANNOTATION")
 	(string_value "%3AANNOTATION-TEXT"))
 
-([ia-viatges_ProjectKB_Class91] of  String
+([ia-viatges_ProjectKB_Class94] of  String
 
 	(name ":META-CLASS")
 	(string_value "%3ANAME"))
 
-([ia-viatges_ProjectKB_Class92] of  String
+([ia-viatges_ProjectKB_Class95] of  String
 
 	(name ":PAL-CONSTRAINT")
 	(string_value "%3APAL-NAME"))

@@ -1,4 +1,4 @@
-; Thu Dec 04 19:11:47 CET 2014
+; Thu Dec 04 19:42:09 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -20,24 +20,24 @@
 
 ([ia-viatges_Class10004] of  Clima
 
-	(name_cliamte "Tropical"))
+	(name_climate "Tropical"))
 
 ([ia-viatges_Class10005] of  Clima
 
-	(name_cliamte "Mediterrani"))
+	(name_climate "Mediterrani"))
 
 ([ia-viatges_Class10006] of  Clima
 
 	(is_present_in [ia-viatges_Class0])
-	(name_cliamte "Escandinau"))
+	(name_climate "Escandinau"))
 
 ([ia-viatges_Class10007] of  Clima
 
-	(name_cliamte "Equatorial"))
+	(name_climate "Equatorial"))
 
 ([ia-viatges_Class10008] of  Clima
 
-	(name_cliamte "Alta_Muntanya"))
+	(name_climate "Alta_Muntanya"))
 
 ([ia-viatges_Class2] of  Continent
 
