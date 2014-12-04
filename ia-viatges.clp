@@ -684,7 +684,7 @@
     (slot num-dies-ciutat (type INTEGER))
     (slot presupost (type INTEGER))
     (multislot rest-transport (type INSTANCE))
-    (slot min-quaitat-allotjament (type INSTANCE))
+    (slot min-qualitat-allotjament (type INTEGER)) ;; Minim estrelles del allotjament
 )
 
 ;;; Template per les preferencies del usuari
@@ -981,5 +981,25 @@
     (send ?destVisitades put-puntuacio ?punt)
     (send ?destVisitades put-justificacions $?just)
     (assert (valorat-populariat ?dest))
+)
+
+
+
+
+;; Filtrar allotjaments per qualtiat
+(defrule processat-data::filtrar-qualitat-allotjament "Es filtraran els allotjaments que no tinguin prou qualitat"
+    ;; Qualitat is numeric
+    (restriccions (min-qualitat-allotjament ?minQualitat))
+    ?dest <- (object (is-a Destination) (accomodations_are $?acoms))
+    ?destVisitades <- (object (is-a DestinacionsVisitades))
+    (test (eq (instance-name ?dest) (instance-name ?destVisitades)))
+    (not (filtrat-qualitat ?dest))
+    =>
+    (progn$ (?curr-acom $?acoms) ;Iterar per totes les accomodations
+        (bind ?qual (send ?curr-acom get-quality))
+        (if (< ?qual ?minQualitat) then
+            (send ?curr-acom delete)
+        )
+    )
 )
 
