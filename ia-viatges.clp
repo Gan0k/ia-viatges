@@ -679,19 +679,18 @@
 
 ;;; Template per les restriccions del usuari
 (deftemplate MAIN::restriccions
-
     (slot min-dies (type INTEGER) (default -1)) ;;; primer
     (slot max-dies (type INTEGER) (default -1)) ;;; segon
     (slot num-ciutats (type INTEGER) (default -1))
     (slot num-dies-ciutat (type INTEGER)) ;;; ha d'estar en consonancia amb valors min i max
     (slot pressupost (type INTEGER))
     (multislot rest-transport (type INSTANCE)) ;;;el que no agafes
-    (slot min-qualitat-allotjament (type INSTANCE))
+    (slot min-qualitat-allotjament (type INTEGER)) ;; Minim estrelles del allotjament
 )
 
 ;;; Template per les preferencies del usuari
 (deftemplate MAIN::preferencies
-
+    (slot popularitat (type SYMBOL)) ;; Necessari?
     (slot ratio-qual-diners (type SYMBOL) (default desconegut))
     (slot preferencia-llocs-exotics (type SYMBOL) (default desconegut))
     (slot pref-continent (type INSTANCE))
@@ -811,10 +810,10 @@
     (declare (salience 10))
     =>
     (printout t "====================================================================" crlf)
-    (printout t "=  Sistema de recomanació de viatjes al fin del mundo y mas allá  =" crlf)
+    (printout t "=  Sistema de recomanacio de viatjes al fin del mundo y mas alla  =" crlf)
     (printout t "====================================================================" crlf)
     (printout t crlf)   
-    (printout t "¡Benvingut al sistema de recomenació de viatges. A continuacio se li formularan unes preguntes per poder recomenarli viatjes." crlf)
+    (printout t "¡Benvingut al sistema de recomenacio de viatges. A continuacio se li formularan unes preguntes per poder recomenarli viatjes." crlf)
     (printout t crlf)
     (focus recopilacio-usuari)
 )
@@ -911,7 +910,7 @@
     (test (> ?e 0))
     (test (> ?n 0))
     =>
-    (focus recopilacio-prefs)
+    (focus recopilacio-restriccions)
 )
 
 (defrule recopilacio-prefs::ratio-qual-diners "Pregunta per la preferencia de major qualitat sobre menys pressupost"
@@ -1015,7 +1014,7 @@
 ;    (bind $?lista (find-all-instances ((?inst Pelicula)) TRUE))
 ;    (progn$ (?curr-con ?lista)
 ;      (make-instance (gensym) of Recomendacion (contenido ?curr-con) (puntuacion (send ?curr-con get-puntuacion)))
-;    )  
+;    )	
 ;    (retract ?hecho)
 ;  )
 
@@ -1023,36 +1022,36 @@
 ;; CIUTATS
 (defrule processat-data::afegir-ciutats "S'afageixen totes les ciutats"
   ; Tipus ha de ser una regla preguntada anteriorment sobr eles preferencies
-    ?fet <- (tipus City)
-    =>
-    (bind $?llista (find-all-instances ((?inst City)) TRUE))
-    (progn$ (?curr ?llista)
-        (make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
-    )   
-    (retract ?fet)
+	?fet <- (tipus City)
+	=>
+	(bind $?llista (find-all-instances ((?inst City)) TRUE))
+	(progn$ (?curr ?llista)
+		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+	)	
+	(retract ?fet)
 )
 
 
 ;; POBLES
 (defrule processat-data::afegir-pobles "S'afageixen totes les pobles"
-    ?fet <- (tipus Town)
-    =>
-    (bind $?llista (find-all-instances ((?inst Town)) TRUE))
-    (progn$ (?curr ?llista)
-        (make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
-    )   
-    (retract ?fet)
+	?fet <- (tipus Town)
+	=>
+	(bind $?llista (find-all-instances ((?inst Town)) TRUE))
+	(progn$ (?curr ?llista)
+		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+	)	
+	(retract ?fet)
 )
 
 ;; MUNTANYES
 (defrule processat-data::afegir-muntanyes "S'afageixen totes les muntanyes"
-    ?fet <- (tipus Mountain)
-    =>
-    (bind $?llista (find-all-instances ((?inst Mountain)) TRUE))
-    (progn$ (?curr ?llista)
-        (make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
-    )   
-    (retract ?fet)
+	?fet <- (tipus Mountain)
+	=>
+	(bind $?llista (find-all-instances ((?inst Mountain)) TRUE))
+	(progn$ (?curr ?llista)
+		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+	)	
+	(retract ?fet)
 )
 
 
@@ -1095,3 +1094,4 @@
         )
     )
 )
+
