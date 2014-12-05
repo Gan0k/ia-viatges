@@ -679,8 +679,8 @@
 
 ;;; Template per les restriccions del usuari
 (deftemplate MAIN::restriccions
-    (slot min-dies (type INTEGER) (default -1)) ;;; primer
-    (slot max-dies (type INTEGER) (default -1)) ;;; segon
+;    (slot min-dies (type INTEGER) (default -1)) ;;; primer
+;    (slot max-dies (type INTEGER) (default -1)) ;;; segon
     (slot num-ciutats (type INTEGER) (default -1))
     (slot num-dies-ciutat (type INTEGER)) ;;; ha d'estar en consonancia amb valors min i max
     (slot pressupost (type INTEGER))
@@ -954,22 +954,22 @@
 ;; 
 ;; )
 
-(defrule recopilacio-restriccions::min-dies "Nombre minim de dies que voldriem que dures el viatge"
-    ?u <- (restriccions (min-dies -1))
-    =>
-    (bind ?e (pregunta-numerica "Quin es el nombre minim de dies que t'agradaria que dures el viatge?"))
-    (modify ?u (min-dies ?e))
-)
-
-
-(defrule recopilacio-restriccions::max-dies "Nombre minim de dies que voldriem que dures el viatge"
-    ?q <- (restriccions (min-dies ?d))
-    ?u <- (restriccions (max-dies -1))
-    test(> ?d -1)
-    =>
-    (bind ?e (pregunta-numerica "Quin es el nombre maxim de dies que t'agradaria que dures el viatge?" 0 99999999999))
-    (modify ?u (max-dies ?e))
-)
+;(defrule recopilacio-restriccions::min-dies "Nombre minim de dies que voldriem que dures el viatge"
+;    ?u <- (restriccions (min-dies -1))
+;    =>
+;    (bind ?e (pregunta-numerica "Quin es el nombre minim de dies que t'agradaria que dures el viatge?"))
+;    (modify ?u (min-dies ?e))
+;)
+;
+;
+;(defrule recopilacio-restriccions::max-dies "Nombre minim de dies que voldriem que dures el viatge"
+;    ?q <- (restriccions (min-dies ?d))
+;    ?u <- (restriccions (max-dies -1))
+;    test(> ?d -1)
+;    =>
+;    (bind ?e (pregunta-numerica "Quin es el nombre maxim de dies que t'agradaria que dures el viatge?" 0 99999999999))
+;    (modify ?u (max-dies ?e))
+;)
 
 (defrule recopilacio-restriccions::num-ciutats "Nombre de ciutats que hauria de tenir el viatge"
     ?u <- (restriccions (num-ciutats -1))
