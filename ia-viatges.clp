@@ -679,8 +679,9 @@
 
 ;;; Template per les restriccions del usuari
 (deftemplate MAIN::restriccions
-;    (slot min-dies (type INTEGER) (default -1)) ;;; primer
-;    (slot max-dies (type INTEGER) (default -1)) ;;; segon
+;;Deprecated
+;;    (slot min-dies (type INTEGER) (default -1)) ;;; primer
+;;    (slot max-dies (type INTEGER) (default -1)) ;;; segon
     (slot num-ciutats (type INTEGER) (default -1))
     (slot num-dies-ciutat (type INTEGER) (default -1)) ;;; ha d'estar en consonancia amb valors min i max
     (slot pressupost (type INTEGER) (default -1))
@@ -916,6 +917,8 @@
 ;-----------------------------;
 ; FUNCIONS MODUL RESTRICCIONS ;
 ;-----------------------------;
+
+;;Deprecated
 ;(defrule recopilacio-restriccions::min-dies "Nombre minim de dies que voldriem que dures el viatge"
 ;    ?u <- (restriccions (min-dies -1))
 ;    =>
