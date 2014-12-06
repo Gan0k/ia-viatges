@@ -929,7 +929,7 @@
 ;    ?u <- (restriccions (max-dies -1))
 ;    test(> ?d -1)
 ;    =>
-;    (bind ?e (pregunta-numerica "Quin es el nombre maxim de dies que t'agradaria que dures el viatge?" 0 99999999999))
+;    (bind ?e (pregunta-numerica "Quin es el nombre maxim de dies que t'agradaria que dures el viatge?" 0 9999))
 ;    (modify ?u (max-dies ?e))
 ;)
 
@@ -937,7 +937,6 @@
     (num-ciutats ask)
     (restriccions)
 )
-
 
 (defrule recopilacio-restriccions::num-ciutats "Nombre de ciutats que hauria de tenir el viatge"
     ?u <- (restriccions (num-ciutats -1))
