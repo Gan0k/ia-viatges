@@ -683,7 +683,7 @@
 ;;    (slot min-dies (type INTEGER) (default -1)) ;;; primer
 ;;    (slot max-dies (type INTEGER) (default -1)) ;;; segon
     (slot num-ciutats (type INTEGER) (default -1))
-    (slot num-dies-ciutat (type INTEGER) (default -1)) ;;; ha d'estar en consonancia amb valors min i max
+    (slot num-dies-ciutat (type INTEGER) (default -1))
     (slot pressupost (type INTEGER) (default -1))
     (multislot rest-transport (type INSTANCE)) ;;;el que no agafes
     (slot min-qualitat-allotjament (type INTEGER) (default -1)) ;; Minim estrelles del allotjament
@@ -696,7 +696,8 @@
     (slot preferencia-llocs-exotics (type SYMBOL) (default desconegut))
     (slot pref-continent (type INSTANCE))
     (slot pref-clima (type SYMBOL) (default desconegut))
-    (slot pref-ciutat (type SYMBOL) (default desconegut))
+    ;; Not used so far
+    ;;(slot pref-ciutat (type SYMBOL) (default desconegut))
 )
 
 ;;; Fi declaracio templates -----------------------
@@ -938,42 +939,56 @@
 
 (deffacts recopilacio-restriccions::fets-inicials "Fets inicials de restriccions"
     (num-ciutats ask)
+    (rest-transport ask)
     (restriccions)
 )
 
 (defrule recopilacio-restriccions::num-ciutats "Nombre de ciutats que hauria de tenir el viatge"
     ?u <- (restriccions (num-ciutats -1))
     =>
-    (bind ?e (pregunta-numerica "Quin es el nombre de ciutats que t'agradaria visitar?" 0 99999999999))
+    (bind ?e (pregunta-numerica "Quin es el nombre de ciutats que t'agradaria visitar?" 1 15))
     (modify ?u (num-ciutats ?e))
 )
 
-;(defrule recopilacio-restriccions::num-dies-ciutats ;; nombre de dies minim que t'agradaria estar a cada ciutat
-;    ?p <-thrth
-;)
+(defrule recopilacio-restriccions::num-dies-ciutats "Nombre de dies minim que t'agradaria estar a cada ciutat"
+    ?u <- (restriccions (num-dies-ciutat -1))
+    =>
+    (bind ?e (pregunta-numerica "Quants dies et voldires passar en aquelles ciutats?" 1 20))
+    (modify ?u (num-dies-ciutat ?e))
+)
 
 (defrule recopilacio-restriccions::pressupost "Pressupost del qual disposa l'usuari"
     ?u <- (restriccions (pressupost -1))
     =>
-    (bind ?e (pregunta-numerica "De quin pressupost disposes?" 0 99999999999))
+    (bind ?e (pregunta-numerica "De quin pressupost disposes?" 0 5000))
     (modify ?u (pressupost ?e))
 )
 
-;; (defrule recopilacio-restriccions::rest-transport
+(defrule recopilacio-restriccions::rest-transport
+	?fet <- (rest-transport choose)
+	?re <- (preferencies)
+	=>
+	(bind ?r pregunta-opcions "Hi ha algun transport que no es pugui utilitzar?" Baixell Avio Tren)
+	(switch ?r
+        (case 1 then
+            
+        )
+        (case 2 then
+            
+        )
+        (case 3 then
+            ;; Put instances of the prohivited class here
+        )
+    )
+)
 
-;; )
+(defrule recopilacio-restriccions::min-qualitat-allotjament
+    ?u <- (restriccions (min-qualitat-allotjament -1))
+    =>
+    (bind ?e (pregunta-numerica "Quantes estrelles han de tenir els hotels com a mínim" 1 5))
+    (modify ?u (min-qualitat-allotjament ?e))
+)
 
-;; (defrule recopilacio-restriccions::min-qualitat-allotjament
-;; 
-;; )
-
-;;; (defrule recopilacio-restriccions::num-dies "Preguntem pel numero de dies"
-;;;     ?u <- (restriccions (num-dies -1))
-;;;     =>
-;;;     (bind ?e (pregunta-numerica "Quants 
-;;; )
-
-;; (defrule recopilacio-prefs::pref-continent
 
 (defrule recopilacio-restriccions::pasar-a-preferencies "Pasa de la recopilacio de restriccions de preferencies"
     (declare (salience 10))
@@ -991,6 +1006,14 @@
 ;-----------------------------;
 ; FUNCIONS MODUL PREFERENCIES ;
 ;-----------------------------;
+
+(defrule recopilacio-prefs::select-popularitat 
+	?u <- (preferencies (popularitat desconegut))
+	=>
+	(bind ?a pregunta-si-no "Li agradaria viatjar a ciutats que son populars entre els nostres clients?")
+	(if (eq ?a TRUE) then (modify ?u (popularitat alta)) else (modify ?u (popularitat baixa)))
+)
+
 (defrule recopilacio-prefs::ratio-qual-diners "Pregunta per la preferencia de major qualitat sobre menys pressupost"
     ?u <- (preferencies (ratio-qual-diners desconegut))
     =>
@@ -1023,14 +1046,17 @@
     )
 )
 
+;(defrule recopilacio-prefs::pref-continent
 
-;; (defrule recopilacio-prefs::pref-continent
+;)
 
-;; )
+;(defrule recopilacio-prefs::pref-clima
+ 
+;)
 
-;; (defrule recopilacio-prefs::pref-clima
-;; 
-;; )
+;(defrule recopilacio-prefs::pasar-a-processat
+
+;)
 
 ;--------------------------;
 ; FUNCIONS MODUL PROCESSAT ;
