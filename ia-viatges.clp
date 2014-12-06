@@ -929,7 +929,7 @@
 ;    ?u <- (restriccions (max-dies -1))
 ;    test(> ?d -1)
 ;    =>
-;    (bind ?e (pregunta-numerica "Quin es el nombre maxim de dies que t'agradaria que dures el viatge?" 0 99999999999))
+;    (bind ?e (pregunta-numerica "Quin es el nombre maxim de dies que t'agradaria que dures el viatge?" 0 9999))
 ;    (modify ?u (max-dies ?e))
 ;)
 
@@ -938,14 +938,13 @@
     (restriccions)
 )
 
-
 (defrule recopilacio-restriccions::num-ciutats "Nombre de ciutats que hauria de tenir el viatge"
     ?fet <- (num-ciutats ask)
     ;?u <- (restriccions (num-ciutats ?n))
     ;(test (< ?n 10)) 
     =>
     (printout t "it works" crlf)
-    (bind ?e (pregunta-numerica "Quin es el nombre de ciutats que t'agradaria visitar?" 0 99999999999))
+    (bind ?e (pregunta-numerica "Quin es el nombre de ciutats que t'agradaria visitar?" 0 9999))
     (retract ?fet)
     ;(modify ?u (num-ciutats ?e))
 )
