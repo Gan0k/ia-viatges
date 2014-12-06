@@ -965,7 +965,7 @@
 )
 
 (defrule recopilacio-restriccions::rest-transport
-	?fet <- (rest-transport choose)
+	?fet <- (rest-transport ask)
 	?re <- (preferencies)
 	=>
 	(bind ?r pregunta-opcions "Hi ha algun transport que no es pugui utilitzar?" Baixell Avio Tren)
