@@ -978,9 +978,9 @@
     (modify ?u (num-ciutats ?e))
 )
 
-(defrule recopilacio-restriccions::num-dies-ciutats ;; nombre de dies minim que t'agradaria estar a cada ciutat
-    ?p <-thrth
-)
+;(defrule recopilacio-restriccions::num-dies-ciutats ;; nombre de dies minim que t'agradaria estar a cada ciutat
+;    ?p <-thrth
+;)
 
 (defrule recopilacio-restriccions::pressupost "Pressupost del qual disposa l'usuari"
     ?u <- (restriccions (pressupost -1))
