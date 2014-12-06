@@ -773,7 +773,7 @@
             (bind ?linia (format nil "  %d. %s" ?var-index ?var))
             (printout t ?linia crlf)
     )
-    (bind ?resposta (pregunta-numerica "Escoge una opción:" 1 (length$ ?valors-possibles)))
+    (bind ?resposta (pregunta-numerica "Tria una opcio:" 1 (length$ ?valors-possibles)))
     ?resposta
 )
 
@@ -913,46 +913,7 @@
     (focus recopilacio-restriccions)
 )
 
-(defrule recopilacio-prefs::ratio-qual-diners "Pregunta per la preferencia de major qualitat sobre menys pressupost"
-    ?u <- (preferencies (ratio-qual-diners desconegut))
-    =>
-    (bind ?e (pregunta-opcions "Quina importancia dones a la qualitat sobre el pressupost?" baixa mitjana alta))
-    (switch ?e
-        (case 1 then
-            (modify ?u (ratio-qual-diners baixa))
-        )
-        (case 2 then
-            (modify ?u (ratio-qual-diners mitjana))
-        )
-        (case 3 then
-            (modify ?u (ratio-qual-diners alta))
-        )
-    )
-)
-
-
-(defrule recopilacio-prefs::preferencia-llocs-exotics
-    ?u <- (preferencies (preferencia-llocs-exotics desconegut))
-    =>
-    (bind ?e (pregunta-si-no "Preferiries anar a llocs exotics?"))
-    (switch ?e
-        (case TRUE then
-            (modify ?u (preferencia-llocs-exotics TRUE))
-        )
-        (case FALSE then
-            (modify ?u (preferencia-llocs-exotics FALSE))
-        )
-    )
-)
-
-
-;; (defrule recopilacio-prefs::pref-continent
-
-;; )
-
-;; (defrule recopilacio-prefs::pref-clima
-;; 
-;; )
+; FUNCIONS MODUL RESTRICCIONS 
 
 ;(defrule recopilacio-restriccions::min-dies "Nombre minim de dies que voldriem que dures el viatge"
 ;    ?u <- (restriccions (min-dies -1))
@@ -1004,7 +965,66 @@
 ;;; )
 
 ;; (defrule recopilacio-prefs::pref-continent
-; ------ MODUL PROCESSAT ----------
+
+(defrule recopilacio-restriccions::pasar-a-preferencies "Pasa de la recopilacio de restriccions de preferencies"
+    (declare (salience 10))
+    ;; Falta posar rest-transport
+    ?u <- (restriccions (num-ciutats ?n) (num-dies-ciutat ?c) (pressupost ?p) (min-qualitat-allotjament ?a)) 
+    (test (> ?n 0))
+    (test (> ?c 0))
+    (test (> ?p 0))
+    (test (> ?a 0))
+    =>
+    (focus recopilacio-prefs)
+)
+
+;-----------------------------;
+; FUNCIONS MODUL PREFERENCIES ;
+;-----------------------------;
+(defrule recopilacio-prefs::ratio-qual-diners "Pregunta per la preferencia de major qualitat sobre menys pressupost"
+    ?u <- (preferencies (ratio-qual-diners desconegut))
+    =>
+    (bind ?e (pregunta-opcions "Quina importancia dones a la qualitat sobre el pressupost?" baixa mitjana alta))
+    (switch ?e
+        (case 1 then
+            (modify ?u (ratio-qual-diners baixa))
+        )
+        (case 2 then
+            (modify ?u (ratio-qual-diners mitjana))
+        )
+        (case 3 then
+            (modify ?u (ratio-qual-diners alta))
+        )
+    )
+)
+
+
+(defrule recopilacio-prefs::preferencia-llocs-exotics
+    ?u <- (preferencies (preferencia-llocs-exotics desconegut))
+    =>
+    (bind ?e (pregunta-si-no "Preferiries anar a llocs exotics?"))
+    (switch ?e
+        (case TRUE then
+            (modify ?u (preferencia-llocs-exotics TRUE))
+        )
+        (case FALSE then
+            (modify ?u (preferencia-llocs-exotics FALSE))
+        )
+    )
+)
+
+
+;; (defrule recopilacio-prefs::pref-continent
+
+;; )
+
+;; (defrule recopilacio-prefs::pref-clima
+;; 
+;; )
+
+;--------------------------;
+; FUNCIONS MODUL PROCESSAT ;
+;--------------------------;
 
 ;; exemple
 
