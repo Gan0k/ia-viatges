@@ -902,23 +902,6 @@
     (modify ?u (objectiu-viatge ?e))
 )
 
-(defrule recopilacio-usuari::resum-valors "Imprimeix els valors fins ara"
-    ?u <- (Usuari (edat ?e) (num-pers ?n) (familia ?fam) (nivell-cult ?cult) (tipus-viatge ?tviatge) (objectiu-viatge ?oviatge))
-    => 
-    (printout t "edat" crlf)
-    (printout t ?e crlf)
-    (printout t "num-pers" crlf)
-    (printout t ?n crlf)
-    (printout t "familia" crlf)
-    (printout t ?fam crlf)
-    (printout t "nivell-cult" crlf)
-    (printout t ?cult crlf)
-    (printout t "tipus-viatgej" crlf)
-    (printout t ?tviatge crlf)
-    (printout t "object-viatge" crlf)
-    (printout t ?oviatge crlf)
-
-)
 
 (defrule recopilacio-usuari::pasar-a-restriccions "Pasa a la recopilacio de restriccions"
     (declare (salience 10))
@@ -955,13 +938,6 @@
     (restriccions)
 )
 
-(defrule recopilacio-restriccions::check "check"
-    (declare (salience 10))
-    =>
-    (printout t "CHECK CHECK " crlf)
-    (assert (num-ciutats ask))
-
-)
 
 (defrule recopilacio-restriccions::num-ciutats "Nombre de ciutats que hauria de tenir el viatge"
     ?fet <- (num-ciutats ask)
