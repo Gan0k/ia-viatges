@@ -812,7 +812,7 @@
     (declare (salience 10))
     =>
     (printout t "====================================================================" crlf)
-    (printout t "=  Sistema de recomanacio de viatjes al fin del mundo y mas alla  =" crlf)
+    (printout t "=   Sistema de recomanacio de viatjes al fin del mundo y mas alla  =" crlf)
     (printout t "====================================================================" crlf)
     (printout t crlf)   
     (printout t "¡Benvingut al sistema de recomenacio de viatges. A continuacio se li formularan unes preguntes per poder recomenarli viatjes." crlf)
@@ -964,12 +964,12 @@
     (modify ?u (pressupost ?e))
 )
 
-(defrule recopilacio-restriccions::rest-transport
-	?fet <- (rest-transport ask)
-	?re <- (preferencies)
-	=>
-	(bind ?r pregunta-opcions "Hi ha algun transport que no es pugui utilitzar?" Baixell Avio Tren)
-	(switch ?r
+(defrule recopilacio-restriccions::rest-transport "Pregunta transports"
+    ?fet <- (rest-transport ask) 
+    ;;?re <- (restriccions)
+    =>
+    (bind ?r (pregunta-opcions "Hi ha algun transport que no puguis utilitzar?" baixell avio tren))
+    (switch ?r
         (case 1 then
             
         )
@@ -980,6 +980,8 @@
             ;; Put instances of the prohivited class here
         )
     )
+    (retract ?fet)
+    (assert (rest-transport TRUE))
 )
 
 (defrule recopilacio-restriccions::min-qualitat-allotjament
@@ -993,7 +995,8 @@
 (defrule recopilacio-restriccions::pasar-a-preferencies "Pasa de la recopilacio de restriccions de preferencies"
     (declare (salience 10))
     ;; Falta posar rest-transport
-    ?u <- (restriccions (num-ciutats ?n) (num-dies-ciutat ?c) (pressupost ?p) (min-qualitat-allotjament ?a)) 
+    (rest-transport ~ask)
+    ?u <- (restriccions (num-ciutats ?n) (num-dies-ciutat ?c) (pressupost ?p) (min-qualitat-allotjament ?a))
     (test (> ?n 0))
     (test (> ?c 0))
     (test (> ?p 0))
