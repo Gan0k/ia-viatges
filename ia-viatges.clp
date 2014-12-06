@@ -940,14 +940,10 @@
 
 
 (defrule recopilacio-restriccions::num-ciutats "Nombre de ciutats que hauria de tenir el viatge"
-    ?fet <- (num-ciutats ask)
-    ;?u <- (restriccions (num-ciutats ?n))
-    ;(test (< ?n 10)) 
+    ?u <- (restriccions (num-ciutats -1))
     =>
-    (printout t "it works" crlf)
     (bind ?e (pregunta-numerica "Quin es el nombre de ciutats que t'agradaria visitar?" 0 99999999999))
-    (retract ?fet)
-    ;(modify ?u (num-ciutats ?e))
+    (modify ?u (num-ciutats ?e))
 )
 
 ;(defrule recopilacio-restriccions::num-dies-ciutats ;; nombre de dies minim que t'agradaria estar a cada ciutat
