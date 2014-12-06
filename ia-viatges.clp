@@ -902,7 +902,23 @@
     (modify ?u (objectiu-viatge ?e))
 )
 
+(defrule recopilacio-usuari::resum-valors "Imprimeix els valors fins ara"
+    ?u <- (Usuari (edat ?e) (num-pers ?n) (familia ?fam) (nivell-cult ?cult) (tipus-viatge ?tviatge) (objectiu-viatge ?oviatge))
+    => 
+    (printout t "edat" crlf)
+    (printout t ?e crlf)
+    (printout t "num-pers" crlf)
+    (printout t ?n crlf)
+    (printout t "familia" crlf)
+    (printout t ?fam crlf)
+    (printout t "nivell-cult" crlf)
+    (printout t ?cult crlf)
+    (printout t "tipus-viatgej" crlf)
+    (printout t ?tviatge crlf)
+    (printout t "object-viatge" crlf)
+    (printout t ?oviatge crlf)
 
+)
 
 (defrule recopilacio-usuari::pasar-a-restriccions "Pasa a la recopilacio de restriccions"
     (declare (salience 10))
@@ -910,11 +926,13 @@
     (test (> ?e 0))
     (test (> ?n 0))
     =>
+    (printout t "Passant a recopilacio-restriccions" crlf)
     (focus recopilacio-restriccions)
 )
 
-; FUNCIONS MODUL RESTRICCIONS 
-
+;-----------------------------;
+; FUNCIONS MODUL RESTRICCIONS ;
+;-----------------------------;
 ;(defrule recopilacio-restriccions::min-dies "Nombre minim de dies que voldriem que dures el viatge"
 ;    ?u <- (restriccions (min-dies -1))
 ;    =>
@@ -932,11 +950,28 @@
 ;    (modify ?u (max-dies ?e))
 ;)
 
-(defrule recopilacio-restriccions::num-ciutats "Nombre de ciutats que hauria de tenir el viatge"
-    ?u <- (restriccions (num-ciutats -1))
+(deffacts recopilacio-restriccions::fets-inicials "Fets inicials de restriccions"
+    (num-ciutats ask)
+    (restriccions)
+)
+
+(defrule recopilacio-restriccions::check "check"
+    (declare (salience 10))
     =>
+    (printout t "CHECK CHECK " crlf)
+    (assert (num-ciutats ask))
+
+)
+
+(defrule recopilacio-restriccions::num-ciutats "Nombre de ciutats que hauria de tenir el viatge"
+    ?fet <- (num-ciutats ask)
+    ;?u <- (restriccions (num-ciutats ?n))
+    ;(test (< ?n 10)) 
+    =>
+    (printout t "it works" crlf)
     (bind ?e (pregunta-numerica "Quin es el nombre de ciutats que t'agradaria visitar?" 0 99999999999))
-    (modify ?u (num-ciutats ?e))
+    (retract ?fet)
+    ;(modify ?u (num-ciutats ?e))
 )
 
 ;(defrule recopilacio-restriccions::num-dies-ciutats ;; nombre de dies minim que t'agradaria estar a cada ciutat
@@ -975,6 +1010,7 @@
     (test (> ?p 0))
     (test (> ?a 0))
     =>
+    (printout t "passant a preferencies" clrf)
     (focus recopilacio-prefs)
 )
 
@@ -1092,7 +1128,7 @@
 
     (send ?destVisitades put-puntuacio ?punt)
     (send ?destVisitades put-justificacions $?just)
-    (assert (valorat-populariat ?dest))
+    (assert (valorar-popularitat ?dest))
 )
 
 
