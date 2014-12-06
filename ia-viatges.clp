@@ -1002,7 +1002,7 @@
     (test (> ?p 0))
     (test (> ?a 0))
     =>
-    (printout t "passant a preferencies" clrf)
+    (printout t "DEBUG - passant a preferencies" crlf)
     (focus recopilacio-prefs)
 )
 
@@ -1057,9 +1057,12 @@
  
 ;)
 
-;(defrule recopilacio-prefs::pasar-a-processat
-
-;)
+(defrule recopilacio-prefs::pasar-a-processat
+    (declare (salience 10)) ; TODO should be changed
+    =>
+    (printout t "DEBUG - passant a processat" crlf)
+    (focus processat-data)
+)
 
 ;--------------------------;
 ; FUNCIONS MODUL PROCESSAT ;
