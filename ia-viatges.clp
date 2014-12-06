@@ -682,20 +682,20 @@
 ;    (slot min-dies (type INTEGER) (default -1)) ;;; primer
 ;    (slot max-dies (type INTEGER) (default -1)) ;;; segon
     (slot num-ciutats (type INTEGER) (default -1))
-    (slot num-dies-ciutat (type INTEGER)) ;;; ha d'estar en consonancia amb valors min i max
-    (slot pressupost (type INTEGER))
+    (slot num-dies-ciutat (type INTEGER) (default -1)) ;;; ha d'estar en consonancia amb valors min i max
+    (slot pressupost (type INTEGER) (default -1))
     (multislot rest-transport (type INSTANCE)) ;;;el que no agafes
-    (slot min-qualitat-allotjament (type INTEGER)) ;; Minim estrelles del allotjament
+    (slot min-qualitat-allotjament (type INTEGER) (default -1)) ;; Minim estrelles del allotjament
 )
 
 ;;; Template per les preferencies del usuari
 (deftemplate MAIN::preferencies
-    (slot popularitat (type SYMBOL)) ;; Necessari?
+    (slot popularitat (type SYMBOL) (default desconegut)) ;; Necessari?
     (slot ratio-qual-diners (type SYMBOL) (default desconegut))
     (slot preferencia-llocs-exotics (type SYMBOL) (default desconegut))
     (slot pref-continent (type INSTANCE))
-    (slot pref-clima (type SYMBOL))
-    (slot pref-ciutat (type SYMBOL))
+    (slot pref-clima (type SYMBOL) (default desconegut))
+    (slot pref-ciutat (type SYMBOL) (default desconegut))
 )
 
 ;;; Fi declaracio templates -----------------------
