@@ -32,3 +32,11 @@ Tambe pot pasar que no es puguin complir les restriccions. En tal cal, notificar
 
 Idea: a la ontologia guaradar per cada destinació quin és el cost d'anar a 
 QUALSEVOL altre destinació??
+
+Optional to implement, pero ho diu al enunciat :S -> por ejemplo si es un viaje de bodas probablemente será un
+viaje romántico o si se va con niños, probablemente no se va a descansar.
+Tampoco es necesario explorar todas las posibilidades y hay que implementar el sistema de manera que
+imponga restricciones de sentido común que las restrinjan. Por ejemplo si el viaje es de corta duración,
+probablemente no se querrá que las ciudades estén muy alejadas unas de otras.
+
+ATENCIO!!: FER PREGUNTA DE LLOC D'ORIGEN AL USUARI, ES NECESSITA SABER PER TAL DE SABER D'ON SORTIR
