@@ -56,8 +56,8 @@ MODUL DE PROCESSAT:
 - popularitat -> DONE
 - nivell-cult -> filtrar els points of interest de la ciutat tq siguin museus + fer una altre funcio que puntui 
 la ciutat segons la length dels points of interest left
-- pref-continent -> pujar puntuacio de destins en continents preferits
-- pref-clima -> lo mismo pero amb clima
+- pref-continent -> DONE
+- pref-clima -> DONE
 - preferencia-llocs-exotics -> pujar puntuació destins FORA del continent d'origen
 - ratio-qual-diners -> DEPRECATED FOR NOW
 - idea for edat + num_pers + familia + tipus_viatge + obj_viatge -> tracatar com preferencies que, si es compleix

@@ -1670,6 +1670,22 @@
     (send ?dest-visitada put-justificacions $?just)
 )
 
+(defrule processat-data::valorar-clima
+    (preferencies (pref-clima ?climaDesitjat))
+    ?dest <- (object (is-a Destination) (has_climate ?clima))
+    ?dest-visitada <- (object (is-a DestinacioVisitada) (desti ?nom-visitat) (puntuacio ?punt) (justificacions $?just))
+    (test (eq (instance-name ?dest) (instance-name ?nom-visitat)))
+    (not (valorat-clima ?dest))
+    =>
+    (if (eq ?clima ?climaDesitjat) then
+        (bind ?punt (+ ?punt 100))
+        (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es puja la puntuacio de destinacions amb clima preferit."))
+    )
+    (assert (valorat-clima ?dest))
+    (send ?dest-visitada put-puntuacio ?punt)
+    (send ?dest-visitada put-justificacions $?just)
+)
+
 ;; Filtrar allotjaments per qualtiat
 (defrule processat-data::filtrar-qualitat-allotjament "Es filtraran els allotjaments que no tinguin prou qualitat"
     ;; Qualitat is numeric
