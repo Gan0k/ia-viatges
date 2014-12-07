@@ -42,7 +42,7 @@ probablemente no se querrá que las ciudades estén muy alejadas unas de otras.
 ATENCIO!!: FER PREGUNTA DE LLOC D'ORIGEN AL USUARI, ES NECESSITA SABER PER TAL DE SABER D'ON SORTIR
 
 MODUL DE GENERACIO:
-- Num-ciutats -> Agafar ciutats fins a que valor 0
+- Num-ciutats -> DONE
 - num-dies-ciutat -> entra només en joc en aquest modul
 - Presupossot -> agafar ciutat, per cada hotel de la ciutat, agafar price_per_night, multiplicar pel nombre de dies 
                 x ciutat. Si aquest numero es mes gran que el pressupost sobrat, descartar.
