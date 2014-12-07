@@ -659,8 +659,10 @@
 
 ;; Imprimir destinacio visitada
 (defmessage-handler MAIN::DestinacionsVisitades imprimir ()
-    (printout t "Imprimint destinacio visitada")
-    (printout t "End destinacio visitada")
+    (printout t "Imprimint destinacio visitada" crlf)
+    (format t "Nom: %s" (instance-name ?self:desti))
+    (printout t crlf)
+    (printout t "End destinacio visitada" crlf)
 )
     
 
@@ -957,7 +959,27 @@
 (deffacts recopilacio-restriccions::fets-inicials "Fets inicials de restriccions"
     (num-ciutats ask)
     (rest-transport ask)
+    (tipus-desti ask)
     (restriccions)
+)
+
+(defrule recopilacio-restriccions::tipus-desti "Selecciona el tipus de desti"
+    ?fet <- (tipus-desti ask)
+    =>
+    (retract ?fet)
+    (bind ?e (pregunta-index "Quin tipus de destinacio voldries?" ciutat poble muntanya))
+    (switch ?e
+        (case 1 then
+            (assert (tipus-desti ciutat))
+        )
+        (case 2 then
+            (assert (tipus-desti poble))
+        )
+        (case 3 then
+            (assert (tipus-desti muntanya))
+        )
+    )
+
 )
 
 (defrule recopilacio-restriccions::num-ciutats "Nombre de ciutats que hauria de tenir el viatge"
@@ -1105,7 +1127,7 @@
 	=>
 	(bind $?llista (find-all-instances ((?inst City)) TRUE))
 	(progn$ (?curr ?llista)
-		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntuacio 0))
 	)	
 	(retract ?fet)
 )
@@ -1117,7 +1139,7 @@
 	=>
 	(bind $?llista (find-all-instances ((?inst Town)) TRUE))
 	(progn$ (?curr ?llista)
-		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntuacio 0))
 	)	
 	(retract ?fet)
 )
@@ -1128,7 +1150,7 @@
 	=>
 	(bind $?llista (find-all-instances ((?inst Mountain)) TRUE))
 	(progn$ (?curr ?llista)
-		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntacio 0))
+		(make-instance (gensym) of DestinacionsVisitades (desti ?curr) (puntuacio 0))
 	)	
 	(retract ?fet)
 )
