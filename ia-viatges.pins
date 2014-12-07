@@ -1,4 +1,4 @@
-; Sun Dec 07 20:25:44 CET 2014
+; Sun Dec 07 22:25:01 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -116,7 +116,7 @@
 		[ia-viatges_Class30013]
 		[ia-viatges_Class30014]
 		[ia-viatges_Class30015])
-	(popularity 3)
+	(popularity "alta")
 	(type_destination_is [ia-viatges_Class20004]))
 
 ([ia-viatges_Class30009] of  Cultural
@@ -154,7 +154,7 @@
 		[ia-viatges_Class30019]
 		[ia-viatges_Class30020]
 		[ia-viatges_Class30021])
-	(popularity 5)
+	(popularity "baixa")
 	(type_destination_is [ia-viatges_Class20004]))
 
 ([ia-viatges_Class30017] of  Nightlife
@@ -193,7 +193,7 @@
 		[ia-viatges_Class30025]
 		[ia-viatges_Class30026]
 		[ia-viatges_Class30027])
-	(popularity 4)
+	(popularity "alta")
 	(type_destination_is [ia-viatges_Class30001]))
 
 ([ia-viatges_Class30023] of  Leisure
@@ -232,7 +232,7 @@
 		[ia-viatges_Class30031]
 		[ia-viatges_Class30032]
 		[ia-viatges_Class30033])
-	(popularity 1)
+	(popularity "baixa")
 	(type_destination_is [ia-viatges_Class30002]))
 
 ([ia-viatges_Class30029] of  FamiliarPlace
@@ -271,7 +271,7 @@
 		[ia-viatges_Class30037]
 		[ia-viatges_Class30038]
 		[ia-viatges_Class30039])
-	(popularity 2)
+	(popularity "alta")
 	(type_destination_is [ia-viatges_Class0]))
 
 ([ia-viatges_Class30035] of  Sport
@@ -310,7 +310,7 @@
 		[ia-viatges_Class30043]
 		[ia-viatges_Class30044]
 		[ia-viatges_Class30045])
-	(popularity 5)
+	(popularity "baixa")
 	(type_destination_is [ia-viatges_Class30001]))
 
 ([ia-viatges_Class30041] of  TuristPoint
@@ -346,7 +346,7 @@
 	(has_climate [ia-viatges_Class10007])
 	(is_in_continent [ia-viatges_Class2])
 	(name_city "UltraLuxe")
-	(popularity 5)
+	(popularity "alta")
 	(type_destination_is [ia-viatges_Class30001]))
 
 ([ia-viatges_Class30047] of  Accomodation
@@ -371,7 +371,7 @@
 	(has_climate [ia-viatges_Class10007])
 	(is_in_continent [ia-viatges_Class5])
 	(name_city "ReasonableLux")
-	(popularity 4)
+	(popularity "alta")
 	(type_destination_is [ia-viatges_Class20004]))
 
 ([ia-viatges_Class30050] of  Accomodation
@@ -396,7 +396,7 @@
 	(has_climate [ia-viatges_Class10006])
 	(is_in_continent [ia-viatges_Class4])
 	(name_city "AverageJoe")
-	(popularity 3)
+	(popularity "baixa")
 	(type_destination_is [ia-viatges_Class30002]))
 
 ([ia-viatges_Class30053] of  Accomodation
@@ -425,7 +425,7 @@
 		[ia-viatges_Class30058]
 		[ia-viatges_Class30059]
 		[ia-viatges_Class30060])
-	(popularity 5)
+	(popularity "alta")
 	(type_destination_is [ia-viatges_Class30001]))
 
 ([ia-viatges_Class30056] of  Accomodation
@@ -475,7 +475,7 @@
 		[ia-viatges_Class30070]
 		[ia-viatges_Class30071]
 		[ia-viatges_Class30072])
-	(popularity 5)
+	(popularity "alta")
 	(type_destination_is [ia-viatges_Class30002]))
 
 ([ia-viatges_Class30062] of  Accomodation

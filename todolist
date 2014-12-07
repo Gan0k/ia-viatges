@@ -41,11 +41,21 @@ probablemente no se querrá que las ciudades estén muy alejadas unas de otras.
 
 ATENCIO!!: FER PREGUNTA DE LLOC D'ORIGEN AL USUARI, ES NECESSITA SABER PER TAL DE SABER D'ON SORTIR
 
-QUE FA EL MODUL DE GENERACIO:
-- Num-ciutats -> Agafar ciutats fins això 0
+MODUL DE GENERACIO:
+- Num-ciutats -> Agafar ciutats fins a que valor 0
+- num-dies-ciutat -> entra només en joc en aquest modul
 - Presupossot -> agafar ciutat, per cada hotel de la ciutat, agafar price_per_night, multiplicar pel nombre de dies 
                 x ciutat. Si aquest numero e smes gran que el pressupost sobrat, descartar.
 - rest-transport -> Si el transport que s'ha d'agafar per arribar a una ciutat esta a rest-transport, llavors
                     descatar la ciutat.
 
 RECORDAR QUE AQUESTES VARIABLES NO TINDRAN QUE APAREIXER AL MODUL DE PROCESSAT (NO S'HA DE FER RES AMB ELLES)
+
+MODUL DE PROCESSAT:
+- min-qualitat-hotels -> done
+- popularitat -> done
+- nivell-cult -> filtrar els points of interest de la ciutat tq siguin museus + fer funcio que puntui la ciutat segons
+la length dels points of interest left
+- pref-continent -> pujar puntuacio de destins en continents preferits
+- pref-clima -> lo mismo pero amb clima
+- 

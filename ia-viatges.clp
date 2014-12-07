@@ -1109,10 +1109,7 @@
 
 ;;; Template per les restriccions del usuari
 (deftemplate MAIN::restriccions
-;;Deprecated
-;;    (slot min-dies (type INTEGER) (default -1)) ;;; primer
-;;    (slot max-dies (type INTEGER) (default -1)) ;;; segon
-    (slot num-ciutats (type INTEGER) (default -1))
+    (slot num-ciutats (type INTEGER) (default -1)) ;; cota superior
     (slot num-dies-ciutat (type INTEGER) (default -1))
     (slot pressupost (type INTEGER) (default -1))
     (multislot rest-transport (type INSTANCE)) ;;;el que no agafes
@@ -1313,8 +1310,18 @@
 (defrule recopilacio-usuari::establir-nivellcult "Estableix el nivell cultural del usuari"
     ?u <- (Usuari (nivell-cult desconegut))
     =>
-    (bind ?e (pregunta-opcions "Quin interes tens en la cultura?" alt normal baix))
-    (modify ?u (nivell-cult ?e))
+    (bind ?e (pregunta-index "Quin interes tens en la cultura?" alt normal baix))
+    (switch ?e
+        (case 1 then
+            (modify ?u (nivell-cult alt))
+        )
+        (case 2 then
+            (modify ?u (nivell-cult normal))
+        )
+        (case 3 then
+            (modify ?u (nivell-cult baix))
+        )
+    )
 )
 
 (defrule recopilacio-usuari::establir-tipusviatge "Estableix el tipus de viatge del usuari"
