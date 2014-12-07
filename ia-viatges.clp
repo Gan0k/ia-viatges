@@ -563,7 +563,7 @@
 )
 
 
-(defclass Viatje
+(defclass Viatge
     (is-a USER)
     (role concrete)
     ;; Llocs visitats
@@ -631,7 +631,7 @@
 )
 
 ;;; Modul de generacio de solucions
-(defmodule genera-data
+(defmodule generacio
     (import MAIN ?ALL)
     (export ?ALL)
 )
@@ -647,8 +647,10 @@
 ;;; Declaracio de missatges ---------------------------
 
 ;; Imprime los datos de un contenido
-(defmessage-handler MAIN::Viatje imprimir ()
-    (printout t "Imprimint viatje")
+(defmessage-handler MAIN::Viatge imprimir ()
+    (printout t "Imprimint viatge: " crlf)
+    (printout t (instance-name ?self) crlf)
+    (printout t "Done " crlf)
 )
 
 ;; Imprimir el dia
@@ -698,6 +700,16 @@
     (slot pref-clima (type SYMBOL) (default desconegut))
     ;; Not used so far
     ;;(slot pref-ciutat (type SYMBOL) (default desconegut))
+)
+
+;; Template per la llista de destins
+(deftemplate MAIN::llista-destins
+    (multislot destins (type INSTANCE))
+)
+
+;; Template per la llista de viatges
+(deftemplate MAIN::llista-viatges
+    (multislot viatges (type INSTANCE))
 )
 
 ;;; Fi declaracio templates -----------------------
@@ -915,9 +927,9 @@
     (focus recopilacio-restriccions)
 )
 
-;-----------------------------;
-; FUNCIONS MODUL RESTRICCIONS ;
-;-----------------------------;
+;---------------------------;
+; REGLES MODUL RESTRICCIONS ;
+;---------------------------;
 
 ;;Deprecated
 ;(defrule recopilacio-restriccions::min-dies "Nombre minim de dies que voldriem que dures el viatge"
@@ -1006,9 +1018,9 @@
     (focus recopilacio-prefs)
 )
 
-;-----------------------------;
-; FUNCIONS MODUL PREFERENCIES ;
-;-----------------------------;
+;---------------------------;
+; REGLES MODUL PREFERENCIES ;
+;---------------------------;
 
 (defrule recopilacio-prefs::select-popularitat 
 	?u <- (preferencies (popularitat desconegut))
@@ -1060,13 +1072,13 @@
 (defrule recopilacio-prefs::pasar-a-processat
     (declare (salience 10)) ; TODO should be changed
     =>
-    (printout t "DEBUG - passant a processat" crlf)
+    (printout t "Processant les dades..." crlf)
     (focus processat-data)
 )
 
-;--------------------------;
-; FUNCIONS MODUL PROCESSAT ;
-;--------------------------;
+;------------------------;
+; REGLES MODUL PROCESSAT ;
+;------------------------;
 
 ;; exemple
 
@@ -1084,7 +1096,7 @@
 ;; CIUTATS
 (defrule processat-data::afegir-ciutats "S'afageixen totes les ciutats"
   ; Tipus ha de ser una regla preguntada anteriorment sobr eles preferencies
-	?fet <- (tipus City)
+	?fet <- (tipus-desti ciutat)
 	=>
 	(bind $?llista (find-all-instances ((?inst City)) TRUE))
 	(progn$ (?curr ?llista)
@@ -1096,7 +1108,7 @@
 
 ;; POBLES
 (defrule processat-data::afegir-pobles "S'afageixen totes les pobles"
-	?fet <- (tipus Town)
+	?fet <- (tipus-desti poble)
 	=>
 	(bind $?llista (find-all-instances ((?inst Town)) TRUE))
 	(progn$ (?curr ?llista)
@@ -1107,7 +1119,7 @@
 
 ;; MUNTANYES
 (defrule processat-data::afegir-muntanyes "S'afageixen totes les muntanyes"
-	?fet <- (tipus Mountain)
+	?fet <- (tipus-desti muntanya)
 	=>
 	(bind $?llista (find-all-instances ((?inst Mountain)) TRUE))
 	(progn$ (?curr ?llista)
@@ -1157,3 +1169,68 @@
     )
 )
 
+(defrule recopilacio-prefs::passar-a-generacio
+    (declare (salience -10)) ; TODO should be changed
+    =>
+    (printout t "DEBUG - passant a generacio" crlf)
+    (focus generacio)
+)
+
+;------------------;
+; REGLES GENERACIO ;
+;------------------;
+
+(defrule generacio::crea-llista-destins "Es crea una llista de destins"
+    (not (llista-destins))
+    =>
+    (assert (llista-destins))
+)
+
+
+(defrule generacio::afegir-desti "afegeix un desti la llista de destins"
+    (declare (salience 10))
+    ?rec <- (object (is-a DestinacionsVisitades))
+    ?hecho <- (llista-destins (destins $?llista))
+    (test (not (member$ ?rec $?llista)))
+    =>
+    (bind $?llista (insert$ $?llista (+ (length$ $?llista) 1) ?rec))
+    (modify ?hecho (destins $?llista))
+)
+
+;; TODO Finish this
+(defrule generacio::crea-viatges "Es crean els viatges"
+    (not (llista-viatges))
+    (llista-destins)
+    =>
+    (bind $?llista (create$ ))
+    (bind $?llista (insert$ $?llista (+ (length $?llista) 1) (make-instance Viatge1 of Viatge)))
+    ;; seleccionem el viatge
+    (bind ?viatge (nth$ 1 $?llista))
+    (assert (llista-viatges (viatges $?llista)))
+)
+
+(defrule generacio::passar-a-presentacio "Pasa al modul presentacio"
+    (declare (salience -1))
+    (llista-destins)
+    =>
+    (focus presentacio)
+)
+
+;--------------------;
+; REGLES PRESENTACIO ;
+;--------------------;
+
+
+(defrule presentacio::imprimir-resposta "Imprimeix el resultat"
+    (llista-viatges (viatges $?viatges))
+    (Usuari (nom ?nom))
+    (not (final))
+    =>
+    (printout t "DEBUG - IMPRIMINT RESPOSTES" crlf)
+    (format t "%s, aquesta es la recomanacio, esperem que li agradi!" ?nom)
+    (printout t crlf)
+    (progn$ (?curr $?viatges)
+        (printout t (send ?curr imprimir))
+    )
+    (assert (final))
+)
