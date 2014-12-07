@@ -1569,7 +1569,6 @@
     (declare (salience 10)) 
     (preferencies (pref-clima ~ask) (preferencia-llocs-exotics ~desconegut) (ratio-qual-diners ~desconegut) (popularitat ~desconegut))
     (pref-continent ~ask)
-    ;(popularitat ~desconegut)
     =>
     (printout t "Processant les dades..." crlf)
     (focus processat-data)
