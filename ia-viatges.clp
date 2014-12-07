@@ -650,12 +650,17 @@
 (defmessage-handler MAIN::Viatge imprimir ()
     (printout t "Imprimint viatge: " crlf)
     (printout t (instance-name ?self) crlf)
+    (printout t "Imprimint destinacions..." crlf)
+    (progn$ (?desti (send ?self get-destins-visitats))
+       (printout t (send ?desti imprimir))
+    ) 
     (printout t "Done " crlf)
 )
 
-;; Imprimir el dia
+;; Imprimir destinacio visitada
 (defmessage-handler MAIN::DestinacionsVisitades imprimir ()
-    (printout "Imprimint destinacions visitades")
+    (printout t "Imprimint destinacio visitada")
+    (printout t "End destinacio visitada")
 )
     
 
@@ -1200,18 +1205,35 @@
 ;; TODO Finish this
 (defrule generacio::crea-viatges "Es crean els viatges"
     (not (llista-viatges))
-    (llista-destins)
+    (llista-destins (destins $?destins-disponibles))
     =>
     (bind $?llista (create$ ))
     (bind $?llista (insert$ $?llista (+ (length $?llista) 1) (make-instance Viatge1 of Viatge)))
-    ;; seleccionem el viatge
+    ;; seleccionem el primer viatje
     (bind ?viatge (nth$ 1 $?llista))
+    ; TODO finish this
+
+    ; Destins a seleccionar
+    (bind $?destins-sel (create$ ))
+    (while (> (length$ $?destins-disponibles) 0) do
+        ; seleccionem un desti random
+        (bind ?rand-desti (nth$ (random 1 (length$ $?destins-disponibles)) $?destins-disponibles))
+
+        ; afegin el desti seleccionat a la llista de destins seleccionats
+        (bind $?destins-sel (insert$ $?destins-sel (+ (length$ $?destins-sel) 1) ?rand-desti))
+
+        ; eliminem el desti de la llista
+        (bind $?destins-disponibles (delete-member$ $?destins-disponibles ?rand-desti))
+    )
+    ;; asignem els destins seleccionats al viatge
+    (send ?viatge put-destins-visitats $?destins-sel)
     (assert (llista-viatges (viatges $?llista)))
 )
 
 (defrule generacio::passar-a-presentacio "Pasa al modul presentacio"
     (declare (salience -1))
     (llista-destins)
+    (llista-viatges)
     =>
     (focus presentacio)
 )
