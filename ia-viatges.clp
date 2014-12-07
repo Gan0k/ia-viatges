@@ -660,7 +660,7 @@
 ;; Imprimir destinacio visitada
 (defmessage-handler MAIN::DestinacionsVisitades imprimir ()
     (printout t "Imprimint destinacio visitada" crlf)
-    (format t "Nom: %s" (instance-name ?self:desti))
+    (format t "Nom: %s" (send ?self:desti get-name_city))
     (printout t crlf)
     (printout t "End destinacio visitada" crlf)
 )
