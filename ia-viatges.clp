@@ -1069,6 +1069,8 @@
 ;; Imprime los datos de un contenido
 (defmessage-handler MAIN::Viatge imprimir ()
     (printout t (instance-name ?self) crlf)
+    (printout t "Cost del viatge: ")
+    (printout t ?self:cost crlf)
     (printout t "Destinacions: " crlf)
     (progn$ (?desti (send ?self get-destins-visitats))
        (printout t (send ?desti imprimir))
@@ -1669,8 +1671,6 @@
     (bind $?deleted (create$))
     (progn$ (?curr-acom $?acoms) ;Iterar per totes les accomodations
         (bind ?nom (send ?curr-acom get-name_accom))
-        (printout t ?nom crlf)
-        (printout t ?curr-acom crlf)
         (bind ?qual (send ?curr-acom get-rating))
         (if (< ?qual ?minQualitat) then
             (send ?curr-acom delete)
@@ -1718,27 +1718,50 @@
 (defrule generacio::crea-viatges "Es crean els viatges"
     (not (llista-viatges))
     (llista-destins (destins $?destins-disponibles))
-    (restriccions (num-ciutats ?num-ciutats))
+    (restriccions (pressupost ?pressupost) (num-ciutats ?num-ciutats) (num-dies-ciutat ?dies-ciutat))
     =>
     (bind $?llista (create$ ))
     (bind $?llista (insert$ $?llista (+ (length $?llista) 1) (make-instance Viatge1 of Viatge)))
     ;; seleccionem el primer viatje
     (bind ?viatge (nth$ 1 $?llista))
 
+    ;; Presupost gastat
+    (bind ?pressupost-gastat 0)
+
     ; Destins a seleccionar
     (bind $?destins-sel (create$ ))
     (while (and (< (length$ $?destins-sel) ?num-ciutats) (> (length$ $?destins-disponibles) 0)) do
-        ; seleccionem un desti random
-        (bind ?rand-desti (nth$ (random 1 (length$ $?destins-disponibles)) $?destins-disponibles))
+        ; seleccionem el primer desti
+        (bind ?destiVisitat (nth$ 1 $?destins-disponibles))
+        (bind ?desti (send ?destiVisitat get-desti))
+        (bind $?accoms (send ?desti get-accomodations_are))
+        ; de totes les acomodations, pillarem la primera
+        (bind ?found FALSE)
+        (bind ?i 1)
+        (while ( and (<= ?i (length$ $?accoms)) (eq ?found FALSE)) do
+            (bind ?curr-accom (nth$ ?i $?accoms)) 
+            (bind ?preu-per-nit (send ?curr-accom get-price_per_night))
+            (if ( <= ( + ?pressupost-gastat ( * ?preu-per-nit ?dies-ciutat)) ?pressupost) then
+                (bind ?found TRUE)
+                (bind ?pressupost-gastat (+ ?pressupost-gastat (* ?preu-per-nit ?dies-ciutat)))
+            )
+            (bind ?i (+ ?i 1))
+        )
 
-        ; afegin el desti seleccionat a la llista de destins seleccionats
-        (bind $?destins-sel (insert$ $?destins-sel (+ (length$ $?destins-sel) 1) ?rand-desti))
+        (if (eq ?found TRUE) then
+            ; seleccionem un desti random
+            ;(bind ?rand-desti (nth$ (random 1 (length$ $?destins-disponibles)) $?destins-disponibles))
 
+            ; afegin el desti seleccionat a la llista de destins seleccionats
+            (bind $?destins-sel (insert$ $?destins-sel (+ (length$ $?destins-sel) 1) ?destiVisitat))
+
+        )
         ; eliminem el desti de la llista
-        (bind $?destins-disponibles (delete-member$ $?destins-disponibles ?rand-desti))
+        (bind $?destins-disponibles (delete-member$ $?destins-disponibles ?destiVisitat))
     )
     ;; asignem els destins seleccionats al viatge
     (send ?viatge put-destins-visitats $?destins-sel)
+    (send ?viatge put-cost ?pressupost-gastat)
     (assert (llista-viatges (viatges $?llista)))
 )
 
