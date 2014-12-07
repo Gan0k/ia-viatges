@@ -1,29 +1,29 @@
 TODO--
 
 Caracteristiques Usuaris:
-	Edad
-	Nivell cultural nivell-cult (alt, mitj baix)
-	Viatjara amb fill (si / no)
+    Edad
+    Nivell cultural nivell-cult (alt, mitj baix)
+    Viatjara amb fill (si / no)
     Edat dels fills (1-100)
   
-	Viatge especial (boda XOR fi de curs) tipus-viatge
+    Viatge especial (boda XOR fi de curs) tipus-viatge
     Num persones num-pers int
     Objectiu objectiu-viatge descans, Cultural, romantic, diversion
 
 Restriccions:
-	Num dies (min/max)
-	Num ciutats (min/max)
-	Num dies/ciutat (min/max)
-	Duracio del viatge (per evitar)
-	Presupost
-	Restriccions de transport
-	Minim qualitat allotjaments
+    Num dies (min/max)
+    Num ciutats (min/max)
+    Num dies/ciutat (min/max)
+    Duracio del viatge (per evitar)
+    Presupost
+    Restriccions de transport
+    Minim qualitat allotjaments
 
 Preferencies
-	Importa mes presupost que duracio | qualitat (ratio de valoracio de cada cosa)
-	Preferencia de visitar ciutats/llocs menys coneguts (popularitat)
-	Continent de preferencia
-	Clima (Temperatura, pluja, etc.)
+    Importa mes presupost que duracio | qualitat (ratio de valoracio de cada cosa)
+    Preferencia de visitar ciutats/llocs menys coneguts (popularitat)
+    Continent de preferencia
+    Clima (Temperatura, pluja, etc.)
   Preferencia de llocs exotics (llocs llunyans)
 
 
@@ -40,3 +40,10 @@ imponga restricciones de sentido común que las restrinjan. Por ejemplo si el vi
 probablemente no se querrá que las ciudades estén muy alejadas unas de otras.
 
 ATENCIO!!: FER PREGUNTA DE LLOC D'ORIGEN AL USUARI, ES NECESSITA SABER PER TAL DE SABER D'ON SORTIR
+
+QUE FA EL MODUL DE GENERACIO:
+- Num-ciutats -> Agafar ciutats fins això 0
+- Presupossot -> agafar ciutat, per cada hotel de la ciutat, agafar price_per_night, multiplicar pel nombre de dies 
+                x ciutat. Si aquest numero e smes gran que el pressupost sobrat, descartar.
+- rest-transport -> Si el transport que s'ha d'agafar per arribar a una ciutat esta a rest-transport, llavors
+                    descatar la ciutat.
