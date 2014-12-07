@@ -962,6 +962,9 @@
     (slot numero-dies
         (type INTEGER)
         (create-accessor read-write))
+    (slot nom-hotel
+        (type STRING)
+        (create-accessor read-write))
     ; Ciutat/Poble que correspon
     (slot desti
         (type INSTANCE)
@@ -1082,7 +1085,9 @@
 ;; Imprimir destinacio visitada
 (defmessage-handler MAIN::DestinacioVisitada imprimir ()
     (printout t "Desti:")
-    (printout t (send ?self:desti get-name_city) crlf)
+    (printout t (send ?self:desti get-name_city))
+    (printout t " hotel: ")
+    (printout t ?self:nom-hotel crlf)
 )
     
 
@@ -1771,6 +1776,8 @@
             (if ( <= ( + ?pressupost-gastat ( * ?preu-per-nit ?dies-ciutat)) ?pressupost) then
                 (bind ?found TRUE)
                 (bind ?pressupost-gastat (+ ?pressupost-gastat (* ?preu-per-nit ?dies-ciutat)))
+                (send ?destiVisitat put-nom-hotel (send ?curr-accom get-name_accom))
+                ;; Ok, anem a agafar pois
             )
             (bind ?i (+ ?i 1))
         )
