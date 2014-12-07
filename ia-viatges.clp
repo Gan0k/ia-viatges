@@ -16,953 +16,940 @@
 ;;-------------------------------------------------------------------------------------------------------------
 
 ;; Aqui va el .pons
-
-
-; Thu Dec 04 19:42:09 CET 2014
+; Sun Dec 07 20:25:44 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
 
 
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
-	(is-a USER)
-	(role abstract)
-	(single-slot name_poi
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot destinations_are
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(inverse-slot type_destination_is)
-		(create-accessor read-write))
-	(multislot accomodations_are
-		(type INSTANCE)
-;+		(allowed-classes Accomodation)
-;+		(inverse-slot is_in)
-		(create-accessor read-write))
-	(single-slot name_city
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot name_type_dest
-;+		(comment "Ex: Gran Ciutat Europea")
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot has_climate
-		(type INSTANCE)
-;+		(allowed-classes Clima)
-;+		(cardinality 1 1)
-;+		(inverse-slot is_present_in)
-		(create-accessor read-write))
-	(single-slot departure
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(cardinality 1 1)
-;+		(inverse-slot can_go_to)
-		(create-accessor read-write))
-	(single-slot has_activities_kids
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot rating
-		(type INTEGER)
-		(range 0 5)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot popularity
-		(type INTEGER)
-		(range 1 10)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot is_present_in
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(inverse-slot has_climate)
-		(create-accessor read-write))
-	(single-slot price_per_night
-		(type INTEGER)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot is_in
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(cardinality 1 1)
-;+		(inverse-slot accomodations_are)
-		(create-accessor read-write))
-	(single-slot has_war
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot name_continent
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot can_be_reached
-		(type INSTANCE)
-;+		(allowed-classes Transport)
-;+		(inverse-slot arrival)
-		(create-accessor read-write))
-	(single-slot type_hotel
-		(type SYMBOL)
-		(allowed-values Luxury Budget Regular)
-		(default Regular)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot MAIN::ia-viatges_Class20007
-		(type SYMBOL)
-;+		(allowed-parents)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot can_go_to
-		(type INSTANCE)
-;+		(allowed-classes Transport)
-;+		(inverse-slot departure)
-		(create-accessor read-write))
-	(single-slot is_in_continent
-		(type INSTANCE)
-;+		(allowed-classes Continent)
-;+		(cardinality 1 1)
-;+		(inverse-slot has_destinations)
-		(create-accessor read-write))
-	(single-slot arrival
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(cardinality 1 1)
-;+		(inverse-slot can_be_reached)
-		(create-accessor read-write))
-	(multislot has_destinations
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(inverse-slot is_in_continent)
-		(create-accessor read-write))
-	(single-slot has_ebola
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot type_dest_is
-		(type INSTANCE)
-;+		(allowed-classes TypeDestination)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot name_climate
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot type_dest
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot poi_are
-		(type INSTANCE)
-;+		(allowed-classes PointOfInterest)
-;+		(inverse-slot poi_is_in)
-		(create-accessor read-write))
-	(single-slot name_accom
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot has_pool
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot inverse_of_destinations_are
-		(type INSTANCE)
-;+		(allowed-classes TypeDestination)
-		(create-accessor read-write))
-	(multislot type_city
-		(type SYMBOL)
-		(allowed-values BigEuropeanCity MediterraneanCity ScandinavianCity)
-		(create-accessor read-write))
-	(single-slot far_from_city
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot type_destination_is
-		(type INSTANCE)
-;+		(allowed-classes TypeDestination)
-;+		(cardinality 1 1)
-;+		(inverse-slot destinations_are)
-		(create-accessor read-write))
-	(single-slot poi_is_in
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(cardinality 1 1)
-;+		(inverse-slot poi_are)
-		(create-accessor read-write))
-	(single-slot is_youth_hostel
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write)))
+    (is-a USER)
+    (role abstract)
+    (single-slot name_poi
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (multislot destinations_are
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+;+      (inverse-slot type_destination_is)
+        (create-accessor read-write))
+    (multislot accomodations_are
+        (type INSTANCE)
+;+      (allowed-classes Accomodation)
+;+      (inverse-slot is_in)
+        (create-accessor read-write))
+    (single-slot name_city
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot name_type_dest
+;+      (comment "Ex: Gran Ciutat Europea")
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot has_climate
+        (type INSTANCE)
+;+      (allowed-classes Clima)
+;+      (cardinality 1 1)
+;+      (inverse-slot is_present_in)
+        (create-accessor read-write))
+    (single-slot departure
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+;+      (cardinality 1 1)
+;+      (inverse-slot can_go_to)
+        (create-accessor read-write))
+    (single-slot has_activities_kids
+        (type SYMBOL)
+        (allowed-values FALSE TRUE)
+;+      (cardinality 0 1)
+        (create-accessor read-write))
+    (single-slot rating
+        (type INTEGER)
+        (range 0 5)
+;+      (cardinality 0 1)
+        (create-accessor read-write))
+    (single-slot popularity
+        (type INTEGER)
+        (range 1 10)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (multislot is_present_in
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+;+      (inverse-slot has_climate)
+        (create-accessor read-write))
+    (single-slot price_per_night
+        (type INTEGER)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot is_in
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+;+      (cardinality 1 1)
+;+      (inverse-slot accomodations_are)
+        (create-accessor read-write))
+    (single-slot has_war
+        (type SYMBOL)
+        (allowed-values FALSE TRUE)
+;+      (cardinality 0 1)
+        (create-accessor read-write))
+    (single-slot name_continent
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (multislot can_be_reached
+        (type INSTANCE)
+;+      (allowed-classes Transport)
+;+      (inverse-slot arrival)
+        (create-accessor read-write))
+    (single-slot type_hotel
+        (type SYMBOL)
+        (allowed-values Luxury Budget Regular)
+        (default Regular)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (multislot can_go_to
+        (type INSTANCE)
+;+      (allowed-classes Transport)
+;+      (inverse-slot departure)
+        (create-accessor read-write))
+    (single-slot is_in_continent
+        (type INSTANCE)
+;+      (allowed-classes Continent)
+;+      (cardinality 1 1)
+;+      (inverse-slot has_destinations)
+        (create-accessor read-write))
+    (single-slot arrival
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+;+      (cardinality 1 1)
+;+      (inverse-slot can_be_reached)
+        (create-accessor read-write))
+    (multislot has_destinations
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+;+      (inverse-slot is_in_continent)
+        (create-accessor read-write))
+    (single-slot has_ebola
+        (type SYMBOL)
+        (allowed-values FALSE TRUE)
+;+      (cardinality 0 1)
+        (create-accessor read-write))
+    (single-slot type_dest_is
+        (type INSTANCE)
+;+      (allowed-classes TypeDestination)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot name_climate
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot type_dest
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (multislot poi_are
+        (type INSTANCE)
+;+      (allowed-classes PointOfInterest)
+;+      (inverse-slot poi_is_in)
+        (create-accessor read-write))
+    (single-slot name_accom
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot has_pool
+        (type SYMBOL)
+        (allowed-values FALSE TRUE)
+;+      (cardinality 0 1)
+        (create-accessor read-write))
+    (multislot inverse_of_destinations_are
+        (type INSTANCE)
+;+      (allowed-classes TypeDestination)
+        (create-accessor read-write))
+    (multislot type_city
+        (type SYMBOL)
+        (allowed-values BigEuropeanCity MediterraneanCity ScandinavianCity)
+        (create-accessor read-write))
+    (single-slot far_from_city
+        (type SYMBOL)
+        (allowed-values FALSE TRUE)
+;+      (cardinality 0 1)
+        (create-accessor read-write))
+    (single-slot type_destination_is
+        (type INSTANCE)
+;+      (allowed-classes TypeDestination)
+;+      (cardinality 1 1)
+;+      (inverse-slot destinations_are)
+        (create-accessor read-write))
+    (single-slot poi_is_in
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+;+      (cardinality 1 1)
+;+      (inverse-slot poi_are)
+        (create-accessor read-write))
+    (single-slot is_youth_hostel
+        (type SYMBOL)
+        (allowed-values FALSE TRUE)
+;+      (cardinality 0 1)
+        (create-accessor read-write)))
 
 (defclass Accomodation
-	(is-a USER)
-	(role concrete)
-	(single-slot rating
-		(type INTEGER)
-		(range 0 5)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot price_per_night
-		(type INTEGER)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot is_in
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot name_accom
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+    (is-a USER)
+    (role concrete)
+    (single-slot rating
+        (type INTEGER)
+        (range 0 5)
+;+      (cardinality 0 1)
+        (create-accessor read-write))
+    (single-slot price_per_night
+        (type INTEGER)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot is_in
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot name_accom
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write)))
 
 (defclass Destination
-	(is-a USER)
-	(role concrete)
-	(multislot inverse_of_destinations_are
-		(type INSTANCE)
-;+		(allowed-classes TypeDestination)
-		(create-accessor read-write))
-	(multislot can_be_reached
-		(type INSTANCE)
-;+		(allowed-classes Transport)
-		(create-accessor read-write))
-	(single-slot popularity
-		(type INTEGER)
-		(range 1 10)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot name_city
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot poi_are
-		(type INSTANCE)
-;+		(allowed-classes PointOfInterest)
-		(create-accessor read-write))
-	(single-slot type_destination_is
-		(type INSTANCE)
-;+		(allowed-classes TypeDestination)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot has_climate
-		(type INSTANCE)
-;+		(allowed-classes Clima)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot accomodations_are
-		(type INSTANCE)
-;+		(allowed-classes Accomodation)
-		(create-accessor read-write))
-	(multislot can_go_to
-		(type INSTANCE)
-;+		(allowed-classes Transport)
-		(create-accessor read-write))
-	(single-slot is_in_continent
-		(type INSTANCE)
-;+		(allowed-classes Continent)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+    (is-a USER)
+    (role concrete)
+    (multislot inverse_of_destinations_are
+        (type INSTANCE)
+;+      (allowed-classes TypeDestination)
+        (create-accessor read-write))
+    (multislot can_be_reached
+        (type INSTANCE)
+;+      (allowed-classes Transport)
+        (create-accessor read-write))
+    (single-slot popularity
+        (type INTEGER)
+        (range 1 10)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot name_city
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (multislot poi_are
+        (type INSTANCE)
+;+      (allowed-classes PointOfInterest)
+        (create-accessor read-write))
+    (single-slot type_destination_is
+        (type INSTANCE)
+;+      (allowed-classes TypeDestination)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot has_climate
+        (type INSTANCE)
+;+      (allowed-classes Clima)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (multislot accomodations_are
+        (type INSTANCE)
+;+      (allowed-classes Accomodation)
+        (create-accessor read-write))
+    (multislot can_go_to
+        (type INSTANCE)
+;+      (allowed-classes Transport)
+        (create-accessor read-write))
+    (single-slot is_in_continent
+        (type INSTANCE)
+;+      (allowed-classes Continent)
+;+      (cardinality 1 1)
+        (create-accessor read-write)))
 
 (defclass City
-	(is-a Destination)
-	(role concrete))
+    (is-a Destination)
+    (role concrete))
 
 (defclass Mountain
-	(is-a Destination)
-	(role concrete))
+    (is-a Destination)
+    (role concrete))
 
 (defclass Town
-	(is-a Destination)
-	(role concrete))
+    (is-a Destination)
+    (role concrete))
 
 (defclass PointOfInterest
-	(is-a USER)
-	(role concrete)
-	(single-slot name_poi
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot poi_is_in
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+    (is-a USER)
+    (role concrete)
+    (single-slot name_poi
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot poi_is_in
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+;+      (cardinality 1 1)
+        (create-accessor read-write)))
 
 (defclass Cultural
-	(is-a PointOfInterest)
-	(role concrete))
+    (is-a PointOfInterest)
+    (role concrete))
 
 (defclass Leisure "Relaxation"
-	(is-a PointOfInterest)
-	(role concrete))
+    (is-a PointOfInterest)
+    (role concrete))
 
 (defclass Nightlife
-	(is-a PointOfInterest)
-	(role concrete))
+    (is-a PointOfInterest)
+    (role concrete))
 
 (defclass Sport
-	(is-a PointOfInterest)
-	(role concrete))
+    (is-a PointOfInterest)
+    (role concrete))
 
 (defclass TuristPoint
-	(is-a PointOfInterest)
-	(role concrete))
+    (is-a PointOfInterest)
+    (role concrete))
 
 (defclass FamiliarPlace
-	(is-a PointOfInterest)
-	(role concrete))
+    (is-a PointOfInterest)
+    (role concrete))
 
 (defclass Transport
-	(is-a USER)
-	(role concrete)
-	(single-slot arrival
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot departure
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
-
-(defclass Bus
-	(is-a Transport)
-	(role concrete))
+    (is-a USER)
+    (role concrete)
+    (single-slot arrival
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+;+      (cardinality 1 1)
+        (create-accessor read-write))
+    (single-slot departure
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+;+      (cardinality 1 1)
+        (create-accessor read-write)))
 
 (defclass Plane
-	(is-a Transport)
-	(role concrete))
-
-(defclass Train
-	(is-a Transport)
-	(role concrete))
+    (is-a Transport)
+    (role concrete))
 
 (defclass Boat
-	(is-a Transport)
-	(role concrete))
+    (is-a Transport)
+    (role concrete))
+
+(defclass Train
+    (is-a Transport)
+    (role concrete))
 
 (defclass TypeDestination
-	(is-a USER)
-	(role concrete)
-	(multislot destinations_are
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-		(create-accessor read-write))
-	(single-slot name_type_dest
-;+		(comment "Ex: Gran Ciutat Europea")
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+    (is-a USER)
+    (role concrete)
+    (multislot destinations_are
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+        (create-accessor read-write))
+    (single-slot name_type_dest
+;+      (comment "Ex: Gran Ciutat Europea")
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write)))
 
 (defclass Continent
-	(is-a USER)
-	(role concrete)
-	(multislot has_destinations
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-		(create-accessor read-write))
-	(single-slot name_continent
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+    (is-a USER)
+    (role concrete)
+    (multislot has_destinations
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+        (create-accessor read-write))
+    (single-slot name_continent
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write)))
 
 (defclass Clima
-	(is-a USER)
-	(role concrete)
-	(multislot is_present_in
-		(type INSTANCE)
-;+		(allowed-classes Destination)
-		(create-accessor read-write))
-	(single-slot name_climate
-		(type STRING)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
+    (is-a USER)
+    (role concrete)
+    (multislot is_present_in
+        (type INSTANCE)
+;+      (allowed-classes Destination)
+        (create-accessor read-write))
+    (single-slot name_climate
+        (type STRING)
+;+      (cardinality 1 1)
+        (create-accessor read-write)))
+
 ;;-------------------------------------------------------------------------------------------------------------
 ;;                    INSTANCIES
 ;;-------------------------------------------------------------------------------------------------------------
 
 
-; Sun Dec 07 16:35:37 CET 2014
-; 
-;+ (version "3.5")
-;+ (build "Build 660")
-
 (definstances instances
-([MAIN::ia-viatges_Class0] of  TypeDestination
 
-	(destinations_are [MAIN::ia-viatges_Class30034])
-	(name_type_dest "gran_ciutat_europea"))
+; Sun Dec 07 20:25:44 CET 2014
+; 
+;+ (version "3.4.8")
+;+ (build "Build 629")
 
-([MAIN::ia-viatges_Class1] of  Continent
+([ia-viatges_Class0] of  TypeDestination
 
-	(has_destinations
-		[MAIN::ia-viatges_Class30022]
-		[MAIN::ia-viatges_Class30040])
-	(name_continent "Europe"))
+    (destinations_are [ia-viatges_Class30034])
+    (name_type_dest "gran_ciutat_europea"))
 
-([MAIN::ia-viatges_Class10000] of  Accomodation
+([ia-viatges_Class1] of  Continent
 
-	(name_accom "Hotel Arts")
-	(price_per_night 1300)
-	(rating 5))
+    (has_destinations
+        [ia-viatges_Class30022]
+        [ia-viatges_Class30040])
+    (name_continent "Europe"))
 
-([MAIN::ia-viatges_Class10001] of  Clima
+([ia-viatges_Class10000] of  Accomodation
+
+    (name_accom "Hotel Arts")
+    (price_per_night 1300)
+    (rating 5))
+
+([ia-viatges_Class10004] of  Clima
+
+    (is_present_in [ia-viatges_Class30034])
+    (name_climate "Tropical"))
+
+([ia-viatges_Class10005] of  Clima
+
+    (is_present_in
+        [ia-viatges_Class30028]
+        [ia-viatges_Class30055])
+    (name_climate "Mediterrani"))
+
+([ia-viatges_Class10006] of  Clima
+
+    (is_present_in
+        [ia-viatges_Class30052]
+        [ia-viatges_Class30061])
+    (name_climate "Escandinau"))
+
+([ia-viatges_Class10007] of  Clima
+
+    (is_present_in
+        [ia-viatges_Class30016]
+        [ia-viatges_Class30046]
+        [ia-viatges_Class30049])
+    (name_climate "Equatorial"))
+
+([ia-viatges_Class10008] of  Clima
+
+    (is_present_in
+        [ia-viatges_Class30008]
+        [ia-viatges_Class30022]
+        [ia-viatges_Class30040])
+    (name_climate "Alta_Muntanya"))
+
+([ia-viatges_Class2] of  Continent
+
+    (has_destinations
+        [ia-viatges_Class30008]
+        [ia-viatges_Class30016]
+        [ia-viatges_Class30046])
+    (name_continent "Africa"))
+
+([ia-viatges_Class20001] of  Accomodation
+
+    (name_accom "EuroPark")
+    (price_per_night 200)
+    (rating 3))
+
+([ia-viatges_Class20002] of  Cultural
+
+    (name_poi "Sagrada Familia")
+    (poi_is_in [ia-viatges_Class30008]))
+
+([ia-viatges_Class20004] of  TypeDestination
+
+    (destinations_are
+        [ia-viatges_Class30008]
+        [ia-viatges_Class30016]
+        [ia-viatges_Class30049])
+    (name_type_dest "ciutat_mediterranea"))
+
+([ia-viatges_Class3] of  Continent
+
+    (has_destinations [ia-viatges_Class30034])
+    (name_continent "Asia"))
+
+([ia-viatges_Class30001] of  TypeDestination
+
+    (destinations_are
+        [ia-viatges_Class30022]
+        [ia-viatges_Class30040]
+        [ia-viatges_Class30046]
+        [ia-viatges_Class30055])
+    (name_type_dest "ciutat_tropical"))
+
+([ia-viatges_Class30002] of  TypeDestination
+
+    (destinations_are
+        [ia-viatges_Class30028]
+        [ia-viatges_Class30052]
+        [ia-viatges_Class30061])
+    (name_type_dest "ciutat_arida"))
+
+([ia-viatges_Class30008] of  City
+
+    (has_climate [ia-viatges_Class10008])
+    (is_in_continent [ia-viatges_Class2])
+    (name_city "Culturia")
+    (poi_are
+        [ia-viatges_Class30009]
+        [ia-viatges_Class20002]
+        [ia-viatges_Class30013]
+        [ia-viatges_Class30014]
+        [ia-viatges_Class30015])
+    (popularity 3)
+    (type_destination_is [ia-viatges_Class20004]))
+
+([ia-viatges_Class30009] of  Cultural
+
+    (name_poi "caerPoi")
+    (poi_is_in [ia-viatges_Class30008]))
+
+([ia-viatges_Class30010] of  Sport
+
+    (name_poi "caerSport"))
+
+([ia-viatges_Class30013] of  Cultural
+
+    (name_poi "fallPoi")
+    (poi_is_in [ia-viatges_Class30008]))
+
+([ia-viatges_Class30014] of  Cultural
+
+    (name_poi "gluor")
+    (poi_is_in [ia-viatges_Class30008]))
+
+([ia-viatges_Class30015] of  Cultural
+
+    (name_poi "museumClub")
+    (poi_is_in [ia-viatges_Class30008]))
+
+([ia-viatges_Class30016] of  City
+
+    (has_climate [ia-viatges_Class10007])
+    (is_in_continent [ia-viatges_Class2])
+    (name_city "Bail")
+    (poi_are
+        [ia-viatges_Class30017]
+        [ia-viatges_Class30018]
+        [ia-viatges_Class30019]
+        [ia-viatges_Class30020]
+        [ia-viatges_Class30021])
+    (popularity 5)
+    (type_destination_is [ia-viatges_Class20004]))
+
+([ia-viatges_Class30017] of  Nightlife
+
+    (name_poi "DiscoRave")
+    (poi_is_in [ia-viatges_Class30016]))
+
+([ia-viatges_Class30018] of  Leisure
+
+    (name_poi "TangoDJ")
+    (poi_is_in [ia-viatges_Class30016]))
+
+([ia-viatges_Class30019] of  Nightlife
+
+    (name_poi "CopaCabana")
+    (poi_is_in [ia-viatges_Class30016]))
+
+([ia-viatges_Class30020] of  Nightlife
+
+    (name_poi "Razzmatazz")
+    (poi_is_in [ia-viatges_Class30016]))
+
+([ia-viatges_Class30021] of  Nightlife
+
+    (name_poi "HardcoreHall")
+    (poi_is_in [ia-viatges_Class30016]))
+
+([ia-viatges_Class30022] of  City
+
+    (has_climate [ia-viatges_Class10008])
+    (is_in_continent [ia-viatges_Class1])
+    (name_city "Asgard")
+    (poi_are
+        [ia-viatges_Class30023]
+        [ia-viatges_Class30024]
+        [ia-viatges_Class30025]
+        [ia-viatges_Class30026]
+        [ia-viatges_Class30027])
+    (popularity 4)
+    (type_destination_is [ia-viatges_Class30001]))
+
+([ia-viatges_Class30023] of  Leisure
+
+    (name_poi "TermalWaters")
+    (poi_is_in [ia-viatges_Class30022]))
+
+([ia-viatges_Class30024] of  Leisure
+
+    (name_poi "SpaZone")
+    (poi_is_in [ia-viatges_Class30022]))
+
+([ia-viatges_Class30025] of  Leisure
+
+    (name_poi "ContextFreeLeisure")
+    (poi_is_in [ia-viatges_Class30022]))
+
+([ia-viatges_Class30026] of  Leisure
+
+    (name_poi "OdinsHall")
+    (poi_is_in [ia-viatges_Class30022]))
+
+([ia-viatges_Class30027] of  Leisure
+
+    (name_poi "ThorTable")
+    (poi_is_in [ia-viatges_Class30022]))
+
+([ia-viatges_Class30028] of  City
+
+    (has_climate [ia-viatges_Class10005])
+    (is_in_continent [ia-viatges_Class4])
+    (name_city "CartoonNetwork")
+    (poi_are
+        [ia-viatges_Class30029]
+        [ia-viatges_Class30030]
+        [ia-viatges_Class30031]
+        [ia-viatges_Class30032]
+        [ia-viatges_Class30033])
+    (popularity 1)
+    (type_destination_is [ia-viatges_Class30002]))
+
+([ia-viatges_Class30029] of  FamiliarPlace
+
+    (name_poi "BoingCinema")
+    (poi_is_in [ia-viatges_Class30028]))
+
+([ia-viatges_Class30030] of  FamiliarPlace
+
+    (name_poi "Imaginarium")
+    (poi_is_in [ia-viatges_Class30028]))
+
+([ia-viatges_Class30031] of  FamiliarPlace
+
+    (name_poi "LazyTown")
+    (poi_is_in [ia-viatges_Class30028]))
+
+([ia-viatges_Class30032] of  FamiliarPlace
+
+    (name_poi "Drim")
+    (poi_is_in [ia-viatges_Class30028]))
+
+([ia-viatges_Class30033] of  FamiliarPlace
+
+    (name_poi "TriangleFerroviari")
+    (poi_is_in [ia-viatges_Class30028]))
+
+([ia-viatges_Class30034] of  City
+
+    (has_climate [ia-viatges_Class10004])
+    (is_in_continent [ia-viatges_Class3])
+    (name_city "Climbistan")
+    (poi_are
+        [ia-viatges_Class30035]
+        [ia-viatges_Class30036]
+        [ia-viatges_Class30037]
+        [ia-viatges_Class30038]
+        [ia-viatges_Class30039])
+    (popularity 2)
+    (type_destination_is [ia-viatges_Class0]))
+
+([ia-viatges_Class30035] of  Sport
+
+    (name_poi "Rocodrom")
+    (poi_is_in [ia-viatges_Class30034]))
+
+([ia-viatges_Class30036] of  Sport
+
+    (name_poi "EasySkiTracks")
+    (poi_is_in [ia-viatges_Class30034]))
+
+([ia-viatges_Class30037] of  Sport
+
+    (name_poi "MediumSkiTrack")
+    (poi_is_in [ia-viatges_Class30034]))
+
+([ia-viatges_Class30038] of  Sport
+
+    (name_poi "HardSkiTrack")
+    (poi_is_in [ia-viatges_Class30034]))
+
+([ia-viatges_Class30039] of  Sport
+
+    (name_poi "ParachutePoint")
+    (poi_is_in [ia-viatges_Class30034]))
+
+([ia-viatges_Class30040] of  City
+
+    (has_climate [ia-viatges_Class10008])
+    (is_in_continent [ia-viatges_Class1])
+    (name_city "Korotkevich")
+    (poi_are
+        [ia-viatges_Class30041]
+        [ia-viatges_Class30042]
+        [ia-viatges_Class30043]
+        [ia-viatges_Class30044]
+        [ia-viatges_Class30045])
+    (popularity 5)
+    (type_destination_is [ia-viatges_Class30001]))
+
+([ia-viatges_Class30041] of  TuristPoint
+
+    (name_poi "MaxFlow")
+    (poi_is_in [ia-viatges_Class30040]))
+
+([ia-viatges_Class30042] of  TuristPoint
+
+    (name_poi "ConvexHull")
+    (poi_is_in [ia-viatges_Class30040]))
+
+([ia-viatges_Class30043] of  TuristPoint
+
+    (name_poi "SuffixArray")
+    (poi_is_in [ia-viatges_Class30040]))
+
+([ia-viatges_Class30044] of  TuristPoint
+
+    (name_poi "HopcroftKarp")
+    (poi_is_in [ia-viatges_Class30040]))
+
+([ia-viatges_Class30045] of  TuristPoint
+
+    (name_poi "PollardRho")
+    (poi_is_in [ia-viatges_Class30040]))
+
+([ia-viatges_Class30046] of  City
+
+    (accomodations_are
+        [ia-viatges_Class30047]
+        [ia-viatges_Class30048])
+    (has_climate [ia-viatges_Class10007])
+    (is_in_continent [ia-viatges_Class2])
+    (name_city "UltraLuxe")
+    (popularity 5)
+    (type_destination_is [ia-viatges_Class30001]))
+
+([ia-viatges_Class30047] of  Accomodation
+
+    (is_in [ia-viatges_Class30046])
+    (name_accom "DollarsHotel")
+    (price_per_night 4000)
+    (rating 5))
+
+([ia-viatges_Class30048] of  Accomodation
+
+    (is_in [ia-viatges_Class30046])
+    (name_accom "MoreDollarsHotel")
+    (price_per_night 6000)
+    (rating 5))
+
+([ia-viatges_Class30049] of  City
+
+    (accomodations_are
+        [ia-viatges_Class30050]
+        [ia-viatges_Class30051])
+    (has_climate [ia-viatges_Class10007])
+    (is_in_continent [ia-viatges_Class5])
+    (name_city "ReasonableLux")
+    (popularity 4)
+    (type_destination_is [ia-viatges_Class20004]))
+
+([ia-viatges_Class30050] of  Accomodation
+
+    (is_in [ia-viatges_Class30049])
+    (name_accom "YuppiesHouse")
+    (price_per_night 2000)
+    (rating 4))
+
+([ia-viatges_Class30051] of  Accomodation
+
+    (is_in [ia-viatges_Class30049])
+    (name_accom "ButSalHotel")
+    (price_per_night 1500)
+    (rating 4))
+
+([ia-viatges_Class30052] of  City
+
+    (accomodations_are
+        [ia-viatges_Class30053]
+        [ia-viatges_Class30054])
+    (has_climate [ia-viatges_Class10006])
+    (is_in_continent [ia-viatges_Class4])
+    (name_city "AverageJoe")
+    (popularity 3)
+    (type_destination_is [ia-viatges_Class30002]))
+
+([ia-viatges_Class30053] of  Accomodation
+
+    (is_in [ia-viatges_Class30052])
+    (name_accom "NormalHotel")
+    (price_per_night 400)
+    (rating 3))
+
+([ia-viatges_Class30054] of  Accomodation
+
+    (is_in [ia-viatges_Class30052])
+    (name_accom "AverageHotel")
+    (price_per_night 350)
+    (rating 3))
+
+([ia-viatges_Class30055] of  City
+
+    (accomodations_are
+        [ia-viatges_Class30056]
+        [ia-viatges_Class30057])
+    (has_climate [ia-viatges_Class10005])
+    (is_in_continent [ia-viatges_Class4])
+    (name_city "StudentsDestination")
+    (poi_are
+        [ia-viatges_Class30058]
+        [ia-viatges_Class30059]
+        [ia-viatges_Class30060])
+    (popularity 5)
+    (type_destination_is [ia-viatges_Class30001]))
+
+([ia-viatges_Class30056] of  Accomodation
+
+    (is_in [ia-viatges_Class30055])
+    (name_accom "Hostel")
+    (price_per_night 50)
+    (rating 1))
+
+([ia-viatges_Class30057] of  Accomodation
+
+    (is_in [ia-viatges_Class30055])
+    (name_accom "SleepWithARoach")
+    (price_per_night 25)
+    (rating 1))
+
+([ia-viatges_Class30058] of  Nightlife
+
+    (name_poi "PotShop")
+    (poi_is_in [ia-viatges_Class30055]))
+
+([ia-viatges_Class30059] of  Nightlife
+
+    (name_poi "DarkPassions")
+    (poi_is_in [ia-viatges_Class30055]))
+
+([ia-viatges_Class30060] of  Sport
+
+    (name_poi "Footballer")
+    (poi_is_in [ia-viatges_Class30055]))
+
+([ia-viatges_Class30061] of  City
+
+    (accomodations_are
+        [ia-viatges_Class30062]
+        [ia-viatges_Class30063]
+        [ia-viatges_Class30064]
+        [ia-viatges_Class30065]
+        [ia-viatges_Class30066])
+    (has_climate [ia-viatges_Class10006])
+    (is_in_continent [ia-viatges_Class5])
+    (name_city "LandOfEverybody")
+    (poi_are
+        [ia-viatges_Class30067]
+        [ia-viatges_Class30068]
+        [ia-viatges_Class30069]
+        [ia-viatges_Class30070]
+        [ia-viatges_Class30071]
+        [ia-viatges_Class30072])
+    (popularity 5)
+    (type_destination_is [ia-viatges_Class30002]))
+
+([ia-viatges_Class30062] of  Accomodation
+
+    (is_in [ia-viatges_Class30061])
+    (name_accom "EverybodyWhoIsRich")
+    (price_per_night 5000)
+    (rating 5))
+
+([ia-viatges_Class30063] of  Accomodation
+
+    (is_in [ia-viatges_Class30061])
+    (name_accom "EverybodyWhoHasMonnaie")
+    (price_per_night 3500)
+    (rating 4))
+
+([ia-viatges_Class30064] of  Accomodation
+
+    (is_in [ia-viatges_Class30061])
+    (name_accom "EverybodyWithSomeCash")
+    (price_per_night 2000)
+    (rating 3))
+
+([ia-viatges_Class30065] of  Accomodation
+
+    (is_in [ia-viatges_Class30061])
+    (name_accom "EverybodyWithACoin")
+    (price_per_night 800)
+    (rating 2))
+
+([ia-viatges_Class30066] of  Accomodation
+
+    (is_in [ia-viatges_Class30061])
+    (name_accom "Everybody, Literally")
+    (price_per_night 1)
+    (rating 1))
+
+([ia-viatges_Class30067] of  Cultural
+
+    (name_poi "CulturalStuff")
+    (poi_is_in [ia-viatges_Class30061]))
+
+([ia-viatges_Class30068] of  FamiliarPlace
+
+    (name_poi "PutYourKidHere")
+    (poi_is_in [ia-viatges_Class30061]))
+
+([ia-viatges_Class30069] of  Leisure
+
+    (name_poi "Sleep")
+    (poi_is_in [ia-viatges_Class30061]))
+
+([ia-viatges_Class30070] of  Nightlife
+
+    (name_poi "PartyHere")
+    (poi_is_in [ia-viatges_Class30061]))
+
+([ia-viatges_Class30071] of  Sport
+
+    (name_poi "RunAndClimb")
+    (poi_is_in [ia-viatges_Class30061]))
+
+([ia-viatges_Class30072] of  TuristPoint
+
+    (name_poi "TakeAPhoto")
+    (poi_is_in [ia-viatges_Class30061]))
+
+([ia-viatges_Class4] of  Continent
+
+    (has_destinations
+        [ia-viatges_Class30028]
+        [ia-viatges_Class30052]
+        [ia-viatges_Class30055])
+    (name_continent "Oceania"))
+
+([ia-viatges_Class5] of  Continent
+
+    (has_destinations
+        [ia-viatges_Class30061]
+        [ia-viatges_Class30049])
+    (name_continent "NorthAmerica"))
+
+([ia-viatges_Class6] of  Continent
+
+    (name_continent "SouthAmerica"))
+
 )
 
-([MAIN::ia-viatges_Class10004] of  Clima
-
-	(is_present_in [MAIN::ia-viatges_Class30034])
-	(name_climate "Tropical"))
-
-([MAIN::ia-viatges_Class10005] of  Clima
-
-	(is_present_in
-		[MAIN::ia-viatges_Class30028]
-		[MAIN::ia-viatges_Class30055])
-	(name_climate "Mediterrani"))
-
-([MAIN::ia-viatges_Class10006] of  Clima
-
-	(is_present_in
-		[MAIN::ia-viatges_Class30052]
-		[MAIN::ia-viatges_Class30061])
-	(name_climate "Escandinau"))
-
-([MAIN::ia-viatges_Class10007] of  Clima
-
-	(is_present_in
-		[MAIN::ia-viatges_Class30016]
-		[MAIN::ia-viatges_Class30046]
-		[MAIN::ia-viatges_Class30049])
-	(name_climate "Equatorial"))
-
-([MAIN::ia-viatges_Class10008] of  Clima
-
-	(is_present_in
-		[MAIN::ia-viatges_Class30008]
-		[MAIN::ia-viatges_Class30022]
-		[MAIN::ia-viatges_Class30040])
-	(name_climate "Alta_Muntanya"))
-
-([MAIN::ia-viatges_Class2] of  Continent
-
-	(has_destinations
-		[MAIN::ia-viatges_Class30008]
-		[MAIN::ia-viatges_Class30016]
-		[MAIN::ia-viatges_Class30046])
-	(name_continent "Africa"))
-
-([MAIN::ia-viatges_Class20001] of  Accomodation
-
-	(name_accom "EuroPark")
-	(price_per_night 200)
-	(rating 3))
-
-([MAIN::ia-viatges_Class20002] of  Cultural
-
-	(name_poi "Sagrada Familia")
-	(poi_is_in [MAIN::ia-viatges_Class30008]))
-
-([MAIN::ia-viatges_Class20004] of  TypeDestination
-
-	(destinations_are
-		[MAIN::ia-viatges_Class30008]
-		[MAIN::ia-viatges_Class30016]
-		[MAIN::ia-viatges_Class30049])
-	(name_type_dest "ciutat_mediterranea"))
-
-([MAIN::ia-viatges_Class3] of  Continent
-
-	(has_destinations [MAIN::ia-viatges_Class30034])
-	(name_continent "Asia"))
-
-([MAIN::ia-viatges_Class30001] of  TypeDestination
-
-	(destinations_are
-		[MAIN::ia-viatges_Class30022]
-		[MAIN::ia-viatges_Class30040]
-		[MAIN::ia-viatges_Class30046]
-		[MAIN::ia-viatges_Class30055])
-	(name_type_dest "ciutat_tropical"))
-
-([MAIN::ia-viatges_Class30002] of  TypeDestination
-
-	(destinations_are
-		[MAIN::ia-viatges_Class30028]
-		[MAIN::ia-viatges_Class30052]
-		[MAIN::ia-viatges_Class30061])
-	(name_type_dest "ciutat_arida"))
-
-([MAIN::ia-viatges_Class30004] of  Clima
-)
-
-([MAIN::ia-viatges_Class30008] of  City
-
-	(has_climate [MAIN::ia-viatges_Class10008])
-	(is_in_continent [MAIN::ia-viatges_Class2])
-	(name_city "Culturia")
-	(poi_are
-		[MAIN::ia-viatges_Class30009]
-		[MAIN::ia-viatges_Class20002]
-		[MAIN::ia-viatges_Class30013]
-		[MAIN::ia-viatges_Class30014]
-		[MAIN::ia-viatges_Class30015])
-	(popularity 3)
-	(type_destination_is [MAIN::ia-viatges_Class20004]))
-
-([MAIN::ia-viatges_Class30009] of  Cultural
-
-	(name_poi "caerPoi")
-	(poi_is_in [MAIN::ia-viatges_Class30008]))
-
-([MAIN::ia-viatges_Class30010] of  Sport
-
-	(name_poi "caerSport"))
-
-([MAIN::ia-viatges_Class30013] of  Cultural
-
-	(name_poi "fallPoi")
-	(poi_is_in [MAIN::ia-viatges_Class30008]))
-
-([MAIN::ia-viatges_Class30014] of  Cultural
-
-	(name_poi "gluor")
-	(poi_is_in [MAIN::ia-viatges_Class30008]))
-
-([MAIN::ia-viatges_Class30015] of  Cultural
-
-	(name_poi "museumClub")
-	(poi_is_in [MAIN::ia-viatges_Class30008]))
-
-([MAIN::ia-viatges_Class30016] of  City
-
-	(has_climate [MAIN::ia-viatges_Class10007])
-	(is_in_continent [MAIN::ia-viatges_Class2])
-	(name_city "Bail")
-	(poi_are
-		[MAIN::ia-viatges_Class30017]
-		[MAIN::ia-viatges_Class30018]
-		[MAIN::ia-viatges_Class30019]
-		[MAIN::ia-viatges_Class30020]
-		[MAIN::ia-viatges_Class30021])
-	(popularity 5)
-	(type_destination_is [MAIN::ia-viatges_Class20004]))
-
-([MAIN::ia-viatges_Class30017] of  Nightlife
-
-	(name_poi "DiscoRave")
-	(poi_is_in [MAIN::ia-viatges_Class30016]))
-
-([MAIN::ia-viatges_Class30018] of  Leisure
-
-	(name_poi "TangoDJ")
-	(poi_is_in [MAIN::ia-viatges_Class30016]))
-
-([MAIN::ia-viatges_Class30019] of  Nightlife
-
-	(name_poi "CopaCabana")
-	(poi_is_in [MAIN::ia-viatges_Class30016]))
-
-([MAIN::ia-viatges_Class30020] of  Nightlife
-
-	(name_poi "Razzmatazz")
-	(poi_is_in [MAIN::ia-viatges_Class30016]))
-
-([MAIN::ia-viatges_Class30021] of  Nightlife
-
-	(name_poi "HardcoreHall")
-	(poi_is_in [MAIN::ia-viatges_Class30016]))
-
-([MAIN::ia-viatges_Class30022] of  City
-
-	(has_climate [MAIN::ia-viatges_Class10008])
-	(is_in_continent [MAIN::ia-viatges_Class1])
-	(name_city "Asgard")
-	(poi_are
-		[MAIN::ia-viatges_Class30023]
-		[MAIN::ia-viatges_Class30024]
-		[MAIN::ia-viatges_Class30025]
-		[MAIN::ia-viatges_Class30026]
-		[MAIN::ia-viatges_Class30027])
-	(popularity 4)
-	(type_destination_is [MAIN::ia-viatges_Class30001]))
-
-([MAIN::ia-viatges_Class30023] of  Leisure
-
-	(name_poi "TermalWaters")
-	(poi_is_in [MAIN::ia-viatges_Class30022]))
-
-([MAIN::ia-viatges_Class30024] of  Leisure
-
-	(name_poi "SpaZone")
-	(poi_is_in [MAIN::ia-viatges_Class30022]))
-
-([MAIN::ia-viatges_Class30025] of  Leisure
-
-	(name_poi "ContextFreeLeisure")
-	(poi_is_in [MAIN::ia-viatges_Class30022]))
-
-([MAIN::ia-viatges_Class30026] of  Leisure
-
-	(name_poi "OdinsHall")
-	(poi_is_in [MAIN::ia-viatges_Class30022]))
-
-([MAIN::ia-viatges_Class30027] of  Leisure
-
-	(name_poi "ThorTable")
-	(poi_is_in [MAIN::ia-viatges_Class30022]))
-
-([MAIN::ia-viatges_Class30028] of  City
-
-	(has_climate [MAIN::ia-viatges_Class10005])
-	(is_in_continent [MAIN::ia-viatges_Class4])
-	(name_city "CartoonNetwork")
-	(poi_are
-		[MAIN::ia-viatges_Class30029]
-		[MAIN::ia-viatges_Class30030]
-		[MAIN::ia-viatges_Class30031]
-		[MAIN::ia-viatges_Class30032]
-		[MAIN::ia-viatges_Class30033])
-	(popularity 1)
-	(type_destination_is [MAIN::ia-viatges_Class30002]))
-
-([MAIN::ia-viatges_Class30029] of  FamiliarPlace
-
-	(name_poi "BoingCinema")
-	(poi_is_in [MAIN::ia-viatges_Class30028]))
-
-([MAIN::ia-viatges_Class30030] of  FamiliarPlace
-
-	(name_poi "Imaginarium")
-	(poi_is_in [MAIN::ia-viatges_Class30028]))
-
-([MAIN::ia-viatges_Class30031] of  FamiliarPlace
-
-	(name_poi "LazyTown")
-	(poi_is_in [MAIN::ia-viatges_Class30028]))
-
-([MAIN::ia-viatges_Class30032] of  FamiliarPlace
-
-	(name_poi "Drim")
-	(poi_is_in [MAIN::ia-viatges_Class30028]))
-
-([MAIN::ia-viatges_Class30033] of  FamiliarPlace
-
-	(name_poi "TriangleFerroviari")
-	(poi_is_in [MAIN::ia-viatges_Class30028]))
-
-([MAIN::ia-viatges_Class30034] of  City
-
-	(has_climate [MAIN::ia-viatges_Class10004])
-	(is_in_continent [MAIN::ia-viatges_Class3])
-	(name_city "Climbistan")
-	(poi_are
-		[MAIN::ia-viatges_Class30035]
-		[MAIN::ia-viatges_Class30036]
-		[MAIN::ia-viatges_Class30037]
-		[MAIN::ia-viatges_Class30038]
-		[MAIN::ia-viatges_Class30039])
-	(popularity 2)
-	(type_destination_is [MAIN::ia-viatges_Class0]))
-
-([MAIN::ia-viatges_Class30035] of  Sport
-
-	(name_poi "Rocodrom")
-	(poi_is_in [MAIN::ia-viatges_Class30034]))
-
-([MAIN::ia-viatges_Class30036] of  Sport
-
-	(name_poi "EasySkiTracks")
-	(poi_is_in [MAIN::ia-viatges_Class30034]))
-
-([MAIN::ia-viatges_Class30037] of  Sport
-
-	(name_poi "MediumSkiTrack")
-	(poi_is_in [MAIN::ia-viatges_Class30034]))
-
-([MAIN::ia-viatges_Class30038] of  Sport
-
-	(name_poi "HardSkiTrack")
-	(poi_is_in [MAIN::ia-viatges_Class30034]))
-
-([MAIN::ia-viatges_Class30039] of  Sport
-
-	(name_poi "ParachutePoint")
-	(poi_is_in [MAIN::ia-viatges_Class30034]))
-
-([MAIN::ia-viatges_Class30040] of  City
-
-	(has_climate [MAIN::ia-viatges_Class10008])
-	(is_in_continent [MAIN::ia-viatges_Class1])
-	(name_city "Korotkevich")
-	(poi_are
-		[MAIN::ia-viatges_Class30041]
-		[MAIN::ia-viatges_Class30042]
-		[MAIN::ia-viatges_Class30043]
-		[MAIN::ia-viatges_Class30044]
-		[MAIN::ia-viatges_Class30045])
-	(popularity 5)
-	(type_destination_is [MAIN::ia-viatges_Class30001]))
-
-([MAIN::ia-viatges_Class30041] of  TuristPoint
-
-	(name_poi "MaxFlow")
-	(poi_is_in [MAIN::ia-viatges_Class30040]))
-
-([MAIN::ia-viatges_Class30042] of  TuristPoint
-
-	(name_poi "ConvexHull")
-	(poi_is_in [MAIN::ia-viatges_Class30040]))
-
-([MAIN::ia-viatges_Class30043] of  TuristPoint
-
-	(name_poi "SuffixArray")
-	(poi_is_in [MAIN::ia-viatges_Class30040]))
-
-([MAIN::ia-viatges_Class30044] of  TuristPoint
-
-	(name_poi "HopcroftKarp")
-	(poi_is_in [MAIN::ia-viatges_Class30040]))
-
-([MAIN::ia-viatges_Class30045] of  TuristPoint
-
-	(name_poi "PollardRho")
-	(poi_is_in [MAIN::ia-viatges_Class30040]))
-
-([MAIN::ia-viatges_Class30046] of  City
-
-	(accomodations_are
-		[MAIN::ia-viatges_Class30047]
-		[MAIN::ia-viatges_Class30048])
-	(has_climate [MAIN::ia-viatges_Class10007])
-	(is_in_continent [MAIN::ia-viatges_Class2])
-	(name_city "UltraLuxe")
-	(popularity 5)
-	(type_destination_is [MAIN::ia-viatges_Class30001]))
-
-([MAIN::ia-viatges_Class30047] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30046])
-	(name_accom "DollarsHotel")
-	(price_per_night 4000)
-	(rating 5))
-
-([MAIN::ia-viatges_Class30048] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30046])
-	(name_accom "MoreDollarsHotel")
-	(price_per_night 6000)
-	(rating 5))
-
-([MAIN::ia-viatges_Class30049] of  City
-
-	(accomodations_are
-		[MAIN::ia-viatges_Class30050]
-		[MAIN::ia-viatges_Class30051])
-	(has_climate [MAIN::ia-viatges_Class10007])
-	(is_in_continent [MAIN::ia-viatges_Class5])
-	(name_city "ReasonableLux")
-	(popularity 4)
-	(type_destination_is [MAIN::ia-viatges_Class20004]))
-
-([MAIN::ia-viatges_Class30050] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30049])
-	(name_accom "YuppiesHouse")
-	(price_per_night 2000)
-	(rating 4))
-
-([MAIN::ia-viatges_Class30051] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30049])
-	(name_accom "ButSalHotel")
-	(price_per_night 1500)
-	(rating 4))
-
-([MAIN::ia-viatges_Class30052] of  City
-
-	(accomodations_are
-		[MAIN::ia-viatges_Class30053]
-		[MAIN::ia-viatges_Class30054])
-	(has_climate [MAIN::ia-viatges_Class10006])
-	(is_in_continent [MAIN::ia-viatges_Class4])
-	(name_city "AverageJoe")
-	(popularity 3)
-	(type_destination_is [MAIN::ia-viatges_Class30002]))
-
-([MAIN::ia-viatges_Class30053] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30052])
-	(name_accom "NormalHotel")
-	(price_per_night 400)
-	(rating 3))
-
-([MAIN::ia-viatges_Class30054] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30052])
-	(name_accom "AverageHotel")
-	(price_per_night 350)
-	(rating 3))
-
-([MAIN::ia-viatges_Class30055] of  City
-
-	(accomodations_are
-		[MAIN::ia-viatges_Class30056]
-		[MAIN::ia-viatges_Class30057])
-	(has_climate [MAIN::ia-viatges_Class10005])
-	(is_in_continent [MAIN::ia-viatges_Class4])
-	(name_city "StudentsDestination")
-	(poi_are
-		[MAIN::ia-viatges_Class30058]
-		[MAIN::ia-viatges_Class30059]
-		[MAIN::ia-viatges_Class30060])
-	(popularity 5)
-	(type_destination_is [MAIN::ia-viatges_Class30001]))
-
-([MAIN::ia-viatges_Class30056] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30055])
-	(name_accom "Hostel")
-	(price_per_night 50)
-	(rating 1))
-
-([MAIN::ia-viatges_Class30057] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30055])
-	(name_accom "SleepWithARoach")
-	(price_per_night 25)
-	(rating 1))
-
-([MAIN::ia-viatges_Class30058] of  Nightlife
-
-	(name_poi "PotShop")
-	(poi_is_in [MAIN::ia-viatges_Class30055]))
-
-([MAIN::ia-viatges_Class30059] of  Nightlife
-
-	(name_poi "DarkPassions")
-	(poi_is_in [MAIN::ia-viatges_Class30055]))
-
-([MAIN::ia-viatges_Class30060] of  Sport
-
-	(name_poi "Footballer")
-	(poi_is_in [MAIN::ia-viatges_Class30055]))
-
-([MAIN::ia-viatges_Class30061] of  City
-
-	(accomodations_are
-		[MAIN::ia-viatges_Class30062]
-		[MAIN::ia-viatges_Class30063]
-		[MAIN::ia-viatges_Class30064]
-		[MAIN::ia-viatges_Class30065]
-		[MAIN::ia-viatges_Class30066])
-	(has_climate [MAIN::ia-viatges_Class10006])
-	(is_in_continent [MAIN::ia-viatges_Class5])
-	(name_city "LandOfEverybody")
-	(poi_are
-		[MAIN::ia-viatges_Class30067]
-		[MAIN::ia-viatges_Class30068]
-		[MAIN::ia-viatges_Class30069]
-		[MAIN::ia-viatges_Class30070]
-		[MAIN::ia-viatges_Class30071]
-		[MAIN::ia-viatges_Class30072])
-	(popularity 5)
-	(type_destination_is [MAIN::ia-viatges_Class30002]))
-
-([MAIN::ia-viatges_Class30062] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30061])
-	(name_accom "EverybodyWhoIsRich")
-	(price_per_night 5000)
-	(rating 5))
-
-([MAIN::ia-viatges_Class30063] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30061])
-	(name_accom "EverybodyWhoHasMonnaie")
-	(price_per_night 3500)
-	(rating 4))
-
-([MAIN::ia-viatges_Class30064] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30061])
-	(name_accom "EverybodyWithSomeCash")
-	(price_per_night 2000)
-	(rating 3))
-
-([MAIN::ia-viatges_Class30065] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30061])
-	(name_accom "EverybodyWithACoin")
-	(price_per_night 800)
-	(rating 2))
-
-([MAIN::ia-viatges_Class30066] of  Accomodation
-
-	(is_in [MAIN::ia-viatges_Class30061])
-	(name_accom "Everybody, Literally")
-	(price_per_night 1)
-	(rating 1))
-
-([MAIN::ia-viatges_Class30067] of  Cultural
-
-	(name_poi "CulturalStuff")
-	(poi_is_in [MAIN::ia-viatges_Class30061]))
-
-([MAIN::ia-viatges_Class30068] of  FamiliarPlace
-
-	(name_poi "PutYourKidHere")
-	(poi_is_in [MAIN::ia-viatges_Class30061]))
-
-([MAIN::ia-viatges_Class30069] of  Leisure
-
-	(name_poi "Sleep")
-	(poi_is_in [MAIN::ia-viatges_Class30061]))
-
-([MAIN::ia-viatges_Class30070] of  Nightlife
-
-	(name_poi "PartyHere")
-	(poi_is_in [MAIN::ia-viatges_Class30061]))
-
-([MAIN::ia-viatges_Class30071] of  Sport
-
-	(name_poi "RunAndClimb")
-	(poi_is_in [MAIN::ia-viatges_Class30061]))
-
-([MAIN::ia-viatges_Class30072] of  TuristPoint
-
-	(name_poi "TakeAPhoto")
-	(poi_is_in [MAIN::ia-viatges_Class30061]))
-
-([MAIN::ia-viatges_Class4] of  Continent
-
-	(has_destinations
-		[MAIN::ia-viatges_Class30028]
-		[MAIN::ia-viatges_Class30052]
-		[MAIN::ia-viatges_Class30055])
-	(name_continent "Oceania"))
-
-([MAIN::ia-viatges_Class5] of  Continent
-
-	(has_destinations
-		[MAIN::ia-viatges_Class30061]
-		[MAIN::ia-viatges_Class30049])
-	(name_continent "NorthAmerica"))
-
-([MAIN::ia-viatges_Class6] of  Continent
-
-	(name_continent "SouthAmerica"))
-)
 ;;; Fi del codi generat per Protege -------------------
 ;;; ---------------------------------------------------
 
@@ -1162,7 +1149,7 @@
         (if (< ?curr ?minim) then
             (bind ?minim ?curr)
         )
-		)
+        )
     ?minim
 )
 
@@ -1351,8 +1338,21 @@
 (defrule recopilacio-usuari::establir-objectiu "Estableix l'objectiu del viatge"
     ?u <- (Usuari (objectiu-viatge desconegut))
     =>
-    (bind ?e (pregunta-opcions "Quin es l'objectiu del viatge? " diversio romantic cultural descans))
-    (modify ?u (objectiu-viatge ?e))
+    (bind ?e (pregunta-index "Quin es l'objectiu del viatge? " diversio romantic cultural descans))
+    (switch ?e 
+        (case 1 then 
+            (modify ?u (objectiu-viatge diversio))
+        )
+        (case 2 then 
+            (modify ?u (objectiu-viatge romantic))
+        )
+        (case 3 then 
+            (modify ?u (objectiu-viatge cultural))
+        )
+        (case 4 then 
+            (modify ?u (objectiu-viatge descans))
+        )
+    )
 )
 
 
@@ -1411,7 +1411,6 @@
             (assert (tipus-desti muntanya))
         )
     )
-
 )
 
 (defrule recopilacio-restriccions::num-ciutats "Nombre de ciutats que hauria de tenir el viatge"
@@ -1439,20 +1438,19 @@
     ?fet <- (rest-transport ask) 
     ;;?re <- (restriccions)
     =>
-    (bind ?r (pregunta-opcions "Hi ha algun transport que no puguis utilitzar?" baixell avio tren))
+    (bind ?r (pregunta-index "Hi ha algun transport que no puguis utilitzar?" vaixell avio tren))
     (switch ?r
         (case 1 then
-            
+            (assert (rest-transport vaixell))
         )
         (case 2 then
-            
+            (assert (rest-transport avio))
         )
         (case 3 then
-            ;; Put instances of the prohivited class here
+            (assert (rest-transport tren))
         )
     )
     (retract ?fet)
-    (assert (rest-transport TRUE))
 )
 
 (defrule recopilacio-restriccions::min-qualitat-allotjament
@@ -1465,8 +1463,8 @@
 
 (defrule recopilacio-restriccions::pasar-a-preferencies "Pasa de la recopilacio de restriccions de preferencies"
     (declare (salience 10))
-    ;; Falta posar rest-transport
     (rest-transport ~ask)
+    (tipus-desti ~ask)
     ?u <- (restriccions (num-ciutats ?n) (num-dies-ciutat ?c) (pressupost ?p) (min-qualitat-allotjament ?a))
     (test (> ?n 0))
     (test (> ?c 0))
@@ -1481,17 +1479,23 @@
 ; REGLES MODUL PREFERENCIES ;
 ;---------------------------;
 
+(deffacts recopilacio-prefs::fets-inicials "Fets inicials de preferencies"
+    (pref-clima ask)
+    (pref-continent ask)
+    (preferencies)
+)
+
 (defrule recopilacio-prefs::select-popularitat 
-	?u <- (preferencies (popularitat desconegut))
-	=>
-	(bind ?a pregunta-si-no "Li agradaria viatjar a ciutats que son populars entre els nostres clients?")
-	(if (eq ?a TRUE) then (modify ?u (popularitat alta)) else (modify ?u (popularitat baixa)))
+    ?u <- (preferencies (popularitat desconegut))
+    =>
+    (bind ?a pregunta-si-no "Li agradaria viatjar a ciutats que son populars entre els nostres clients?")
+    (if (eq ?a TRUE) then (modify ?u (popularitat alta)) else (modify ?u (popularitat baixa)))
 )
 
 (defrule recopilacio-prefs::ratio-qual-diners "Pregunta per la preferencia de major qualitat sobre menys pressupost"
     ?u <- (preferencies (ratio-qual-diners desconegut))
     =>
-    (bind ?e (pregunta-opcions "Quina importancia dones a la qualitat sobre el pressupost?" baixa mitjana alta))
+    (bind ?e (pregunta-index "Quina importancia dones a la qualitat sobre el pressupost?" baixa mitjana alta))
     (switch ?e
         (case 1 then
             (modify ?u (ratio-qual-diners baixa))
@@ -1520,16 +1524,51 @@
     )
 )
 
-;(defrule recopilacio-prefs::pref-continent
+(defrule recopilacio-prefs::pref-clima
+    ?hecho <- (pref-clima ask)
+    ?pref <- (preferencies)
+    =>
+    (bind $?obj-clima (find-all-instances ((?inst Clima)) TRUE))
+    (bind $?nom-clima (create$ ))
+    (loop-for-count (?i 1 (length$ $?obj-clima)) do
+        (bind ?curr-obj (nth$ ?i ?obj-clima))
+        (bind ?curr-nom (send ?curr-obj get-name_climate))
+        (bind $?nom-clima(insert$ $?nom-clima (+ (length$ $?nom-clima) 1) ?curr-nom))
+    )
+    (bind ?escogido (pregunta-index "Esculli el clima que prefereix: " $?nom-clima))
 
-;)
+    (bind ?respuesta (nth$ ?escogido ?obj-clima))
+    (retract ?hecho)
+    (assert (pref-clima TRUE))
+    (modify ?pref (pref-clima ?respuesta))
+)
 
-;(defrule recopilacio-prefs::pref-clima
- 
-;)
+(defrule recopilacio-prefs::pref-continent
+    ?hecho <- (pref-continent ask)
+    ?pref <- (preferencies)
+    =>
+    (bind $?obj-cont (find-all-instances ((?inst Continent)) TRUE))
+    (bind $?nom-cont (create$ ))
+    (loop-for-count (?i 1 (length$ $?obj-cont)) do
+        (bind ?curr-obj (nth$ ?i ?obj-cont))
+        (bind ?curr-nom (send ?curr-obj get-name_continent))
+        (bind $?nom-cont(insert$ $?nom-cont (+ (length$ $?nom-cont) 1) ?curr-nom))
+    )
+    (bind ?escogido (pregunta-index "Esculli el continent que prefereix: " $?nom-cont))
+
+    (bind ?respuesta (nth$ ?escogido ?obj-cont))
+    (retract ?hecho)
+    (assert (pref-continent TRUE))
+    (modify ?pref (pref-continent ?respuesta))
+)
 
 (defrule recopilacio-prefs::pasar-a-processat
-    (declare (salience 10)) ; TODO should be changed
+    (declare (salience 10)) 
+    (pref-clima ~ask)
+    (pref-continent ~ask)
+    (preferencia-llocs-exotics ~desconegut)
+    (ratio-qual-diners ~desconegut)
+    (popularitat ~desconegut)
     =>
     (printout t "Processant les dades..." crlf)
     (focus processat-data)
@@ -1547,7 +1586,7 @@
 ;    (bind $?lista (find-all-instances ((?inst Pelicula)) TRUE))
 ;    (progn$ (?curr-con ?lista)
 ;      (make-instance (gensym) of Recomendacion (contenido ?curr-con) (puntuacion (send ?curr-con get-puntuacion)))
-;    )	
+;    )  
 ;    (retract ?hecho)
 ;  )
 

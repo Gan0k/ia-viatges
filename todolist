@@ -47,3 +47,5 @@ QUE FA EL MODUL DE GENERACIO:
                 x ciutat. Si aquest numero e smes gran que el pressupost sobrat, descartar.
 - rest-transport -> Si el transport que s'ha d'agafar per arribar a una ciutat esta a rest-transport, llavors
                     descatar la ciutat.
+
+RECORDAR QUE AQUESTES VARIABLES NO TINDRAN QUE APAREIXER AL MODUL DE PROCESSAT (NO S'HA DE FER RES AMB ELLES)

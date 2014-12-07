@@ -1,4 +1,4 @@
-; Thu Dec 04 19:42:09 CET 2014
+; Sun Dec 07 20:25:44 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -91,11 +91,6 @@
 		(allowed-values Luxury Budget Regular)
 		(default Regular)
 ;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot ia-viatges_Class20007
-		(type SYMBOL)
-;+		(allowed-parents)
-;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(multislot can_go_to
 		(type INSTANCE)
@@ -315,19 +310,15 @@
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
-(defclass Bus
-	(is-a Transport)
-	(role concrete))
-
 (defclass Plane
 	(is-a Transport)
 	(role concrete))
 
-(defclass Train
+(defclass Boat
 	(is-a Transport)
 	(role concrete))
 
-(defclass Boat
+(defclass Train
 	(is-a Transport)
 	(role concrete))
 
