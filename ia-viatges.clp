@@ -1633,8 +1633,6 @@
 )
 
 
-
-
 ;; Valorar popularitat
 (defrule processat-data::valorar-popularitat "Es valorara la popularitat del lloc"
     (preferencies (popularitat ?popDesitjada))
@@ -1649,15 +1647,28 @@
     )
     (if (eq ?auxpop ?pop) then
         (bind ?punt (+ ?punt 100))
-        (bind $?just (insert$ $?just (+ (length$ $?just) 1) "L'usuari vol una popularitat TODO add which"))
+        (bind $?just (insert$ $?just (+ (length$ $?just) 1) "L'usuari vol una popularitat alta"))
     )
     (send ?destVisitades put-puntuacio ?punt)
     (send ?destVisitades put-justificacions $?just)
     (assert (valorat-popularitat ?dest))
 )
 
-
-
+(defrule processat-data::valorar-continent 
+    (preferencies (pref-continent ?contDesitjat))
+    ?dest <- (object (is-a Destination) (is_in_continent ?cont))
+    ?dest-visitada <- (object (is-a DestinacioVisitada) (desti ?nom-visitat) (puntuacio ?punt) (justificacions $?just))
+    (test (eq (instance-name ?dest) (instance-name ?nom-visitat)))
+    (not (valorat-cont ?dest))
+    =>
+    (if (eq ?cont ?contDesitjat) then
+        (bind ?punt (+ ?punt 100))
+        (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es puja la puntuacio del continent preferit."))
+    )
+    (assert (valorat-cont ?dest))
+    (send ?dest-visitada put-puntuacio ?punt)
+    (send ?dest-visitada put-justificacions $?just)
+)
 
 ;; Filtrar allotjaments per qualtiat
 (defrule processat-data::filtrar-qualitat-allotjament "Es filtraran els allotjaments que no tinguin prou qualitat"
