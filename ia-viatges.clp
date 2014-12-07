@@ -1524,10 +1524,12 @@
     )
 )
 
+;;dynamic question, adapts based on content of the ontology
 (defrule recopilacio-prefs::pref-clima
     ?hecho <- (pref-clima ask)
     ?pref <- (preferencies)
     =>
+    ;; get all the names of the instances of Clima
     (bind $?obj-clima (find-all-instances ((?inst Clima)) TRUE))
     (bind $?nom-clima (create$ ))
     (loop-for-count (?i 1 (length$ $?obj-clima)) do
@@ -1537,6 +1539,7 @@
     )
     (bind ?escogido (pregunta-index "Esculli el clima que prefereix: " $?nom-clima))
 
+    ;;bind the obj choosen to the answer and pass it to prefs
     (bind ?respuesta (nth$ ?escogido ?obj-clima))
     (retract ?hecho)
     (assert (pref-clima TRUE))
