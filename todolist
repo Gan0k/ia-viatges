@@ -45,17 +45,22 @@ MODUL DE GENERACIO:
 - Num-ciutats -> Agafar ciutats fins a que valor 0
 - num-dies-ciutat -> entra només en joc en aquest modul
 - Presupossot -> agafar ciutat, per cada hotel de la ciutat, agafar price_per_night, multiplicar pel nombre de dies 
-                x ciutat. Si aquest numero e smes gran que el pressupost sobrat, descartar.
+                x ciutat. Si aquest numero es mes gran que el pressupost sobrat, descartar.
 - rest-transport -> Si el transport que s'ha d'agafar per arribar a una ciutat esta a rest-transport, llavors
                     descatar la ciutat.
 
 RECORDAR QUE AQUESTES VARIABLES NO TINDRAN QUE APAREIXER AL MODUL DE PROCESSAT (NO S'HA DE FER RES AMB ELLES)
 
 MODUL DE PROCESSAT:
-- min-qualitat-hotels -> done
-- popularitat -> done
-- nivell-cult -> filtrar els points of interest de la ciutat tq siguin museus + fer funcio que puntui la ciutat segons
-la length dels points of interest left
+- min-qualitat-hotels -> DONE
+- popularitat -> DONE
+- nivell-cult -> filtrar els points of interest de la ciutat tq siguin museus + fer una altre funcio que puntui 
+la ciutat segons la length dels points of interest left
 - pref-continent -> pujar puntuacio de destins en continents preferits
 - pref-clima -> lo mismo pero amb clima
-- 
+- preferencia-llocs-exotics -> pujar puntuació destins FORA del continent d'origen
+- ratio-qual-diners -> DEPRECATED FOR NOW
+- idea for edat + num_pers + familia + tipus_viatge + obj_viatge -> tracatar com preferencies que, si es compleix
+  un cert perfil de grup, llavors es puja la puntuació de ciutats que, o be son d'un tipus determiant (gran ciutat
+  europea) o tnenen molts punts d'interes d'un tipus (molts spas o algo aixi). Per exemple, si es va en familia
+  i l'edat del tiu son 50 anys i l'bj del viatge es fer turisme doncs els enviem a una gran ciutat europea o algo aixi.

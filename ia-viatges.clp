@@ -1279,7 +1279,7 @@
         (bind ?i 0)
 
         (while (< ?i ?numFills) do
-            (bind ?e (pregunta-numerica "Edat del fill" 0 30))
+            (bind ?e (pregunta-numerica "Edat del menor" 0 30))
             (bind ?llista (insert$ ?llista 1 ?e))
             (bind ?i (+ 1 ?i))
         )
