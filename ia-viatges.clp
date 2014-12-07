@@ -1139,8 +1139,6 @@
     (slot preferencia-llocs-exotics (type SYMBOL) (default desconegut))
     (slot pref-continent (type INSTANCE))
     (slot pref-clima (type SYMBOL) (default desconegut))
-    ;; Not used so far
-    ;;(slot pref-ciutat (type SYMBOL) (default desconegut))
 )
 
 ;; Template per la llista de destins
