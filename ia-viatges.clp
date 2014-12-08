@@ -1754,11 +1754,13 @@
 
 ;; Imprimir destinacio visitada
 (defmessage-handler MAIN::DestinacioVisitada imprimir ()
-    (printout t "Desti:")
+    (printout t "Desti: ")
     (printout t (send ?self:desti get-name_city) crlf)
+    (printout t "   Numero de dies: ")
+    (printout t ?self:numero-dies crlf)
     (printout t "   Hotel: ")
     (printout t ?self:nom-hotel crlf)
-    (printout t "   Visites:")
+    (printout t "   Visites: ")
     (progn$ (?curr-poi ?self:pois)
         (printout t (send ?curr-poi get-name_poi))
         (printout t ",")
