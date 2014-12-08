@@ -992,6 +992,10 @@
     (slot cost
         (type INTEGER)
         (create-accessor read-write))
+    ;; transport amb el que s'hi arriba
+    (slot transport-arribar
+        (type STRING)
+        (create-accessor read-write))
 )
 
 
@@ -1018,6 +1022,10 @@
     ; List of used transports
     (multislot transports
         (type INSTANCE)
+        (create-accessor read-write))
+    ;; indica el tranport per tornar
+    (slot transport-tornada
+        (type STRING)
         (create-accessor read-write))
 )
 
@@ -1091,6 +1099,27 @@
     (progn$ (?desti (send ?self get-destins-visitats))
        (printout t (send ?desti imprimir))
     ) 
+    ;; TRANSPORT
+    (printout t "Transports agafats: ")
+    (bind ?prev-nom "Origen")
+    ;; iterem pels destins visitats
+    (progn$ (?desti (send ?self get-destins-visitats))
+        ;; check if this works
+        (bind ?next-nom (send (send ?desti get-desti) get-name_city))
+        (bind ?transp (send ?desti get-transport-arribar))
+        (printout t ?prev-nom)
+        (printout t " -> " )
+        (printout t ?next-nom)
+        (printout t " amb ")
+        (printout t ?transp crlf)
+        (bind ?prev-nom ?next-nom)
+    )
+    ;; imprimir la tornada
+    (printout t ?prev-nom)
+    (printout t " -> Origen amb " )
+    (printout t ?self:transport-tornada crlf)
+    ;; FI TRANSPORT 
+
     (printout t "Fi de")
     (printout t (instance-name ?self) crlf)
 )
