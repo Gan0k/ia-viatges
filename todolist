@@ -58,7 +58,7 @@ MODUL DE PROCESSAT:
 la ciutat segons la length dels points of interest left
 - pref-continent -> DONE
 - pref-clima -> DONE
-- preferencia-llocs-exotics -> pujar puntuació destins FORA del continent d'origen
+- preferencia-llocs-exotics -> DONE
 - ratio-qual-diners -> DEPRECATED FOR NOW
 - idea for edat + num_pers + familia + tipus_viatge + obj_viatge -> tracatar com preferencies que, si es compleix
   un cert perfil de grup, llavors es puja la puntuació de ciutats que, o be son d'un tipus determiant (gran ciutat
