@@ -1146,6 +1146,11 @@
     (multislot destins (type INSTANCE))
 )
 
+;; Template per la llista destins ordenada
+(deftemplate MAIN::llista-destins-ordenada
+    (multislot destins (type INSTANCE))
+)
+
 ;; Template per la llista de viatges
 (deftemplate MAIN::llista-viatges
     (multislot viatges (type INSTANCE))
@@ -1154,6 +1159,22 @@
 ;;; Fi declaracio templates -----------------------
 
 ;;; Declaracio de funcios ------------------------
+
+;; Funcio per retornar l'element de maxima puntuacio
+
+;;; Funcion que retorna el elemento con puntuacion maxima
+(deffunction maxima-puntuacio ($?llista)
+	(bind ?maxim -1000000)
+	(bind ?element nil)
+	(progn$ (?curr $?llista)
+		(bind ?punt (send ?curr get-puntuacio))
+		(if (> ?punt ?maxim) then 
+			(bind ?maxim ?punt)
+			(bind ?element ?curr)
+		)
+	)
+	?element
+)
 
 ;;; Funcio per obtenir el minim valor d'una llista numerica
 (deffunction minim-valor ($?lista)
@@ -1816,10 +1837,26 @@
     (modify ?hecho (destins $?llista))
 )
 
+;; Crear llista destins ordenada
+
+(defrule generacio::crea-llista-ordenada "Es crea la llista de destins ordenada"
+    (not (llista-destins-ordenada))
+    (llista-destins (destins $?llista))
+    =>
+    (bind $?resultat (create$))
+    (while (and (not (eq (length$ $?llista) 0)) (< (length $?resultat) 30)) do
+        ;(bind ?curr (nth$ 1 $?llista))
+        (bind ?curr (maxima-puntuacio $?llista))
+        (bind $?llista (delete-member$ $?llista ?curr))
+        (bind $?resultat (insert$ $?resultat (+ (length$ $?resultat) 1) ?curr))
+    )
+    (assert (llista-destins-ordenada (destins $?resultat)))
+)
+
 ;; fix this
 (defrule generacio::crea-viatges "Es crean els viatges"
     (not (llista-viatges))
-    (llista-destins (destins $?destins-disponibles))
+    (llista-destins-ordenada (destins $?destins-disponibles))
     (restriccions (pressupost ?pressupost) (num-ciutats ?num-ciutats) (num-dies-ciutat ?dies-ciutat))
     =>
     (bind $?llista (create$ ))
