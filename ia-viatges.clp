@@ -2867,6 +2867,8 @@
                         (send ?destiVisitat put-transport-arribar ?transp-mig) 
                         ;; assignem el transport final
                         (send ?viatge put-transport-tornada ?transp-final)
+                        ;; actualitzem la previa ciutat
+                        (bind ?prev-ciutat ?desti)
 
                         (bind ?found TRUE)
                         (bind ?pressupost-gastat (+ ?pressupost-gastat ?nou-preu))
