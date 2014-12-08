@@ -1800,7 +1800,7 @@
     (slot num-ciutats (type INTEGER) (default -1)) ;; cota superior
     (slot num-dies-ciutat (type INTEGER) (default -1))
     (slot pressupost (type INTEGER) (default -1))
-    (multislot rest-transport (type INSTANCE)) ;;;el que no agafes
+    (slot rest-transport (type SYMBOL) (default desconegut)) ;;;el que no agafes
     (slot min-qualitat-allotjament (type INTEGER) (default -1)) ;; Minim estrelles del allotjament
 )
 
@@ -2201,21 +2201,27 @@
 
 (defrule recopilacio-restriccions::rest-transport "Pregunta transports"
     ?fet <- (rest-transport ask) 
+    ?u <- (restriccions (rest-transport desconegut))
     ;;?re <- (restriccions)
+
     =>
     (bind ?r (pregunta-index "Hi ha algun transport que no puguis utilitzar?" vaixell avio tren cap))
     (switch ?r
         (case 1 then
             (assert (rest-transport vaixell))
+            (modify ?u (rest-transport vaixell))
         )
         (case 2 then
             (assert (rest-transport avio))
+            (modify ?u (rest-transport avio))
         )
         (case 3 then
             (assert (rest-transport tren))
+            (modify ?u (rest-transport tren))
         )
         (case 4 then 
             (assert (rest-transport FALSE))
+            (modify ?u (rest-transport FALSE))
         )
     )
     (retract ?fet)
@@ -2722,13 +2728,13 @@
     (bind $?transports (create$))
 
     (if (eq ?transport vaixell) then
-        (bind $?vaixells (find-all-instances ((?inst Boat)) TRUE))
+        (bind $?transports (find-all-instances ((?inst Boat)) TRUE))
     )
     (if (eq ?transport avio) then
-        (bind $?vaixells (find-all-instances ((?inst Plane)) TRUE))
+        (bind $?transports (find-all-instances ((?inst Plane)) TRUE))
     )
     (if (eq ?transport tren) then
-        (bind $?vaixells (find-all-instances ((?inst Train)) TRUE))
+        (bind $?transports (find-all-instances ((?inst Train)) TRUE))
     )
 
     (progn$ (?curr-trans $?transports) ;Iterar per totes les accomodations
