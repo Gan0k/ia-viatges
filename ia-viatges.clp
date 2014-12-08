@@ -1842,22 +1842,22 @@
     (bind ?result FALSE)
 
     ; obtenir tot
-    (bind $?vaixells (find-all-instances ((?inst-vaixell Boat)) TRUE))
-    (bind $?trens (find-all-instances ((?inst-tren Train)) TRUE))
-    (bind $?avions (find-all-instances ((?inst-avio Plane)) TRUE))
+    (bind $?vaixells (find-all-instances ((?inst Boat)) TRUE))
+    (bind $?trens (find-all-instances ((?inst Train)) TRUE))
+    (bind $?avions (find-all-instances ((?inst Plane)) TRUE))
 
     ; obtenir anar i tornar
     (bind $?transports-anar (send ?origen-visitat get-can_go_to))
     (bind $?transports-arribat (send ?desti-visitat get-can_be_reached))
     (progn$ (?curr-trans $?transports-anar)
         (if (member$ ?curr-trans $?transports-arribat) then
-            (if (member$ ?curr-trans $?vaixells) then
+            (if (member$ (instance-name ?curr-trans) $?vaixells) then
                 (bind ?result "vaixell")
             )
-            (if (member$ ?curr-trans $?trens) then
+            (if (member$ (instance-name ?curr-trans) $?trens) then
                 (bind ?result "tren")
             )
-            (if (member$ ?curr-trans $?avions) then
+            (if (member$ (instance-name ?curr-trans) $?avions) then
                 (bind ?result "avio") 
             )
         )
@@ -1868,13 +1868,13 @@
             (bind $?transports-anar (send ?desti-visitat get-can_go_to))
             (bind $?transports-arribat (send ?origen-visitat get-can_be_reached))
             (if (member$ ?curr-trans $?transports-arribat) then
-                (if (member$ ?curr-trans $?vaixells) then
+                (if (member$ (instance-name ?curr-trans) $?vaixells) then
                     (bind ?result "vaixell")
                 )
-                (if (member$ ?curr-trans $?trens) then
+                (if (member$ (instance-name ?curr-trans) $?trens) then
                     (bind ?result "tren")
                 )
-                (if (member$ ?curr-trans $?avions) then
+                (if (member$ (instance-name ?curr-trans) $?avions) then
                     (bind ?result "avio") 
                 )
             )
@@ -2817,6 +2817,11 @@
     ;;; CIUTAT D'ORIGEN SEMPRE ES BARCELONA
     
     (bind ?ciutat-barcelona (nth$ 1 (find-instance ((?inst City)) (eq ?inst:name_city "Barcelona"))))
+    (bind ?ciutat-culturia  (nth$ 1 (find-instance ((?inst City)) (eq ?inst:name_city "Culturia"))))
+
+    (bind ?estat (pot-arribar ?ciutat-barcelona ?ciutat-culturia))
+    (printout t "Pot anar: ")
+    (printout t ?estat crlf)
     ;;;
 
 
