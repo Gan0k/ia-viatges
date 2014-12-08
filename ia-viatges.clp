@@ -15,10 +15,10 @@
 ;;                    ONTOLOGIA
 ;;-------------------------------------------------------------------------------------------------------------
 
-; Mon Dec 08 17:24:50 CET 2014
+; Mon Dec 08 20:06:18 CET 2014
 ; 
-;+ (version "3.5")
-;+ (build "Build 660")
+;+ (version "3.4.8")
+;+ (build "Build 629")
 
 
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
@@ -218,13 +218,13 @@
 (defclass Destination
 	(is-a USER)
 	(role concrete)
-	(multislot inverse_of_destinations_are
-		(type INSTANCE)
-;+		(allowed-classes TypeDestination)
-		(create-accessor read-write))
 	(multislot can_be_reached
 		(type INSTANCE)
 ;+		(allowed-classes Transport)
+		(create-accessor read-write))
+	(multislot inverse_of_destinations_are
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
 		(create-accessor read-write))
 	(single-slot popularity
 		(type STRING)
@@ -243,18 +243,18 @@
 ;+		(allowed-classes TypeDestination)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot has_climate
+	(multislot can_go_to
 		(type INSTANCE)
-;+		(allowed-classes Clima)
-;+		(cardinality 1 1)
+;+		(allowed-classes Transport)
 		(create-accessor read-write))
 	(multislot accomodations_are
 		(type INSTANCE)
 ;+		(allowed-classes Accomodation)
 		(create-accessor read-write))
-	(multislot can_go_to
+	(single-slot has_climate
 		(type INSTANCE)
-;+		(allowed-classes Transport)
+;+		(allowed-classes Clima)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot is_in_continent
 		(type INSTANCE)
@@ -389,10 +389,10 @@
 
 (definstances instances
 
-; Mon Dec 08 17:24:50 CET 2014
+; Mon Dec 08 20:06:18 CET 2014
 ; 
-;+ (version "3.5")
-;+ (build "Build 660")
+;+ (version "3.4.8")
+;+ (build "Build 629")
 
 ([MAIN::ia-viatges_Class0] of  TypeDestination
 
@@ -1329,12 +1329,6 @@
 
 ([MAIN::ia-viatges_Class40045] of  City
 
-	(accomodations_are
-		[MAIN::ia-viatges_Class40070]
-		[MAIN::ia-viatges_Class40071]
-		[MAIN::ia-viatges_Class40072]
-		[MAIN::ia-viatges_Class40073]
-		[MAIN::ia-viatges_Class40074])
 	(can_be_reached
 		[MAIN::ia-viatges_Class40060]
 		[MAIN::ia-viatges_Class40061]
@@ -1487,35 +1481,30 @@
 
 ([MAIN::ia-viatges_Class40070] of  Accomodation
 
-	(is_in [MAIN::ia-viatges_Class40045])
 	(name_accom "BarnaCaro")
 	(price_per_night 5400)
 	(rating 5))
 
 ([MAIN::ia-viatges_Class40071] of  Accomodation
 
-	(is_in [MAIN::ia-viatges_Class40045])
 	(name_accom "Barnal")
 	(price_per_night 4400)
 	(rating 4))
 
 ([MAIN::ia-viatges_Class40072] of  Accomodation
 
-	(is_in [MAIN::ia-viatges_Class40045])
 	(name_accom "Barnarato")
 	(price_per_night 3300)
 	(rating 3))
 
 ([MAIN::ia-viatges_Class40073] of  Accomodation
 
-	(is_in [MAIN::ia-viatges_Class40045])
 	(name_accom "BarnaTirao")
 	(price_per_night 3300)
 	(rating 3))
 
 ([MAIN::ia-viatges_Class40074] of  Accomodation
 
-	(is_in [MAIN::ia-viatges_Class40045])
 	(name_accom "BarnaCutrillo")
 	(price_per_night 2200)
 	(rating 2))
