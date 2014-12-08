@@ -1858,6 +1858,7 @@
     (not (llista-viatges))
     (llista-destins-ordenada (destins $?destins-disponibles))
     (restriccions (pressupost ?pressupost) (num-ciutats ?num-ciutats) (num-dies-ciutat ?dies-ciutat))
+    (Usuari (num-pers ?num-pers))
     =>
     (bind $?llista (create$ ))
     (bind $?llista (insert$ $?llista (+ (length $?llista) 1) (make-instance Viatge1 of Viatge)))
@@ -1884,9 +1885,10 @@
             (while ( and (<= ?i (length$ $?accoms)) (eq ?found FALSE)) do
                 (bind ?curr-accom (nth$ ?i $?accoms)) 
                 (bind ?preu-per-nit (send ?curr-accom get-price_per_night))
-                (if ( <= ( + ?pressupost-gastat ( * ?preu-per-nit ?dies-ciutat)) ?pressupost) then
+                (bind ?nou-preu ( * ( * ?preu-per-nit ?num-pers) ?dies-ciutat))
+                (if ( <= ( + ?pressupost-gastat ?nou-preu) ?pressupost) then
                     (bind ?found TRUE)
-                    (bind ?pressupost-gastat (+ ?pressupost-gastat (* ?preu-per-nit ?dies-ciutat)))
+                    (bind ?pressupost-gastat (+ ?pressupost-gastat ?nou-preu))
                     (send ?destiVisitat put-nom-hotel (send ?curr-accom get-name_accom))
                     (send ?destiVisitat put-numero-dies ?dies-ciutat)
                     ;; Ok, anem a agafar pois
