@@ -1691,6 +1691,23 @@
     (send ?dest-visitada put-justificacions $?just)
 )
 
+(defrule processat-data::valorar-llocs-exotics
+    (preferencies (preferencia-llocs-exotics ?exoticDesitjat))
+    ?dest <- (object (is-a Destination) (is_in_continent ?cont))
+    ?dest-visitada <- (object (is-a DestinacioVisitada) (desti ?nom-visitat) (puntuacio ?punt) (justificacions $?just))
+    (test (eq (instance-name ?dest) (instance-name ?nom-visitat)))
+    (not (valorat-llocs-exotics ?dest))
+    =>
+    (if (and (eq ?exoticDesitjat TRUE) (not (eq (send ?cont get-name_continent) "Europe"))) then
+        (bind ?punt (+ ?punt 50))
+        (printout t ?dest crlf)
+        (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es puja la puntuacio de destinacions exotiques."))
+    )
+    (assert (valorat-llocs-exotics ?dest))
+    (send ?dest-visitada put-puntuacio ?punt)
+    (send ?dest-visitada put-justificacions $?just)
+)
+
 ;; Filtrar allotjaments per qualtiat
 (defrule processat-data::filtrar-qualitat-allotjament "Es filtraran els allotjaments que no tinguin prou qualitat"
     ;; Qualitat is numeric
