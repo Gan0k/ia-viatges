@@ -2782,7 +2782,7 @@
     (llista-destins (destins $?llista))
     =>
     (bind $?resultat (create$))
-    (while (and (not (eq (length$ $?llista) 0)) (< (length $?resultat) 30)) do
+    (while (not (eq (length$ $?llista ) 0)) do
         ;(bind ?curr (nth$ 1 $?llista))
         (bind ?curr (maxima-puntuacio $?llista))
         (bind $?llista (delete-member$ $?llista ?curr))
