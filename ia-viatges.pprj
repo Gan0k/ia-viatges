@@ -1,4 +1,4 @@
-; Sun Dec 07 22:25:01 CET 2014
+; Mon Dec 08 14:11:54 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -20,9 +20,9 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ia-viatges_ProjectKB_Class10129]
-		[ia-viatges_ProjectKB_Class10130]
-		[ia-viatges_ProjectKB_Class10131]))
+		[ia-viatges_ProjectKB_Class81]
+		[ia-viatges_ProjectKB_Class82]
+		[ia-viatges_ProjectKB_Class83]))
 
 ([CLSES_TAB] of  Widget
 
@@ -48,21 +48,6 @@
 
 ([ia-viatges_ProjectKB_Class10] of  Property_List
 )
-
-([ia-viatges_ProjectKB_Class10129] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([ia-viatges_ProjectKB_Class10130] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([ia-viatges_ProjectKB_Class10131] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
 
 ([ia-viatges_ProjectKB_Class107] of  String
 
@@ -413,6 +398,21 @@
 ([ia-viatges_ProjectKB_Class80] of  Property_List
 )
 
+([ia-viatges_ProjectKB_Class81] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([ia-viatges_ProjectKB_Class82] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([ia-viatges_ProjectKB_Class83] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
 ([ia-viatges_ProjectKB_Class9] of  Widget
 
 	(is_hidden TRUE)
@@ -542,7 +542,7 @@
 ([KB_227129_Class99] of  Property_List
 )
 
-([KB_304730_Class0] of  Map
+([KB_592633_Class0] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List
@@ -628,8 +628,8 @@
 	(browser_slot_names [BROWSER_SLOT_NAMES])
 	(customized_instance_widgets
 		[INSTANCE_ANNOTATION_FORM_WIDGET]
-		[STANDARD_FACET_FORM_WIDGET]
 		[STANDARD_SLOT_FORM_WIDGET]
+		[STANDARD_FACET_FORM_WIDGET]
 		[PAL_FORM_WIDGET]
 		[STANDARD_CLASS_FORM_WIDGET])
 	(default_cls_metaclass ":STANDARD-CLASS")
