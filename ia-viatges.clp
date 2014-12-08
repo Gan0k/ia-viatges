@@ -1709,7 +1709,7 @@
 (defmessage-handler MAIN::Viatge imprimir ()
     (if (eq (length (send ?self get-destins-visitats)) 0) then 
         (printout t (instance-name ?self) crlf)
-        (printout t "No s'ha trobat cap viatge per a les condicons que ha posat." crlf)
+        (printout t "No s'ha trobat cap viatge amb les condicions que ha posat." crlf)
         (printout t "Fi de")
         (printout t (instance-name ?self) crlf)
         else
