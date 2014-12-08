@@ -1471,7 +1471,7 @@
 (defrule recopilacio-restriccions::pressupost "Pressupost del qual disposa l'usuari"
     ?u <- (restriccions (pressupost -1))
     =>
-    (bind ?e (pregunta-numerica "De quin pressupost disposes?" 0 5000))
+    (bind ?e (pregunta-numerica "De quin pressupost disposes?" 0 50000))
     (modify ?u (pressupost ?e))
 )
 
