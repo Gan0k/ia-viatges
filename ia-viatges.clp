@@ -1861,48 +1861,54 @@
     =>
     (bind $?llista (create$ ))
     (bind $?llista (insert$ $?llista (+ (length $?llista) 1) (make-instance Viatge1 of Viatge)))
-    ;; seleccionem el primer viatje
-    (bind ?viatge (nth$ 1 $?llista))
+    (bind $?llista (insert$ $?llista (+ (length $?llista) 1) (make-instance Viatge2 of Viatge)))
 
-    ;; Presupost gastat
-    (bind ?pressupost-gastat 0)
+    (bind ?ind-viatge 1)
+    (while (<= ?ind-viatge 2) do
+        ;; seleccionem el primer viatje
+        (bind ?viatge (nth$ ?ind-viatge $?llista))
 
-    ; Destins a seleccionar
-    (bind $?destins-sel (create$ ))
-    (while (and (< (length$ $?destins-sel) ?num-ciutats) (> (length$ $?destins-disponibles) 0)) do
-        ; seleccionem el primer desti
-        (bind ?destiVisitat (nth$ 1 $?destins-disponibles))
-        (bind ?desti (send ?destiVisitat get-desti))
-        (bind $?accoms (send ?desti get-accomodations_are))
-        ; de totes les acomodations, pillarem la primera
-        (bind ?found FALSE)
-        (bind ?i 1)
-        (while ( and (<= ?i (length$ $?accoms)) (eq ?found FALSE)) do
-            (bind ?curr-accom (nth$ ?i $?accoms)) 
-            (bind ?preu-per-nit (send ?curr-accom get-price_per_night))
-            (if ( <= ( + ?pressupost-gastat ( * ?preu-per-nit ?dies-ciutat)) ?pressupost) then
-                (bind ?found TRUE)
-                (bind ?pressupost-gastat (+ ?pressupost-gastat (* ?preu-per-nit ?dies-ciutat)))
-                (send ?destiVisitat put-nom-hotel (send ?curr-accom get-name_accom))
-                ;; Ok, anem a agafar pois
+        ;; Presupost gastat
+        (bind ?pressupost-gastat 0)
+
+        ; Destins a seleccionar
+        (bind $?destins-sel (create$ ))
+        (while (and (< (length$ $?destins-sel) ?num-ciutats) (> (length$ $?destins-disponibles) 0)) do
+            ; seleccionem el primer desti
+            (bind ?destiVisitat (nth$ 1 $?destins-disponibles))
+            (bind ?desti (send ?destiVisitat get-desti))
+            (bind $?accoms (send ?desti get-accomodations_are))
+            ; de totes les acomodations, pillarem la primera
+            (bind ?found FALSE)
+            (bind ?i 1)
+            (while ( and (<= ?i (length$ $?accoms)) (eq ?found FALSE)) do
+                (bind ?curr-accom (nth$ ?i $?accoms)) 
+                (bind ?preu-per-nit (send ?curr-accom get-price_per_night))
+                (if ( <= ( + ?pressupost-gastat ( * ?preu-per-nit ?dies-ciutat)) ?pressupost) then
+                    (bind ?found TRUE)
+                    (bind ?pressupost-gastat (+ ?pressupost-gastat (* ?preu-per-nit ?dies-ciutat)))
+                    (send ?destiVisitat put-nom-hotel (send ?curr-accom get-name_accom))
+                    ;; Ok, anem a agafar pois
+                )
+                (bind ?i (+ ?i 1))
             )
-            (bind ?i (+ ?i 1))
+
+            (if (eq ?found TRUE) then
+                ; seleccionem un desti random
+                ;(bind ?rand-desti (nth$ (random 1 (length$ $?destins-disponibles)) $?destins-disponibles))
+
+                ; afegin el desti seleccionat a la llista de destins seleccionats
+                (bind $?destins-sel (insert$ $?destins-sel (+ (length$ $?destins-sel) 1) ?destiVisitat))
+
+            )
+            ; eliminem el desti de la llista
+            (bind $?destins-disponibles (delete-member$ $?destins-disponibles ?destiVisitat))
         )
-
-        (if (eq ?found TRUE) then
-            ; seleccionem un desti random
-            ;(bind ?rand-desti (nth$ (random 1 (length$ $?destins-disponibles)) $?destins-disponibles))
-
-            ; afegin el desti seleccionat a la llista de destins seleccionats
-            (bind $?destins-sel (insert$ $?destins-sel (+ (length$ $?destins-sel) 1) ?destiVisitat))
-
-        )
-        ; eliminem el desti de la llista
-        (bind $?destins-disponibles (delete-member$ $?destins-disponibles ?destiVisitat))
+        ;; asignem els destins seleccionats al viatge
+        (send ?viatge put-destins-visitats $?destins-sel)
+        (send ?viatge put-cost ?pressupost-gastat)
+        (bind ?ind-viatge (+ ?ind-viatge 1)) 
     )
-    ;; asignem els destins seleccionats al viatge
-    (send ?viatge put-destins-visitats $?destins-sel)
-    (send ?viatge put-cost ?pressupost-gastat)
     (assert (llista-viatges (viatges $?llista)))
 )
 
