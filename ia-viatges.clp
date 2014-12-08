@@ -1388,22 +1388,28 @@
 
 
 (defrule recopilacio-usuari::establir-objectiu "Estableix l'objectiu del viatge"
-    ?u <- (Usuari (objectiu-viatge desconegut))
+    ?u <- (Usuari (objectiu-viatge desconegut) (tipus-viatge ?tipus))
     =>
-    (bind ?e (pregunta-index "Quin es l'objectiu del viatge? " diversio romantic cultural descans))
-    (switch ?e 
-        (case 1 then 
-            (modify ?u (objectiu-viatge diversio))
+    (if (eq ?tipus FALSE) then 
+        (bind ?e (pregunta-index "Quin es l'objectiu del viatge? " diversio romantic descans turisme))
+        (switch ?e 
+            (case 1 then 
+                (modify ?u (objectiu-viatge diversio))
+            )
+            (case 2 then 
+                (modify ?u (objectiu-viatge romantic))
+            )
+            ;(case 3 then 
+            ;   (modify ?u (objectiu-viatge cultural))
+            ;)
+            (case 3 then 
+                (modify ?u (objectiu-viatge descans))
+            )
+            (case 4 then
+                (modify ?u (objectiu-viatge turisme))
+            )
         )
-        (case 2 then 
-            (modify ?u (objectiu-viatge romantic))
-        )
-        (case 3 then 
-            (modify ?u (objectiu-viatge cultural))
-        )
-        (case 4 then 
-            (modify ?u (objectiu-viatge descans))
-        )
+        else (modify ?u (objectiu-viatge FALSE))
     )
 )
 
@@ -1688,7 +1694,7 @@
     ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois) (justificacions $?just))
     (test (eq (instance-name ?dest) (instance-name ?nom-visitat)))
     (test (eq ?cult alt))
-    (test (not (eq ?obj diversio)))
+    ;;(test (not (eq ?obj diversio)))
     (not (afegit-cult ?dest))
     =>
     (bind $?cult-pois (find-all-instances ((?inst Cultural)) TRUE))

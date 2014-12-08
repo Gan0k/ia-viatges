@@ -39,8 +39,6 @@ Tampoco es necesario explorar todas las posibilidades y hay que implementar el s
 imponga restricciones de sentido común que las restrinjan. Por ejemplo si el viaje es de corta duración,
 probablemente no se querrá que las ciudades estén muy alejadas unas de otras.
 
-ATENCIO!!: FER PREGUNTA DE LLOC D'ORIGEN AL USUARI, ES NECESSITA SABER PER TAL DE SABER D'ON SORTIR
-
 MODUL DE GENERACIO:
 - Num-ciutats -> DONE
 - num-dies-ciutat -> entra només en joc en aquest modul - DONE
@@ -60,7 +58,6 @@ la ciutat segons la length dels points of interest left - DONE
 - pref-continent -> DONE
 - pref-clima -> DONE
 - preferencia-llocs-exotics -> DONE
-- ratio-qual-diners -> DEPRECATED FOR NOW
 - Objectiu-viatge == diversio -> DONE
 - Objectiu-viatge == romantic -> DONE
 - Objectiu-viatge == descans -> DONE
@@ -69,6 +66,10 @@ la ciutat segons la length dels points of interest left - DONE
 - tipus-viatge == boda -> ???
 - tipus-viatge == viatge de fi de curs -> ???
 - fer metode de filtratje de pois (random)
+
+Unprocessed parameters: ratio-qual-diners, edat usuari, nombre-persones del viatge (nomes utilitzat a generacio)
+Unused classes in ontology: typeDestination, and lots of slots lol  
+
 
 IDEA: for edat + num_pers + familia + tipus_viatge + obj_viatge -> tracatar com preferencies que, si es compleix
 un cert perfil de grup, llavors es puja la puntuació de ciutats que, o be son d'un tipus determiant (gran ciutat
