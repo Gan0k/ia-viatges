@@ -43,9 +43,9 @@ ATENCIO!!: FER PREGUNTA DE LLOC D'ORIGEN AL USUARI, ES NECESSITA SABER PER TAL D
 
 MODUL DE GENERACIO:
 - Num-ciutats -> DONE
-- num-dies-ciutat -> entra només en joc en aquest modul
+- num-dies-ciutat -> entra només en joc en aquest modul - DONE
 - Presupossot -> agafar ciutat, per cada hotel de la ciutat, agafar price_per_night, multiplicar pel nombre de dies 
-                x ciutat. Si aquest numero es mes gran que el pressupost sobrat, descartar.
+                x ciutat. Si aquest numero es mes gran que el pressupost sobrat, descartar. - DONE
 - rest-transport -> Si el transport que s'ha d'agafar per arribar a una ciutat esta a rest-transport, llavors
                     descatar la ciutat.
 
@@ -55,12 +55,21 @@ MODUL DE PROCESSAT:
 - min-qualitat-hotels -> DONE
 - popularitat -> DONE
 - nivell-cult -> filtrar els points of interest de la ciutat tq siguin museus + fer una altre funcio que puntui 
-la ciutat segons la length dels points of interest left
+la ciutat segons la length dels points of interest left - DONE
 - pref-continent -> DONE
 - pref-clima -> DONE
 - preferencia-llocs-exotics -> DONE
 - ratio-qual-diners -> DEPRECATED FOR NOW
-- idea for edat + num_pers + familia + tipus_viatge + obj_viatge -> tracatar com preferencies que, si es compleix
-  un cert perfil de grup, llavors es puja la puntuació de ciutats que, o be son d'un tipus determiant (gran ciutat
-  europea) o tnenen molts punts d'interes d'un tipus (molts spas o algo aixi). Per exemple, si es va en familia
-  i l'edat del tiu son 50 anys i l'bj del viatge es fer turisme doncs els enviem a una gran ciutat europea o algo aixi.
+- Objectiu-viatge == diversio -> DONE
+- Objectiu-viatge == romantic 
+- Objectiu-viatge == descans 
+- familia nens -> agafar pois familiars
+- familia adolecent -> ???
+- tipus-viatge == boda -> ???
+- tipus-viatge == viatge de fi de curs -> ???
+
+IDEA: for edat + num_pers + familia + tipus_viatge + obj_viatge -> tracatar com preferencies que, si es compleix
+un cert perfil de grup, llavors es puja la puntuació de ciutats que, o be son d'un tipus determiant (gran ciutat
+europea) o tnenen molts punts d'interes d'un tipus (molts spas o algo aixi). Per exemple, si es va en familia
+i l'edat del tiu son 50 anys i l'bj del viatge es fer turisme doncs els enviem a una gran ciutat europea o algo aixi.
+
