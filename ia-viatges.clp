@@ -1399,9 +1399,6 @@
             (case 2 then 
                 (modify ?u (objectiu-viatge romantic))
             )
-            ;(case 3 then 
-            ;   (modify ?u (objectiu-viatge cultural))
-            ;)
             (case 3 then 
                 (modify ?u (objectiu-viatge descans))
             )
@@ -1687,16 +1684,14 @@
     (retract ?fet)
 )
 
-
-
 ;; Afegir pois
 (defrule processat-data::afegir-cult "Safegeixen pois culturals"
-    ?u <- (Usuari (nivell-cult ?cult) (objectiu-viatge ?obj))
+    ?u <- (Usuari (nivell-cult ?cult) (objectiu-viatge ?obj) (tipus-viatge ?tipus))
     ?dest <- (object (is-a Destination) (poi_are $?pois))
     ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois) (justificacions $?just))
     (test (eq (instance-name ?dest) (instance-name ?nom-visitat)))
     (test (eq ?cult alt))
-    ;;(test (not (eq ?obj diversio)))
+    (test (and (not (eq ?obj diversio)) (eq ?tipus FALSE)))
     (not (afegit-cult ?dest))
     =>
     (bind $?cult-pois (find-all-instances ((?inst Cultural)) TRUE))
