@@ -1,4 +1,4 @@
-; Mon Dec 08 20:06:18 CET 2014
+; Mon Dec 08 20:52:44 CET 2014
 ; 
 ;+ (version "3.4.8")
 ;+ (build "Build 629")
@@ -20,12 +20,13 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[ia-viatges_ProjectKB_Class20133]
-		[ia-viatges_ProjectKB_Class20134]
-		[ia-viatges_ProjectKB_Class20135]))
+		[ia-viatges_ProjectKB_Class10004]
+		[ia-viatges_ProjectKB_Class10005]
+		[ia-viatges_ProjectKB_Class10006]))
 
 ([CLSES_TAB] of  Widget
 
+	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.ClsesTab"))
 
 ([CREATION_TIMESTAMP_WIDGET] of  Widget
@@ -38,6 +39,7 @@
 
 ([FORMS_TAB] of  Widget
 
+	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.FormsTab"))
 
 ([ia-viatges_ProjectKB_Class1] of  Widget
@@ -48,6 +50,42 @@
 
 ([ia-viatges_ProjectKB_Class10] of  Property_List
 )
+
+([ia-viatges_ProjectKB_Class10004] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([ia-viatges_ProjectKB_Class10005] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([ia-viatges_ProjectKB_Class10006] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([ia-viatges_ProjectKB_Class10007] of  Map_Entry
+
+	(key "add_name_on_instance_form")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([ia-viatges_ProjectKB_Class10008] of  Map_Entry
+
+	(key "change_tracking_active")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
+
+([ia-viatges_ProjectKB_Class10009] of  Map_Entry
+
+	(key "suppress_instance_counting")
+	(key_class "java.lang.String")
+	(value "false")
+	(value_class "java.lang.String"))
 
 ([ia-viatges_ProjectKB_Class107] of  String
 
@@ -100,21 +138,6 @@
 
 ([ia-viatges_ProjectKB_Class20] of  Property_List
 )
-
-([ia-viatges_ProjectKB_Class20133] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([ia-viatges_ProjectKB_Class20134] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([ia-viatges_ProjectKB_Class20135] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
 
 ([ia-viatges_ProjectKB_Class21] of  Widget
 
@@ -385,7 +408,7 @@
 
 ([ia-viatges_ProjectKB_Class75] of  Widget
 
-	(is_hidden TRUE)
+	(is_hidden FALSE)
 	(property_list [ia-viatges_ProjectKB_Class76])
 	(widget_class_name "dfki.protege.ontoviz_tab.OntovizTab"))
 
@@ -440,6 +463,7 @@
 
 ([INSTANCES_TAB] of  Widget
 
+	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
 ([KB_227129_Class0] of  String
@@ -448,7 +472,11 @@
 	(string_value "edu.stanford.smi.protege.storage.clips.ClipsKnowledgeBaseFactory"))
 
 ([KB_227129_Class1] of  Map
-)
+
+	(entries
+		[ia-viatges_ProjectKB_Class10007]
+		[ia-viatges_ProjectKB_Class10008]
+		[ia-viatges_ProjectKB_Class10009]))
 
 ([KB_227129_Class100] of  Property_List
 )
@@ -542,7 +570,7 @@
 ([KB_227129_Class99] of  Property_List
 )
 
-([KB_254103_Class0] of  Map
+([KB_304494_Class3] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List
@@ -557,6 +585,7 @@
 	(display_hidden_classes TRUE)
 	(display_multi_parent_class_icon TRUE)
 	(is_readonly FALSE)
+	(tabbed_instance_form_layout FALSE)
 	(undo_enabled TRUE)
 	(update_modification_slots FALSE))
 
@@ -636,6 +665,7 @@
 	(default_facet_metaclass ":STANDARD-FACET")
 	(default_instance_widget_class_name "edu.stanford.smi.protege.widget.FormWidget")
 	(default_slot_metaclass ":STANDARD-SLOT")
+	(journaling_enabled FALSE)
 	(next_frame_number 0)
 	(options [option_instance])
 	(property_map [KB_227129_Class1])
@@ -645,15 +675,57 @@
 		[SLOTS_TAB]
 		[FORMS_TAB]
 		[INSTANCES_TAB]
-		[QUERIES_TAB]))
+		[QUERIES_TAB]
+		[ia-viatges_ProjectKB_Class43]
+		[ia-viatges_ProjectKB_Class41]
+		[ia-viatges_ProjectKB_Class65]
+		[ia-viatges_ProjectKB_Class25]
+		[ia-viatges_ProjectKB_Class73]
+		[ia-viatges_ProjectKB_Class9]
+		[ia-viatges_ProjectKB_Class69]
+		[ia-viatges_ProjectKB_Class19]
+		[ia-viatges_ProjectKB_Class11]
+		[ia-viatges_ProjectKB_Class1]
+		[ia-viatges_ProjectKB_Class49]
+		[ia-viatges_ProjectKB_Class71]
+		[ia-viatges_ProjectKB_Class31]
+		[ia-viatges_ProjectKB_Class27]
+		[ia-viatges_ProjectKB_Class75]
+		[ia-viatges_ProjectKB_Class23]
+		[ia-viatges_ProjectKB_Class61]
+		[ia-viatges_ProjectKB_Class17]
+		[ia-viatges_ProjectKB_Class79]
+		[ia-viatges_ProjectKB_Class7]
+		[ia-viatges_ProjectKB_Class63]
+		[ia-viatges_ProjectKB_Class59]
+		[ia-viatges_ProjectKB_Class45]
+		[ia-viatges_ProjectKB_Class37]
+		[ia-viatges_ProjectKB_Class51]
+		[ia-viatges_ProjectKB_Class57]
+		[ia-viatges_ProjectKB_Class47]
+		[ia-viatges_ProjectKB_Class77]
+		[ia-viatges_ProjectKB_Class53]
+		[ia-viatges_ProjectKB_Class13]
+		[ia-viatges_ProjectKB_Class29]
+		[ia-viatges_ProjectKB_Class35]
+		[ia-viatges_ProjectKB_Class39]
+		[ia-viatges_ProjectKB_Class3]
+		[ia-viatges_ProjectKB_Class5]
+		[ia-viatges_ProjectKB_Class33]
+		[ia-viatges_ProjectKB_Class55]
+		[ia-viatges_ProjectKB_Class67]
+		[ia-viatges_ProjectKB_Class15]
+		[ia-viatges_ProjectKB_Class21]))
 
 ([QUERIES_TAB] of  Widget
 
+	(is_hidden FALSE)
 	(property_list [KB_227129_Class104])
 	(widget_class_name "edu.stanford.smi.protegex.queries_tab.QueriesTab"))
 
 ([SLOTS_TAB] of  Widget
 
+	(is_hidden FALSE)
 	(widget_class_name "edu.stanford.smi.protege.widget.SlotsTab"))
 
 ([SOURCES] of  Property_List

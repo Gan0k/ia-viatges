@@ -1707,42 +1707,49 @@
 
 ;; Imprime los datos de un contenido
 (defmessage-handler MAIN::Viatge imprimir ()
-    (printout t (instance-name ?self) crlf)
-    (printout t "Cost del viatge: ")
-    (printout t ?self:cost crlf)
-    (bind ?sum 0)
-    (progn$ (?desti (send ?self get-destins-visitats))
-       (bind ?sum (+ ?sum (send ?desti get-numero-dies)))
-    ) 
-    (printout t "Durada del viatge: ")
-    (printout t ?sum " dies" crlf)
-    (printout t "Destinacions: " crlf)
-    (progn$ (?desti (send ?self get-destins-visitats))
-       (printout t (send ?desti imprimir))
-    ) 
-    ;; TRANSPORT
-    (printout t "Transports agafats: ")
-    (bind ?prev-nom "Origen")
-    ;; iterem pels destins visitats
-    (progn$ (?desti (send ?self get-destins-visitats))
-        ;; check if this works
-        (bind ?next-nom (send (send ?desti get-desti) get-name_city))
-        (bind ?transp (send ?desti get-transport-arribar))
+    (if (eq (length (send ?self get-destins-visitats)) 0) then 
+        (printout t (instance-name ?self) crlf)
+        (printout t "No s'ha trobat cap viatge per a les condicons que ha posat." crlf)
+        (printout t "Fi de")
+        (printout t (instance-name ?self) crlf)
+        else
+        (printout t (instance-name ?self) crlf)
+        (printout t "Cost del viatge: ")
+        (printout t ?self:cost crlf)
+        (bind ?sum 0)
+        (progn$ (?desti (send ?self get-destins-visitats))
+           (bind ?sum (+ ?sum (send ?desti get-numero-dies)))
+        ) 
+        (printout t "Durada del viatge: ")
+        (printout t ?sum " dies" crlf)
+        (printout t "Destinacions: " crlf)
+        (progn$ (?desti (send ?self get-destins-visitats))
+           (printout t (send ?desti imprimir))
+        ) 
+        ;; TRANSPORT
+        (printout t "Transports agafats: ")
+        (bind ?prev-nom "Origen")
+        ;; iterem pels destins visitats
+        (progn$ (?desti (send ?self get-destins-visitats))
+            ;; check if this works
+            (bind ?next-nom (send (send ?desti get-desti) get-name_city))
+            (bind ?transp (send ?desti get-transport-arribar))
+            (printout t ?prev-nom)
+            (printout t " -> " )
+            (printout t ?next-nom)
+            (printout t " amb ")
+            (printout t ?transp crlf)
+            (bind ?prev-nom ?next-nom)
+        )
+        ;; imprimir la tornada
         (printout t ?prev-nom)
-        (printout t " -> " )
-        (printout t ?next-nom)
-        (printout t " amb ")
-        (printout t ?transp crlf)
-        (bind ?prev-nom ?next-nom)
-    )
-    ;; imprimir la tornada
-    (printout t ?prev-nom)
-    (printout t " -> Origen amb " )
-    (printout t ?self:transport-tornada crlf)
-    ;; FI TRANSPORT 
+        (printout t " -> Origen amb " )
+        (printout t ?self:transport-tornada crlf)
+        ;; FI TRANSPORT 
 
-    (printout t "Fi de")
-    (printout t (instance-name ?self) crlf)
+        (printout t "Fi de")
+        (printout t (instance-name ?self) crlf)
+    )
 )
 
 ;; Imprimir destinacio visitada
