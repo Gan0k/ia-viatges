@@ -1,7 +1,7 @@
-; Mon Dec 08 14:11:54 CET 2014
+; Mon Dec 08 17:24:50 CET 2014
 ; 
-;+ (version "3.4.8")
-;+ (build "Build 629")
+;+ (version "3.5")
+;+ (build "Build 660")
 
 ([ia-viatges_Class0] of  TypeDestination
 
@@ -12,7 +12,8 @@
 
 	(has_destinations
 		[ia-viatges_Class30022]
-		[ia-viatges_Class30040])
+		[ia-viatges_Class30040]
+		[ia-viatges_Class40045])
 	(name_continent "Europe"))
 
 ([ia-viatges_Class10000] of  Accomodation
@@ -30,7 +31,8 @@
 
 	(is_present_in
 		[ia-viatges_Class30028]
-		[ia-viatges_Class30055])
+		[ia-viatges_Class30055]
+		[ia-viatges_Class40045])
 	(name_climate "Mediterrani"))
 
 ([ia-viatges_Class10006] of  Clima
@@ -64,6 +66,11 @@
 		[ia-viatges_Class30046])
 	(name_continent "Africa"))
 
+([ia-viatges_Class20000] of  Nightlife
+
+	(name_poi "JartyPard")
+	(poi_is_in [ia-viatges_Class30055]))
+
 ([ia-viatges_Class20001] of  Accomodation
 
 	(name_accom "EuroPark")
@@ -80,7 +87,8 @@
 	(destinations_are
 		[ia-viatges_Class30008]
 		[ia-viatges_Class30016]
-		[ia-viatges_Class30049])
+		[ia-viatges_Class30049]
+		[ia-viatges_Class40045])
 	(name_type_dest "ciutat_mediterranea"))
 
 ([ia-viatges_Class3] of  Continent
@@ -107,6 +115,16 @@
 
 ([ia-viatges_Class30008] of  City
 
+	(accomodations_are
+		[ia-viatges_Class40002]
+		[ia-viatges_Class40003]
+		[ia-viatges_Class40004]
+		[ia-viatges_Class40021]
+		[ia-viatges_Class40022])
+	(can_be_reached [ia-viatges_Class40046])
+	(can_go_to
+		[ia-viatges_Class40060]
+		[ia-viatges_Class40081])
 	(has_climate [ia-viatges_Class10008])
 	(is_in_continent [ia-viatges_Class2])
 	(name_city "Culturia")
@@ -115,7 +133,9 @@
 		[ia-viatges_Class20002]
 		[ia-viatges_Class30013]
 		[ia-viatges_Class30014]
-		[ia-viatges_Class30015])
+		[ia-viatges_Class30015]
+		[ia-viatges_Class40023]
+		[ia-viatges_Class40024])
 	(popularity "alta")
 	(type_destination_is [ia-viatges_Class20004]))
 
@@ -145,6 +165,17 @@
 
 ([ia-viatges_Class30016] of  City
 
+	(accomodations_are
+		[ia-viatges_Class40005]
+		[ia-viatges_Class40025]
+		[ia-viatges_Class40026]
+		[ia-viatges_Class40027])
+	(can_be_reached
+		[ia-viatges_Class40047]
+		[ia-viatges_Class40080])
+	(can_go_to
+		[ia-viatges_Class40061]
+		[ia-viatges_Class40082])
 	(has_climate [ia-viatges_Class10007])
 	(is_in_continent [ia-viatges_Class2])
 	(name_city "Bail")
@@ -184,6 +215,15 @@
 
 ([ia-viatges_Class30022] of  City
 
+	(accomodations_are
+		[ia-viatges_Class40006]
+		[ia-viatges_Class40028]
+		[ia-viatges_Class40029]
+		[ia-viatges_Class40030])
+	(can_be_reached [ia-viatges_Class40048])
+	(can_go_to
+		[ia-viatges_Class40062]
+		[ia-viatges_Class40083])
 	(has_climate [ia-viatges_Class10008])
 	(is_in_continent [ia-viatges_Class1])
 	(name_city "Asgard")
@@ -223,6 +263,15 @@
 
 ([ia-viatges_Class30028] of  City
 
+	(accomodations_are
+		[ia-viatges_Class40007]
+		[ia-viatges_Class40008]
+		[ia-viatges_Class40031]
+		[ia-viatges_Class40032])
+	(can_be_reached
+		[ia-viatges_Class40049]
+		[ia-viatges_Class40083])
+	(can_go_to [ia-viatges_Class40063])
 	(has_climate [ia-viatges_Class10005])
 	(is_in_continent [ia-viatges_Class4])
 	(name_city "CartoonNetwork")
@@ -262,6 +311,15 @@
 
 ([ia-viatges_Class30034] of  City
 
+	(accomodations_are
+		[ia-viatges_Class40010]
+		[ia-viatges_Class40033]
+		[ia-viatges_Class40034]
+		[ia-viatges_Class40035])
+	(can_be_reached
+		[ia-viatges_Class40050]
+		[ia-viatges_Class40079])
+	(can_go_to [ia-viatges_Class40064])
 	(has_climate [ia-viatges_Class10004])
 	(is_in_continent [ia-viatges_Class3])
 	(name_city "Climbistan")
@@ -301,6 +359,20 @@
 
 ([ia-viatges_Class30040] of  City
 
+	(accomodations_are
+		[ia-viatges_Class40009]
+		[ia-viatges_Class40036]
+		[ia-viatges_Class40037]
+		[ia-viatges_Class40038]
+		[ia-viatges_Class40039]
+		[ia-viatges_Class40040])
+	(can_be_reached
+		[ia-viatges_Class40051]
+		[ia-viatges_Class40059])
+	(can_go_to
+		[ia-viatges_Class40065]
+		[ia-viatges_Class40079]
+		[ia-viatges_Class40080])
 	(has_climate [ia-viatges_Class10008])
 	(is_in_continent [ia-viatges_Class1])
 	(name_city "Korotkevich")
@@ -342,10 +414,22 @@
 
 	(accomodations_are
 		[ia-viatges_Class30047]
-		[ia-viatges_Class30048])
+		[ia-viatges_Class30048]
+		[ia-viatges_Class40041]
+		[ia-viatges_Class40042])
+	(can_be_reached
+		[ia-viatges_Class40052]
+		[ia-viatges_Class40082])
+	(can_go_to [ia-viatges_Class40077])
 	(has_climate [ia-viatges_Class10007])
 	(is_in_continent [ia-viatges_Class2])
 	(name_city "UltraLuxe")
+	(poi_are
+		[ia-viatges_Class40011]
+		[ia-viatges_Class40012]
+		[ia-viatges_Class40013]
+		[ia-viatges_Class40014]
+		[ia-viatges_Class40015])
 	(popularity "alta")
 	(type_destination_is [ia-viatges_Class30001]))
 
@@ -367,10 +451,19 @@
 
 	(accomodations_are
 		[ia-viatges_Class30050]
-		[ia-viatges_Class30051])
+		[ia-viatges_Class30051]
+		[ia-viatges_Class40043])
+	(can_be_reached
+		[ia-viatges_Class40053]
+		[ia-viatges_Class40058]
+		[ia-viatges_Class40081])
+	(can_go_to [ia-viatges_Class40066])
 	(has_climate [ia-viatges_Class10007])
 	(is_in_continent [ia-viatges_Class5])
 	(name_city "ReasonableLux")
+	(poi_are
+		[ia-viatges_Class40016]
+		[ia-viatges_Class40017])
 	(popularity "alta")
 	(type_destination_is [ia-viatges_Class20004]))
 
@@ -393,9 +486,17 @@
 	(accomodations_are
 		[ia-viatges_Class30053]
 		[ia-viatges_Class30054])
+	(can_be_reached
+		[ia-viatges_Class40078]
+		[ia-viatges_Class40084])
+	(can_go_to [ia-viatges_Class40067])
 	(has_climate [ia-viatges_Class10006])
 	(is_in_continent [ia-viatges_Class4])
 	(name_city "AverageJoe")
+	(poi_are
+		[ia-viatges_Class40018]
+		[ia-viatges_Class40019]
+		[ia-viatges_Class40020])
 	(popularity "baixa")
 	(type_destination_is [ia-viatges_Class30002]))
 
@@ -418,13 +519,21 @@
 	(accomodations_are
 		[ia-viatges_Class30056]
 		[ia-viatges_Class30057])
+	(can_be_reached
+		[ia-viatges_Class40057]
+		[ia-viatges_Class40085])
+	(can_go_to
+		[ia-viatges_Class40069]
+		[ia-viatges_Class40084])
 	(has_climate [ia-viatges_Class10005])
 	(is_in_continent [ia-viatges_Class4])
 	(name_city "StudentsDestination")
 	(poi_are
 		[ia-viatges_Class30058]
 		[ia-viatges_Class30059]
-		[ia-viatges_Class30060])
+		[ia-viatges_Class30060]
+		[ia-viatges_Class20000]
+		[ia-viatges_Class40001])
 	(popularity "alta")
 	(type_destination_is [ia-viatges_Class30001]))
 
@@ -465,6 +574,10 @@
 		[ia-viatges_Class30064]
 		[ia-viatges_Class30065]
 		[ia-viatges_Class30066])
+	(can_be_reached [ia-viatges_Class40054])
+	(can_go_to
+		[ia-viatges_Class40068]
+		[ia-viatges_Class40085])
 	(has_climate [ia-viatges_Class10006])
 	(is_in_continent [ia-viatges_Class5])
 	(name_city "LandOfEverybody")
@@ -550,6 +663,526 @@
 		[ia-viatges_Class30052]
 		[ia-viatges_Class30055])
 	(name_continent "Oceania"))
+
+([ia-viatges_Class40001] of  Nightlife
+
+	(name_poi "SkipLectures")
+	(poi_is_in [ia-viatges_Class30055]))
+
+([ia-viatges_Class40002] of  Accomodation
+
+	(is_in [ia-viatges_Class30008])
+	(name_accom "Hipstel")
+	(price_per_night 200)
+	(rating 3))
+
+([ia-viatges_Class40003] of  Accomodation
+
+	(is_in [ia-viatges_Class30008])
+	(name_accom "Hopstel")
+	(price_per_night 2000)
+	(rating 5))
+
+([ia-viatges_Class40004] of  Accomodation
+
+	(is_in [ia-viatges_Class30008])
+	(name_accom "PastaGlasses")
+	(price_per_night 30)
+	(rating 2))
+
+([ia-viatges_Class40005] of  Accomodation
+
+	(is_in [ia-viatges_Class30016])
+	(name_accom "SweetDreams")
+	(price_per_night 550)
+	(rating 3))
+
+([ia-viatges_Class40006] of  Accomodation
+
+	(is_in [ia-viatges_Class30022])
+	(name_accom "Valhalla")
+	(price_per_night 1337)
+	(rating 5))
+
+([ia-viatges_Class40007] of  Accomodation
+
+	(is_in [ia-viatges_Class30028])
+	(name_accom "TreeHouse")
+	(price_per_night 220)
+	(rating 3))
+
+([ia-viatges_Class40008] of  Accomodation
+
+	(is_in [ia-viatges_Class30028])
+	(name_accom "Underground")
+	(price_per_night 2000)
+	(rating 5))
+
+([ia-viatges_Class40009] of  Accomodation
+
+	(is_in [ia-viatges_Class30040])
+	(name_accom "Google")
+	(price_per_night 5000)
+	(rating 5))
+
+([ia-viatges_Class40010] of  Accomodation
+
+	(is_in [ia-viatges_Class30034])
+	(name_accom "NBAHotel")
+	(price_per_night 1500)
+	(rating 3))
+
+([ia-viatges_Class40011] of  Cultural
+
+	(name_poi "GoldStatue")
+	(poi_is_in [ia-viatges_Class30046]))
+
+([ia-viatges_Class40012] of  FamiliarPlace
+
+	(name_poi "CaviarForKids")
+	(poi_is_in [ia-viatges_Class30046]))
+
+([ia-viatges_Class40013] of  Sport
+
+	(name_poi "MidgetTossing")
+	(poi_is_in [ia-viatges_Class30046]))
+
+([ia-viatges_Class40014] of  Beach
+
+	(name_poi "BeachWithGuards")
+	(poi_is_in [ia-viatges_Class30046]))
+
+([ia-viatges_Class40015] of  TuristPoint
+
+	(name_poi "ThatchersGrave")
+	(poi_is_in [ia-viatges_Class30046]))
+
+([ia-viatges_Class40016] of  Beach
+
+	(name_poi "GoldenBeach")
+	(poi_is_in [ia-viatges_Class30049]))
+
+([ia-viatges_Class40017] of  Spa
+
+	(name_poi "AsianSpa")
+	(poi_is_in [ia-viatges_Class30049]))
+
+([ia-viatges_Class40018] of  Beach
+
+	(name_poi "BarcelonetaLike")
+	(poi_is_in [ia-viatges_Class30052]))
+
+([ia-viatges_Class40019] of  Spa
+
+	(name_poi "SpaWihtoutBubbles")
+	(poi_is_in [ia-viatges_Class30052]))
+
+([ia-viatges_Class40020] of  Leisure
+
+	(name_poi "JustRelax")
+	(poi_is_in [ia-viatges_Class30052]))
+
+([ia-viatges_Class40021] of  Accomodation
+
+	(is_in [ia-viatges_Class30008])
+	(name_accom "ScultureHotel")
+	(price_per_night 6000)
+	(rating 5))
+
+([ia-viatges_Class40022] of  Accomodation
+
+	(is_in [ia-viatges_Class30008])
+	(name_accom "PaintingArtBuilding")
+	(price_per_night 3500)
+	(rating 4))
+
+([ia-viatges_Class40023] of  FamiliarPlace
+
+	(name_poi "HipsterineForKids")
+	(poi_is_in [ia-viatges_Class30008]))
+
+([ia-viatges_Class40024] of  Nightlife
+
+	(name_poi "CultureParty")
+	(poi_is_in [ia-viatges_Class30008]))
+
+([ia-viatges_Class40025] of  Accomodation
+
+	(is_in [ia-viatges_Class30016])
+	(name_accom "Bailout")
+	(price_per_night 50)
+	(rating 1))
+
+([ia-viatges_Class40026] of  Accomodation
+
+	(is_in [ia-viatges_Class30016])
+	(name_accom "TeaParty")
+	(price_per_night 3500)
+	(rating 4))
+
+([ia-viatges_Class40027] of  Accomodation
+
+	(is_in [ia-viatges_Class30016])
+	(name_accom "Woodstein")
+	(price_per_night 5500)
+	(rating 5))
+
+([ia-viatges_Class40028] of  Accomodation
+
+	(is_in [ia-viatges_Class30022])
+	(name_accom "HijosDeCain")
+	(price_per_night 25)
+	(rating 1))
+
+([ia-viatges_Class40029] of  Accomodation
+
+	(is_in [ia-viatges_Class30022])
+	(name_accom "Hammerfall")
+	(price_per_night 4300)
+	(rating 4))
+
+([ia-viatges_Class40030] of  Accomodation
+
+	(is_in [ia-viatges_Class30022])
+	(name_accom "Manowar")
+	(price_per_night 125)
+	(rating 2))
+
+([ia-viatges_Class40031] of  Accomodation
+
+	(is_in [ia-viatges_Class30028])
+	(name_accom "DextersLab")
+	(price_per_night 1200)
+	(rating 4))
+
+([ia-viatges_Class40032] of  Accomodation
+
+	(is_in [ia-viatges_Class30028])
+	(name_accom "RegularHotel")
+	(price_per_night 220)
+	(rating 2))
+
+([ia-viatges_Class40033] of  Accomodation
+
+	(is_in [ia-viatges_Class30034])
+	(name_accom "Montserratel")
+	(price_per_night 2000)
+	(rating 4))
+
+([ia-viatges_Class40034] of  Accomodation
+
+	(is_in [ia-viatges_Class30034])
+	(name_accom "RiverHotel")
+	(price_per_night 5500)
+	(rating 5))
+
+([ia-viatges_Class40035] of  Accomodation
+
+	(is_in [ia-viatges_Class30034])
+	(name_accom "Juvenile")
+	(price_per_night 25)
+	(rating 1))
+
+([ia-viatges_Class40036] of  Accomodation
+
+	(is_in [ia-viatges_Class30040])
+	(name_accom "Mitrichev")
+	(price_per_night 2200)
+	(rating 4))
+
+([ia-viatges_Class40037] of  Accomodation
+
+	(is_in [ia-viatges_Class30040])
+	(name_accom "Roura")
+	(price_per_night 4500)
+	(rating 5))
+
+([ia-viatges_Class40038] of  Accomodation
+
+	(is_in [ia-viatges_Class30040])
+	(name_accom "Gennadys")
+	(price_per_night 550)
+	(rating 3))
+
+([ia-viatges_Class40039] of  Accomodation
+
+	(is_in [ia-viatges_Class30040]))
+
+([ia-viatges_Class40040] of  Accomodation
+
+	(is_in [ia-viatges_Class30040])
+	(name_accom "MrGrr")
+	(price_per_night 25)
+	(rating 1))
+
+([ia-viatges_Class40041] of  Accomodation
+
+	(is_in [ia-viatges_Class30046])
+	(name_accom "AbuDabiPalace")
+	(price_per_night 15000)
+	(rating 5))
+
+([ia-viatges_Class40042] of  Accomodation
+
+	(is_in [ia-viatges_Class30046])
+	(name_accom "BotinsPlace")
+	(price_per_night 16000)
+	(rating 5))
+
+([ia-viatges_Class40043] of  Accomodation
+
+	(is_in [ia-viatges_Class30049])
+	(name_accom "WolfBeg")
+	(price_per_night 1900)
+	(rating 4))
+
+([ia-viatges_Class40045] of  City
+
+	(accomodations_are
+		[ia-viatges_Class40070]
+		[ia-viatges_Class40071]
+		[ia-viatges_Class40072]
+		[ia-viatges_Class40073]
+		[ia-viatges_Class40074])
+	(can_be_reached
+		[ia-viatges_Class40060]
+		[ia-viatges_Class40061]
+		[ia-viatges_Class40062]
+		[ia-viatges_Class40063]
+		[ia-viatges_Class40064]
+		[ia-viatges_Class40065]
+		[ia-viatges_Class40066]
+		[ia-viatges_Class40067]
+		[ia-viatges_Class40068]
+		[ia-viatges_Class40069]
+		[ia-viatges_Class40077])
+	(can_go_to
+		[ia-viatges_Class40046]
+		[ia-viatges_Class40047]
+		[ia-viatges_Class40048]
+		[ia-viatges_Class40049]
+		[ia-viatges_Class40050]
+		[ia-viatges_Class40051]
+		[ia-viatges_Class40052]
+		[ia-viatges_Class40053]
+		[ia-viatges_Class40054]
+		[ia-viatges_Class40055]
+		[ia-viatges_Class40057]
+		[ia-viatges_Class40058]
+		[ia-viatges_Class40059]
+		[ia-viatges_Class40078])
+	(has_climate [ia-viatges_Class10005])
+	(is_in_continent [ia-viatges_Class1])
+	(name_city "Barcelona")
+	(poi_are
+		[ia-viatges_Class40075]
+		[ia-viatges_Class40076])
+	(popularity "alta")
+	(type_destination_is [ia-viatges_Class20004]))
+
+([ia-viatges_Class40046] of  Plane
+
+	(arrival [ia-viatges_Class30008])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40047] of  Plane
+
+	(arrival [ia-viatges_Class30016])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40048] of  Plane
+
+	(arrival [ia-viatges_Class30022])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40049] of  Plane
+
+	(arrival [ia-viatges_Class30028])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40050] of  Plane
+
+	(arrival [ia-viatges_Class30034])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40051] of  Plane
+
+	(arrival [ia-viatges_Class30040])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40052] of  Plane
+
+	(arrival [ia-viatges_Class30046])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40053] of  Plane
+
+	(arrival [ia-viatges_Class30049])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40054] of  Plane
+
+	(arrival [ia-viatges_Class30061])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40055] of  Plane
+
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40057] of  Plane
+
+	(arrival [ia-viatges_Class30055])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40058] of  Train
+
+	(arrival [ia-viatges_Class30049])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40059] of  Boat
+
+	(arrival [ia-viatges_Class30040])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40060] of  Plane
+
+	(arrival [ia-viatges_Class40045])
+	(departure [ia-viatges_Class30008]))
+
+([ia-viatges_Class40061] of  Plane
+
+	(arrival [ia-viatges_Class40045])
+	(departure [ia-viatges_Class30016]))
+
+([ia-viatges_Class40062] of  Plane
+
+	(arrival [ia-viatges_Class40045])
+	(departure [ia-viatges_Class30022]))
+
+([ia-viatges_Class40063] of  Plane
+
+	(arrival [ia-viatges_Class40045])
+	(departure [ia-viatges_Class30028]))
+
+([ia-viatges_Class40064] of  Plane
+
+	(arrival [ia-viatges_Class40045])
+	(departure [ia-viatges_Class30034]))
+
+([ia-viatges_Class40065] of  Plane
+
+	(arrival [ia-viatges_Class40045])
+	(departure [ia-viatges_Class30040]))
+
+([ia-viatges_Class40066] of  Plane
+
+	(arrival [ia-viatges_Class40045])
+	(departure [ia-viatges_Class30049]))
+
+([ia-viatges_Class40067] of  Plane
+
+	(arrival [ia-viatges_Class40045])
+	(departure [ia-viatges_Class30052]))
+
+([ia-viatges_Class40068] of  Plane
+
+	(arrival [ia-viatges_Class40045])
+	(departure [ia-viatges_Class30061]))
+
+([ia-viatges_Class40069] of  Plane
+
+	(arrival [ia-viatges_Class40045])
+	(departure [ia-viatges_Class30055]))
+
+([ia-viatges_Class40070] of  Accomodation
+
+	(is_in [ia-viatges_Class40045])
+	(name_accom "BarnaCaro")
+	(price_per_night 5400)
+	(rating 5))
+
+([ia-viatges_Class40071] of  Accomodation
+
+	(is_in [ia-viatges_Class40045])
+	(name_accom "Barnal")
+	(price_per_night 4400)
+	(rating 4))
+
+([ia-viatges_Class40072] of  Accomodation
+
+	(is_in [ia-viatges_Class40045])
+	(name_accom "Barnarato")
+	(price_per_night 3300)
+	(rating 3))
+
+([ia-viatges_Class40073] of  Accomodation
+
+	(is_in [ia-viatges_Class40045])
+	(name_accom "BarnaTirao")
+	(price_per_night 3300)
+	(rating 3))
+
+([ia-viatges_Class40074] of  Accomodation
+
+	(is_in [ia-viatges_Class40045])
+	(name_accom "BarnaCutrillo")
+	(price_per_night 2200)
+	(rating 2))
+
+([ia-viatges_Class40075] of  TuristPoint
+
+	(name_poi "Sagrada Familia")
+	(poi_is_in [ia-viatges_Class40045]))
+
+([ia-viatges_Class40076] of  TuristPoint
+
+	(name_poi "Satanica Familia")
+	(poi_is_in [ia-viatges_Class40045]))
+
+([ia-viatges_Class40077] of  Plane
+
+	(arrival [ia-viatges_Class40045])
+	(departure [ia-viatges_Class30046]))
+
+([ia-viatges_Class40078] of  Plane
+
+	(arrival [ia-viatges_Class30052])
+	(departure [ia-viatges_Class40045]))
+
+([ia-viatges_Class40079] of  Boat
+
+	(arrival [ia-viatges_Class30034])
+	(departure [ia-viatges_Class30040]))
+
+([ia-viatges_Class40080] of  Train
+
+	(arrival [ia-viatges_Class30016])
+	(departure [ia-viatges_Class30040]))
+
+([ia-viatges_Class40081] of  Boat
+
+	(arrival [ia-viatges_Class30049])
+	(departure [ia-viatges_Class30008]))
+
+([ia-viatges_Class40082] of  Train
+
+	(arrival [ia-viatges_Class30046])
+	(departure [ia-viatges_Class30016]))
+
+([ia-viatges_Class40083] of  Train
+
+	(arrival [ia-viatges_Class30028])
+	(departure [ia-viatges_Class30022]))
+
+([ia-viatges_Class40084] of  Boat
+
+	(arrival [ia-viatges_Class30052])
+	(departure [ia-viatges_Class30055]))
+
+([ia-viatges_Class40085] of  Train
+
+	(arrival [ia-viatges_Class30055])
+	(departure [ia-viatges_Class30061]))
 
 ([ia-viatges_Class5] of  Continent
 
