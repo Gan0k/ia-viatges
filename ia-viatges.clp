@@ -1888,6 +1888,7 @@
                     (bind ?found TRUE)
                     (bind ?pressupost-gastat (+ ?pressupost-gastat (* ?preu-per-nit ?dies-ciutat)))
                     (send ?destiVisitat put-nom-hotel (send ?curr-accom get-name_accom))
+                    (send ?destiVisitat put-numero-dies ?dies-ciutat)
                     ;; Ok, anem a agafar pois
                 )
                 (bind ?i (+ ?i 1))
