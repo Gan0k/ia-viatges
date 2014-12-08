@@ -1,7 +1,7 @@
-; Mon Dec 08 17:24:50 CET 2014
+; Mon Dec 08 20:06:18 CET 2014
 ; 
-;+ (version "3.5")
-;+ (build "Build 660")
+;+ (version "3.4.8")
+;+ (build "Build 629")
 
 ([ia-viatges_Class0] of  TypeDestination
 
@@ -938,12 +938,6 @@
 
 ([ia-viatges_Class40045] of  City
 
-	(accomodations_are
-		[ia-viatges_Class40070]
-		[ia-viatges_Class40071]
-		[ia-viatges_Class40072]
-		[ia-viatges_Class40073]
-		[ia-viatges_Class40074])
 	(can_be_reached
 		[ia-viatges_Class40060]
 		[ia-viatges_Class40061]
@@ -1096,35 +1090,30 @@
 
 ([ia-viatges_Class40070] of  Accomodation
 
-	(is_in [ia-viatges_Class40045])
 	(name_accom "BarnaCaro")
 	(price_per_night 5400)
 	(rating 5))
 
 ([ia-viatges_Class40071] of  Accomodation
 
-	(is_in [ia-viatges_Class40045])
 	(name_accom "Barnal")
 	(price_per_night 4400)
 	(rating 4))
 
 ([ia-viatges_Class40072] of  Accomodation
 
-	(is_in [ia-viatges_Class40045])
 	(name_accom "Barnarato")
 	(price_per_night 3300)
 	(rating 3))
 
 ([ia-viatges_Class40073] of  Accomodation
 
-	(is_in [ia-viatges_Class40045])
 	(name_accom "BarnaTirao")
 	(price_per_night 3300)
 	(rating 3))
 
 ([ia-viatges_Class40074] of  Accomodation
 
-	(is_in [ia-viatges_Class40045])
 	(name_accom "BarnaCutrillo")
 	(price_per_night 2200)
 	(rating 2))

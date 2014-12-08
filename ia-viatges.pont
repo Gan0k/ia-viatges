@@ -1,7 +1,7 @@
-; Mon Dec 08 17:24:50 CET 2014
+; Mon Dec 08 20:06:18 CET 2014
 ; 
-;+ (version "3.5")
-;+ (build "Build 660")
+;+ (version "3.4.8")
+;+ (build "Build 629")
 
 
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
@@ -201,13 +201,13 @@
 (defclass Destination
 	(is-a USER)
 	(role concrete)
-	(multislot inverse_of_destinations_are
-		(type INSTANCE)
-;+		(allowed-classes TypeDestination)
-		(create-accessor read-write))
 	(multislot can_be_reached
 		(type INSTANCE)
 ;+		(allowed-classes Transport)
+		(create-accessor read-write))
+	(multislot inverse_of_destinations_are
+		(type INSTANCE)
+;+		(allowed-classes TypeDestination)
 		(create-accessor read-write))
 	(single-slot popularity
 		(type STRING)
@@ -226,18 +226,18 @@
 ;+		(allowed-classes TypeDestination)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot has_climate
+	(multislot can_go_to
 		(type INSTANCE)
-;+		(allowed-classes Clima)
-;+		(cardinality 1 1)
+;+		(allowed-classes Transport)
 		(create-accessor read-write))
 	(multislot accomodations_are
 		(type INSTANCE)
 ;+		(allowed-classes Accomodation)
 		(create-accessor read-write))
-	(multislot can_go_to
+	(single-slot has_climate
 		(type INSTANCE)
-;+		(allowed-classes Transport)
+;+		(allowed-classes Clima)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot is_in_continent
 		(type INSTANCE)
