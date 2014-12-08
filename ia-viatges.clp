@@ -1002,10 +1002,6 @@
     (multislot justificacions
         (type STRING)
         (create-accessor read-write))
-    ; Derived cost of visited places
-    (slot cost
-        (type INTEGER)
-        (create-accessor read-write))
     ; List of used transports
     (multislot transports
         (type INSTANCE)
@@ -1071,7 +1067,11 @@
 (defmessage-handler MAIN::Viatge imprimir ()
     (printout t (instance-name ?self) crlf)
     (printout t "Cost del viatge: ")
-    (printout t ?self:cost crlf)
+    (bind ?s 0)
+    (progn$ (?desti (send ?self get-destins-visitats))
+       (bind ?s (+ ?s (send ?desti get-cost)))
+    ) 
+    (printout t ?s crlf)
     (bind ?sum 0)
     (progn$ (?desti (send ?self get-destins-visitats))
        (bind ?sum (+ ?sum (send ?desti get-numero-dies)))
