@@ -1698,6 +1698,13 @@
     =>
     (bind $?all-pois (find-all-instances ((?inst Leisure)) TRUE))
     (progn$ (?curr ?all-pois)
+        ;; check if member of list of all Leisures is in the pois of Destination
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (bind $?all-pois (find-all-instances ((?inst Nightlife)) TRUE))
+    (progn$ (?curr ?all-pois)
         (if (member$ ?curr ?pois) then
             (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
         )
@@ -1705,6 +1712,8 @@
     (send ?destVisitades put-pois $?visitat-pois)
     (assert (afegit-diversio ?dest))
 )
+
+
 ;; Valorar popularitat
 (defrule processat-data::valorar-popularitat "Es valorara la popularitat del lloc"
     (preferencies (popularitat ?popDesitjada))
