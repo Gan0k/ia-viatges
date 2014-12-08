@@ -1414,7 +1414,7 @@
     (test (> ?e 0))
     (test (> ?n 0))
     =>
-    (printout t "Passant a recopilacio-restriccions" crlf)
+    (printout t "Passant a recopilacio de restriccions..." crlf)
     (focus recopilacio-restriccions)
 )
 
@@ -1526,7 +1526,7 @@
     (test (> ?p 0))
     (test (> ?a 0))
     =>
-    (printout t "DEBUG - passant a preferencies" crlf)
+    (printout t "Passant a recopilacio de preferencies..." crlf)
     (focus recopilacio-prefs)
 )
 
@@ -1934,7 +1934,7 @@
 (defrule recopilacio-prefs::passar-a-generacio
     (declare (salience -10)) ; TODO should be changed
     =>
-    (printout t "DEBUG - passant a generacio" crlf)
+    (printout t "Generant solucions..." crlf)
     (focus generacio)
 )
 
@@ -2055,7 +2055,7 @@
     (Usuari (nom ?nom))
     (not (final))
     =>
-    (printout t "DEBUG - IMPRIMINT RESPOSTES" crlf)
+    (printout t "Imprimint respostes..." crlf)
     (format t "%s, aquesta es la recomanacio, esperem que li agradi!" ?nom)
     (printout t crlf)
     (progn$ (?curr $?viatges)
