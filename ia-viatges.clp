@@ -2746,13 +2746,20 @@
     (send ?dest put-can_go_to $?go_to)
     (send ?dest put-can_be_reached $?reached)
 )
-;; Filtrar 
-;(defrule processat-data::filtrar-pois "es filtraran les pois no desitjades"
-;    
-;
-;
-;
-;)
+
+(defrule processat-data::filtrar-pois "es filtra per limitar el numero de pois"
+    (restriccions (num-dies-ciutat ?dies-ciutat))
+    ?dest<- (object (is-a DestinacioVisitada) (pois $?pois))
+    (not (filtrat-pois ?dest))
+    =>
+    (bind ?limit (* ?dies-ciutat 3))
+    (while (> (length$ $?pois) ?limit)
+      (bind ?elem (nth$ (random 1 (length$ $?pois)) $?pois))
+      (bind $?pois (delete-member$ $?pois ?elem))
+    )
+    (assert (filtrat-pois ?dest))
+    (send ?dest put-pois $?pois)
+)
 
 (defrule recopilacio-prefs::passar-a-generacio
     (declare (salience -10)) ; TODO should be changed
