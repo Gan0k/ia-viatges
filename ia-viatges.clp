@@ -1372,7 +1372,7 @@
 (defrule recopilacio-usuari::establir-tipusviatge "Estableix el tipus de viatge del usuari"
     ?u <- (Usuari (tipus-viatge desconegut))
     =>
-    (bind ?e (pregunta-index "El teu viatge es tracta d'una celebracio especial?" boda "viatge de fi de curs" no))
+    (bind ?e (pregunta-index "El teu viatge es tracta d'una celebracio especial?" casament "viatge de fi de curs" no))
     (switch ?e
         (case 1 then
             (modify ?u (tipus-viatge boda))
@@ -1687,6 +1687,8 @@
     (retract ?fet)
 )
 
+
+
 ;; Afegir pois
 (defrule processat-data::afegir-cult "Safegeixen pois culturals"
     ?u <- (Usuari (nivell-cult ?cult) (objectiu-viatge ?obj))
@@ -1708,6 +1710,61 @@
     (assert (afegit-cult ?dest))
 )
 
+(defrule processat-data::afegir-boda "Safegeixen pois si el tipus viatge es casament"
+    ?u <- (Usuari (tipus-viatge ?tipus))
+    ?dest <- (object (is-a Destination) (poi_are $?pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois) (justificacions $?just))
+    (test (and (eq (instance-name ?dest) (instance-name ?nom-visitat)) (eq ?tipus boda)))
+    (not (afegit-boda ?dest))
+    =>
+    (bind $?all-pois (find-all-instances ((?inst Nightlife)) TRUE))
+    (progn$ (?curr ?all-pois)
+        ;; check if member of list of all Leisures is in the pois of Destination
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (bind $?all-pois (find-all-instances ((?inst Beach)) TRUE))
+    (progn$ (?curr ?all-pois)
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (bind $?all-pois (find-all-instances ((?inst Leisure)) TRUE))
+    (progn$ (?curr ?all-pois)
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es visiten els llocs esmentats donat que el viatge es un casament."))
+    (send ?destVisitades put-pois $?visitat-pois)
+    (assert (afegit-boda ?dest))
+)
+
+(defrule processat-data::afegir-fidecurs "Safegeixen pois si el tipus viatge es fidecurs"
+    ?u <- (Usuari (tipus-viatge ?tipus))
+    ?dest <- (object (is-a Destination) (poi_are $?pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois) (justificacions $?just))
+    (test (and (eq (instance-name ?dest) (instance-name ?nom-visitat)) (eq ?tipus fi-curs)))
+    (not (afegit-ficurs ?dest))
+    =>
+    (bind $?all-pois (find-all-instances ((?inst Nightlife)) TRUE))
+    (progn$ (?curr ?all-pois)
+        ;; check if member of list of all Leisures is in the pois of Destination
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (bind $?all-pois (find-all-instances ((?inst TuristPoint)) TRUE))
+    (progn$ (?curr ?all-pois)
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es visiten els llocs esmentats donat que el viatge es un viatge de fi de curs."))
+    (send ?destVisitades put-pois $?visitat-pois)
+    (assert (afegit-ficurs ?dest))
+)
 
 ;; Afegir pois
 (defrule processat-data::afegir-diversio "Safegeixen pois Diversio (Leisure)"
@@ -1783,6 +1840,25 @@
     (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es visiten els llocs esmentats donat que es vol descansar al viatge."))
     (send ?destVisitades put-pois $?visitat-pois)
     (assert (afegit-descans ?dest))
+)
+
+(defrule processat-data::afegir-turisme "Safegeixen pois turisme"
+    ?u <- (Usuari (objectiu-viatge ?obj))
+    ?dest <- (object (is-a Destination) (poi_are $?pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois) (justificacions $?just))
+    (test (and (eq (instance-name ?dest) (instance-name ?nom-visitat)) (eq ?obj turisme)))
+    (not (afegit-turisme ?dest))
+    =>
+    (bind $?all-pois (find-all-instances ((?inst TuristPoint)) TRUE))
+    (progn$ (?curr ?all-pois)
+        ;; check if member of list of all Leisures is in the pois of Destination
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es visiten els llocs esmentats donat que es vol fer turisme."))
+    (send ?destVisitades put-pois $?visitat-pois)
+    (assert (afegit-turisme ?dest))
 )
 
 (defrule processat-data::afegir-familiar-nens "Safegeixen pois familiars"
