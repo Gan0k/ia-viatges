@@ -1094,7 +1094,7 @@
     (printout t ?self:nom-hotel crlf)
     (printout t "   Visites:")
     (progn$ (?curr-poi ?self:pois)
-        (printout t (send get-name_poi ?curr-poi))
+        (printout t (send ?curr-poi get-name_poi))
         (printout t ",")
     )
     (printout t crlf)
