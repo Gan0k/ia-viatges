@@ -1314,15 +1314,12 @@
 (defrule recopilacio-usuari::establir-nivellcult "Estableix el nivell cultural del usuari"
     ?u <- (Usuari (nivell-cult desconegut))
     =>
-    (bind ?e (pregunta-index "Quin interes tens en la cultura?" alt normal baix))
+    (bind ?e (pregunta-si-no "Tens interes en la cultura?"))
     (switch ?e
-        (case 1 then
+        (case TRUE then
             (modify ?u (nivell-cult alt))
         )
-        (case 2 then
-            (modify ?u (nivell-cult normal))
-        )
-        (case 3 then
+        (case FALSE then
             (modify ?u (nivell-cult baix))
         )
     )
