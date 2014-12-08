@@ -1685,7 +1685,7 @@
 (defrule processat-data::afegir-cult "Safegeixen pois culturals"
     ?u <- (Usuari (nivell-cult ?cult) (objectiu-viatge ?obj))
     ?dest <- (object (is-a Destination) (poi_are $?pois))
-    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois) (justificacions $?just))
     (test (eq (instance-name ?dest) (instance-name ?nom-visitat)))
     (test (eq ?cult alt))
     (test (not (eq ?obj diversio)))
@@ -1697,6 +1697,7 @@
             (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
         )
     )
+    (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es visiten els llocs esmentats donat que l'uauari te interes en la cultura."))
     (send ?destVisitades put-pois $?visitat-pois)
     (assert (afegit-cult ?dest))
 )
@@ -1706,7 +1707,7 @@
 (defrule processat-data::afegir-diversio "Safegeixen pois Diversio (Leisure)"
     ?u <- (Usuari (objectiu-viatge ?obj))
     ?dest <- (object (is-a Destination) (poi_are $?pois))
-    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois) (justificacions $?just))
     (test (and (eq (instance-name ?dest) (instance-name ?nom-visitat)) (eq ?obj diversio)))
     (not (afegit-diversio ?dest))
     =>
@@ -1723,6 +1724,7 @@
             (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
         )
     )
+    (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es visiten els llocs esmentats donat que l'objectiu del viatge es diversio."))
     (send ?destVisitades put-pois $?visitat-pois)
     (assert (afegit-diversio ?dest))
 )
@@ -1730,7 +1732,7 @@
 (defrule processat-data::afegir-romantic "Safegeixen pois Romantic"
     ?u <- (Usuari (objectiu-viatge ?obj))
     ?dest <- (object (is-a Destination) (poi_are $?pois))
-    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois) (justificacions $?just))
     (test (and (eq (instance-name ?dest) (instance-name ?nom-visitat)) (eq ?obj romantic)))
     (not (afegit-romantic ?dest))
     =>
@@ -1747,6 +1749,7 @@
             (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
         )
     )
+    (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es visiten els llocs esmentats donat que es un viatge romantic."))
     (send ?destVisitades put-pois $?visitat-pois)
     (assert (afegit-romantic ?dest))
 )
@@ -1754,7 +1757,7 @@
 (defrule processat-data::afegir-descans "Safegeixen pois descans"
     ?u <- (Usuari (objectiu-viatge ?obj))
     ?dest <- (object (is-a Destination) (poi_are $?pois))
-    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois) (justificacions $?just))
     (test (and (eq (instance-name ?dest) (instance-name ?nom-visitat)) (eq ?obj descans)))
     (not (afegit-descans ?dest))
     =>
@@ -1771,6 +1774,7 @@
             (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
         )
     )
+    (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es visiten els llocs esmentats donat que es vol descansar al viatge."))
     (send ?destVisitades put-pois $?visitat-pois)
     (assert (afegit-descans ?dest))
 )
@@ -1778,7 +1782,7 @@
 (defrule processat-data::afegir-familiar-nens "Safegeixen pois familiars"
     ?u <- (Usuari (familia ?obj))
     ?dest <- (object (is-a Destination) (poi_are $?pois))
-    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois) (justificacions $?just))
     (test (and (eq (instance-name ?dest) (instance-name ?nom-visitat)) (eq ?obj nens)))
     (not (afegit-familiar-nens ?dest))
     =>
@@ -1794,6 +1798,7 @@
             (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
         )
     )
+    (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es visiten els llocs esmentats donat que l'usuari viatja amb nens."))
     (send ?destVisitades put-pois $?visitat-pois)
     (assert (afegit-familiar-nens ?dest))
 )
@@ -1801,7 +1806,7 @@
 (defrule processat-data::afegir-familiar-adolescents "Safegeixen pois familiars amb adolescents"
     ?u <- (Usuari (familia ?obj))
     ?dest <- (object (is-a Destination) (poi_are $?pois))
-    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois) (justificacions $?just))
     (test (and (eq (instance-name ?dest) (instance-name ?nom-visitat)) (eq ?obj adolescents)))
     (not (afegit-familiar-adolescents ?dest))
     =>
@@ -1817,6 +1822,7 @@
             (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
         )
     )
+    (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es visiten els llocs esmentats donat que l'usuari viatja amb adolescents."))
     (send ?destVisitades put-pois $?visitat-pois)
     (assert (afegit-familiar-adolescents ?dest))
 )
