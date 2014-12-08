@@ -1006,12 +1006,10 @@
     (slot cost
         (type INTEGER)
         (create-accessor read-write))
-
-    ;; NOT YET
-    ; List of used transports. not used now
-    ;(multislot transports
-    ;    (type INSTANCE)
-    ;    (create-accessor read-write))
+    ; List of used transports
+    (multislot transports
+        (type INSTANCE)
+        (create-accessor read-write))
 )
 
 
@@ -1074,6 +1072,12 @@
     (printout t (instance-name ?self) crlf)
     (printout t "Cost del viatge: ")
     (printout t ?self:cost crlf)
+    (bind ?sum 0)
+    (progn$ (?desti (send ?self get-destins-visitats))
+       (bind ?sum (+ ?sum (send ?desti get-numero-dies)))
+    ) 
+    (printout t "Durada del viatge: ")
+    (printout t ?sum " dies" crlf)
     (printout t "Destinacions: " crlf)
     (progn$ (?desti (send ?self get-destins-visitats))
        (printout t (send ?desti imprimir))
@@ -1086,10 +1090,18 @@
 (defmessage-handler MAIN::DestinacioVisitada imprimir ()
     (printout t "Desti:")
     (printout t (send ?self:desti get-name_city))
-    (printout t " hotel: ")
+    (printout t "   Hotel: ")
     (printout t ?self:nom-hotel crlf)
+    (printout t "   Visites:")
+    (progn$ (?curr-poi ?self:pois)
+        (printout t (send get-name_poi ?curr-poi))
+        (printout t ",")
+    )
+    (printout t crlf)
+    (progn$ (?curr-just ?self:justificacions)
+        (printout t ?curr-just crlf)
+    )
 )
-    
 
 ;;; Fin declaracion de messages -----------------------
 
@@ -1716,7 +1728,6 @@
     =>
     (if (and (eq ?exoticDesitjat TRUE) (not (eq (send ?cont get-name_continent) "Europe"))) then
         (bind ?punt (+ ?punt 50))
-        (printout t ?dest crlf)
         (bind $?just (insert$ $?just (+ (length$ $?just) 1) "Es puja la puntuacio de destinacions exotiques."))
     )
     (assert (valorat-llocs-exotics ?dest))
