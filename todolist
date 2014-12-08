@@ -48,6 +48,7 @@ MODUL DE GENERACIO:
                 x ciutat. Si aquest numero es mes gran que el pressupost sobrat, descartar. - DONE
 - rest-transport -> Si el transport que s'ha d'agafar per arribar a una ciutat esta a rest-transport, llavors
                     descatar la ciutat.
+- MADNESS POINT -> fer que es faci un recorregut que comenci i acabi a Barcelona
 
 RECORDAR QUE AQUESTES VARIABLES NO TINDRAN QUE APAREIXER AL MODUL DE PROCESSAT (NO S'HA DE FER RES AMB ELLES)
 
@@ -63,10 +64,11 @@ la ciutat segons la length dels points of interest left - DONE
 - Objectiu-viatge == diversio -> DONE
 - Objectiu-viatge == romantic -> DONE
 - Objectiu-viatge == descans -> DONE
-- familia nens -> agafar pois familiars
-- familia adolecent -> ???
+- familia nens -> DONE
+- familia adolecent -> DONE
 - tipus-viatge == boda -> ???
 - tipus-viatge == viatge de fi de curs -> ???
+- fer metode de filtratje de pois (random)
 
 IDEA: for edat + num_pers + familia + tipus_viatge + obj_viatge -> tracatar com preferencies que, si es compleix
 un cert perfil de grup, llavors es puja la puntuació de ciutats que, o be son d'un tipus determiant (gran ciutat

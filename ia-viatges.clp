@@ -1098,7 +1098,7 @@
 ;; Imprimir destinacio visitada
 (defmessage-handler MAIN::DestinacioVisitada imprimir ()
     (printout t "Desti:")
-    (printout t (send ?self:desti get-name_city))
+    (printout t (send ?self:desti get-name_city) crlf)
     (printout t "   Hotel: ")
     (printout t ?self:nom-hotel crlf)
     (printout t "   Visites:")
@@ -1107,7 +1107,9 @@
         (printout t ",")
     )
     (printout t crlf)
+    (printout t "   Justificacions:" crlf)
     (progn$ (?curr-just ?self:justificacions)
+        (printout t "   ")
         (printout t ?curr-just crlf)
     )
 )
@@ -1488,7 +1490,7 @@
     ?fet <- (rest-transport ask) 
     ;;?re <- (restriccions)
     =>
-    (bind ?r (pregunta-index "Hi ha algun transport que no puguis utilitzar?" vaixell avio tren))
+    (bind ?r (pregunta-index "Hi ha algun transport que no puguis utilitzar?" vaixell avio tren cap))
     (switch ?r
         (case 1 then
             (assert (rest-transport vaixell))
@@ -1498,6 +1500,9 @@
         )
         (case 3 then
             (assert (rest-transport tren))
+        )
+        (case 4 then 
+            (assert (rest-transport FALSE))
         )
     )
     (retract ?fet)
@@ -1768,6 +1773,52 @@
     )
     (send ?destVisitades put-pois $?visitat-pois)
     (assert (afegit-descans ?dest))
+)
+
+(defrule processat-data::afegir-familiar-nens "Safegeixen pois familiars"
+    ?u <- (Usuari (familia ?obj))
+    ?dest <- (object (is-a Destination) (poi_are $?pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois))
+    (test (and (eq (instance-name ?dest) (instance-name ?nom-visitat)) (eq ?obj nens)))
+    (not (afegit-familiar-nens ?dest))
+    =>
+    (bind $?all-pois (find-all-instances ((?inst FamiliarPlace)) TRUE))
+    (progn$ (?curr ?all-pois)
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (bind $?all-pois (find-all-instances ((?inst TuristPoint)) TRUE))
+    (progn$ (?curr ?all-pois)
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (send ?destVisitades put-pois $?visitat-pois)
+    (assert (afegit-familiar-nens ?dest))
+)
+
+(defrule processat-data::afegir-familiar-adolescents "Safegeixen pois familiars amb adolescents"
+    ?u <- (Usuari (familia ?obj))
+    ?dest <- (object (is-a Destination) (poi_are $?pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois))
+    (test (and (eq (instance-name ?dest) (instance-name ?nom-visitat)) (eq ?obj adolescents)))
+    (not (afegit-familiar-adolescents ?dest))
+    =>
+    (bind $?all-pois (find-all-instances ((?inst FamiliarPlace)) TRUE))
+    (progn$ (?curr ?all-pois)
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (bind $?all-pois (find-all-instances ((?inst Sport)) TRUE))
+    (progn$ (?curr ?all-pois)
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (send ?destVisitades put-pois $?visitat-pois)
+    (assert (afegit-familiar-adolescents ?dest))
 )
 
 ;; Valorar popularitat
