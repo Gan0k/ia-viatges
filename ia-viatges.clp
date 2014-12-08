@@ -1648,11 +1648,12 @@
 
 ;; Afegir pois
 (defrule processat-data::afegir-cult "Safegeixen pois culturals"
-    ?u <- (Usuari (nivell-cult ?cult))
+    ?u <- (Usuari (nivell-cult ?cult) (objectiu-viatge ?obj))
     ?dest <- (object (is-a Destination) (poi_are $?pois))
     ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois))
     (test (eq (instance-name ?dest) (instance-name ?nom-visitat)))
     (test (eq ?cult alt))
+    (test (not (eq ?obj diversio)))
     (not (afegit-cult ?dest))
     =>
     (bind $?cult-pois (find-all-instances ((?inst Cultural)) TRUE))
@@ -1666,6 +1667,23 @@
 )
 
 
+;; Afegir pois
+(defrule processat-data::afegir-diversio "Safegeixen pois Diversio (Leisure)"
+    ?u <- (Usuari (objectiu-viatge ?obj))
+    ?dest <- (object (is-a Destination) (poi_are $?pois))
+    ?destVisitades <-(object (is-a DestinacioVisitada) (desti ?nom-visitat) (pois $?visitat-pois))
+    (test (and (eq (instance-name ?dest) (instance-name ?nom-visitat)) (eq ?obj diversio)))
+    (not (afegit-diversio ?dest))
+    =>
+    (bind $?all-pois (find-all-instances ((?inst Leisure)) TRUE))
+    (progn$ (?curr ?all-pois)
+        (if (member$ ?curr ?pois) then
+            (bind $?visitat-pois (insert$ $?visitat-pois (+ (length$ $?visitat-pois) 1) ?curr))
+        )
+    )
+    (send ?destVisitades put-pois $?visitat-pois)
+    (assert (afegit-diversio ?dest))
+)
 ;; Valorar popularitat
 (defrule processat-data::valorar-popularitat "Es valorara la popularitat del lloc"
     (preferencies (popularitat ?popDesitjada))
