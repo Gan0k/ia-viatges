@@ -63,8 +63,8 @@ la ciutat segons la length dels points of interest left - DONE
 - Objectiu-viatge == descans -> DONE
 - familia nens -> DONE
 - familia adolecent -> DONE
-- tipus-viatge == boda -> ???
-- tipus-viatge == viatge de fi de curs -> ???
+- tipus-viatge == boda -> DONE
+- tipus-viatge == viatge de fi de curs -> DONE
 - fer metode de filtratje de pois (random)
 
 Unprocessed parameters: ratio-qual-diners, edat usuari, nombre-persones del viatge (nomes utilitzat a generacio)
