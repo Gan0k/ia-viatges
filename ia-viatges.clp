@@ -15,10 +15,10 @@
 ;;                    ONTOLOGIA
 ;;-------------------------------------------------------------------------------------------------------------
 
-; Mon Dec 08 20:06:18 CET 2014
+; Tue Dec 09 01:32:06 CET 2014
 ; 
-;+ (version "3.4.8")
-;+ (build "Build 629")
+;+ (version "3.5")
+;+ (build "Build 660")
 
 
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
@@ -218,13 +218,13 @@
 (defclass Destination
 	(is-a USER)
 	(role concrete)
-	(multislot can_be_reached
-		(type INSTANCE)
-;+		(allowed-classes Transport)
-		(create-accessor read-write))
 	(multislot inverse_of_destinations_are
 		(type INSTANCE)
 ;+		(allowed-classes TypeDestination)
+		(create-accessor read-write))
+	(multislot can_be_reached
+		(type INSTANCE)
+;+		(allowed-classes Transport)
 		(create-accessor read-write))
 	(single-slot popularity
 		(type STRING)
@@ -243,18 +243,18 @@
 ;+		(allowed-classes TypeDestination)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot can_go_to
+	(single-slot has_climate
 		(type INSTANCE)
-;+		(allowed-classes Transport)
+;+		(allowed-classes Clima)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot accomodations_are
 		(type INSTANCE)
 ;+		(allowed-classes Accomodation)
 		(create-accessor read-write))
-	(single-slot has_climate
+	(multislot can_go_to
 		(type INSTANCE)
-;+		(allowed-classes Clima)
-;+		(cardinality 1 1)
+;+		(allowed-classes Transport)
 		(create-accessor read-write))
 	(single-slot is_in_continent
 		(type INSTANCE)
@@ -381,7 +381,6 @@
 		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
-
 ;;-------------------------------------------------------------------------------------------------------------
 ;;                    INSTANCIES
 ;;-------------------------------------------------------------------------------------------------------------
@@ -389,10 +388,10 @@
 
 (definstances instances
 
-; Mon Dec 08 20:06:18 CET 2014
+; Tue Dec 09 01:32:06 CET 2014
 ; 
-;+ (version "3.4.8")
-;+ (build "Build 629")
+;+ (version "3.5")
+;+ (build "Build 660")
 
 ([MAIN::ia-viatges_Class0] of  TypeDestination
 
@@ -404,7 +403,8 @@
 	(has_destinations
 		[MAIN::ia-viatges_Class30022]
 		[MAIN::ia-viatges_Class30040]
-		[MAIN::ia-viatges_Class40045])
+		[MAIN::ia-viatges_Class40045]
+		[MAIN::ia-viatges_Class50032])
 	(name_continent "Europe"))
 
 ([MAIN::ia-viatges_Class10000] of  Accomodation
@@ -415,7 +415,10 @@
 
 ([MAIN::ia-viatges_Class10004] of  Clima
 
-	(is_present_in [MAIN::ia-viatges_Class30034])
+	(is_present_in
+		[MAIN::ia-viatges_Class30034]
+		[MAIN::ia-viatges_Class50032]
+		[MAIN::ia-viatges_Class50056])
 	(name_climate "Tropical"))
 
 ([MAIN::ia-viatges_Class10005] of  Clima
@@ -423,14 +426,16 @@
 	(is_present_in
 		[MAIN::ia-viatges_Class30028]
 		[MAIN::ia-viatges_Class30055]
-		[MAIN::ia-viatges_Class40045])
+		[MAIN::ia-viatges_Class40045]
+		[MAIN::ia-viatges_Class50065])
 	(name_climate "Mediterrani"))
 
 ([MAIN::ia-viatges_Class10006] of  Clima
 
 	(is_present_in
 		[MAIN::ia-viatges_Class30052]
-		[MAIN::ia-viatges_Class30061])
+		[MAIN::ia-viatges_Class30061]
+		[MAIN::ia-viatges_Class30000])
 	(name_climate "Escandinau"))
 
 ([MAIN::ia-viatges_Class10007] of  Clima
@@ -438,7 +443,11 @@
 	(is_present_in
 		[MAIN::ia-viatges_Class30016]
 		[MAIN::ia-viatges_Class30046]
-		[MAIN::ia-viatges_Class30049])
+		[MAIN::ia-viatges_Class30049]
+		[MAIN::ia-viatges_Class50010]
+		[MAIN::ia-viatges_Class50019]
+		[MAIN::ia-viatges_Class50024]
+		[MAIN::ia-viatges_Class50049])
 	(name_climate "Equatorial"))
 
 ([MAIN::ia-viatges_Class10008] of  Clima
@@ -446,7 +455,9 @@
 	(is_present_in
 		[MAIN::ia-viatges_Class30008]
 		[MAIN::ia-viatges_Class30022]
-		[MAIN::ia-viatges_Class30040])
+		[MAIN::ia-viatges_Class30040]
+		[MAIN::ia-viatges_Class50003]
+		[MAIN::ia-viatges_Class50072])
 	(name_climate "Alta_Muntanya"))
 
 ([MAIN::ia-viatges_Class2] of  Continent
@@ -479,13 +490,35 @@
 		[MAIN::ia-viatges_Class30008]
 		[MAIN::ia-viatges_Class30016]
 		[MAIN::ia-viatges_Class30049]
-		[MAIN::ia-viatges_Class40045])
+		[MAIN::ia-viatges_Class40045]
+		[MAIN::ia-viatges_Class50003]
+		[MAIN::ia-viatges_Class50010]
+		[MAIN::ia-viatges_Class50019]
+		[MAIN::ia-viatges_Class50024]
+		[MAIN::ia-viatges_Class50032]
+		[MAIN::ia-viatges_Class50049]
+		[MAIN::ia-viatges_Class50065])
 	(name_type_dest "ciutat_mediterranea"))
 
 ([MAIN::ia-viatges_Class3] of  Continent
 
-	(has_destinations [MAIN::ia-viatges_Class30034])
+	(has_destinations
+		[MAIN::ia-viatges_Class30034]
+		[MAIN::ia-viatges_Class50056])
 	(name_continent "Asia"))
+
+([MAIN::ia-viatges_Class30000] of  Mountain
+
+	(accomodations_are [MAIN::ia-viatges_Class50002])
+	(can_be_reached
+		[MAIN::ia-viatges_Class50001]
+		[MAIN::ia-viatges_Class50018])
+	(has_climate [MAIN::ia-viatges_Class10006])
+	(is_in_continent [MAIN::ia-viatges_Class5])
+	(name_city "Muntanya1")
+	(poi_are [MAIN::ia-viatges_Class50005])
+	(popularity "baixa")
+	(type_destination_is [MAIN::ia-viatges_Class30001]))
 
 ([MAIN::ia-viatges_Class30001] of  TypeDestination
 
@@ -493,7 +526,9 @@
 		[MAIN::ia-viatges_Class30022]
 		[MAIN::ia-viatges_Class30040]
 		[MAIN::ia-viatges_Class30046]
-		[MAIN::ia-viatges_Class30055])
+		[MAIN::ia-viatges_Class30055]
+		[MAIN::ia-viatges_Class30000]
+		[MAIN::ia-viatges_Class50072])
 	(name_type_dest "ciutat_tropical"))
 
 ([MAIN::ia-viatges_Class30002] of  TypeDestination
@@ -501,7 +536,8 @@
 	(destinations_are
 		[MAIN::ia-viatges_Class30028]
 		[MAIN::ia-viatges_Class30052]
-		[MAIN::ia-viatges_Class30061])
+		[MAIN::ia-viatges_Class30061]
+		[MAIN::ia-viatges_Class50056])
 	(name_type_dest "ciutat_arida"))
 
 ([MAIN::ia-viatges_Class30008] of  City
@@ -563,7 +599,8 @@
 		[MAIN::ia-viatges_Class40027])
 	(can_be_reached
 		[MAIN::ia-viatges_Class40047]
-		[MAIN::ia-viatges_Class40080])
+		[MAIN::ia-viatges_Class40080]
+		[MAIN::ia-viatges_Class50044])
 	(can_go_to
 		[MAIN::ia-viatges_Class40061]
 		[MAIN::ia-viatges_Class40082])
@@ -611,7 +648,9 @@
 		[MAIN::ia-viatges_Class40028]
 		[MAIN::ia-viatges_Class40029]
 		[MAIN::ia-viatges_Class40030])
-	(can_be_reached [MAIN::ia-viatges_Class40048])
+	(can_be_reached
+		[MAIN::ia-viatges_Class40048]
+		[MAIN::ia-viatges_Class50047])
 	(can_go_to
 		[MAIN::ia-viatges_Class40062]
 		[MAIN::ia-viatges_Class40083])
@@ -661,7 +700,8 @@
 		[MAIN::ia-viatges_Class40032])
 	(can_be_reached
 		[MAIN::ia-viatges_Class40049]
-		[MAIN::ia-viatges_Class40083])
+		[MAIN::ia-viatges_Class40083]
+		[MAIN::ia-viatges_Class50031])
 	(can_go_to [MAIN::ia-viatges_Class40063])
 	(has_climate [MAIN::ia-viatges_Class10005])
 	(is_in_continent [MAIN::ia-viatges_Class4])
@@ -709,8 +749,13 @@
 		[MAIN::ia-viatges_Class40035])
 	(can_be_reached
 		[MAIN::ia-viatges_Class40050]
-		[MAIN::ia-viatges_Class40079])
-	(can_go_to [MAIN::ia-viatges_Class40064])
+		[MAIN::ia-viatges_Class40079]
+		[MAIN::ia-viatges_Class50048])
+	(can_go_to
+		[MAIN::ia-viatges_Class40064]
+		[MAIN::ia-viatges_Class50046]
+		[MAIN::ia-viatges_Class50047]
+		[MAIN::ia-viatges_Class50048])
 	(has_climate [MAIN::ia-viatges_Class10004])
 	(is_in_continent [MAIN::ia-viatges_Class3])
 	(name_city "Climbistan")
@@ -759,7 +804,8 @@
 		[MAIN::ia-viatges_Class40040])
 	(can_be_reached
 		[MAIN::ia-viatges_Class40051]
-		[MAIN::ia-viatges_Class40059])
+		[MAIN::ia-viatges_Class40059]
+		[MAIN::ia-viatges_Class50084])
 	(can_go_to
 		[MAIN::ia-viatges_Class40065]
 		[MAIN::ia-viatges_Class40079]
@@ -847,7 +893,8 @@
 	(can_be_reached
 		[MAIN::ia-viatges_Class40053]
 		[MAIN::ia-viatges_Class40058]
-		[MAIN::ia-viatges_Class40081])
+		[MAIN::ia-viatges_Class40081]
+		[MAIN::ia-viatges_Class50043])
 	(can_go_to [MAIN::ia-viatges_Class40066])
 	(has_climate [MAIN::ia-viatges_Class10007])
 	(is_in_continent [MAIN::ia-viatges_Class5])
@@ -965,10 +1012,13 @@
 		[MAIN::ia-viatges_Class30064]
 		[MAIN::ia-viatges_Class30065]
 		[MAIN::ia-viatges_Class30066])
-	(can_be_reached [MAIN::ia-viatges_Class40054])
+	(can_be_reached
+		[MAIN::ia-viatges_Class40054]
+		[MAIN::ia-viatges_Class50045])
 	(can_go_to
 		[MAIN::ia-viatges_Class40068]
-		[MAIN::ia-viatges_Class40085])
+		[MAIN::ia-viatges_Class40085]
+		[MAIN::ia-viatges_Class50085])
 	(has_climate [MAIN::ia-viatges_Class10006])
 	(is_in_continent [MAIN::ia-viatges_Class5])
 	(name_city "LandOfEverybody")
@@ -1052,7 +1102,9 @@
 	(has_destinations
 		[MAIN::ia-viatges_Class30028]
 		[MAIN::ia-viatges_Class30052]
-		[MAIN::ia-viatges_Class30055])
+		[MAIN::ia-viatges_Class30055]
+		[MAIN::ia-viatges_Class50003]
+		[MAIN::ia-viatges_Class50072])
 	(name_continent "Oceania"))
 
 ([MAIN::ia-viatges_Class40001] of  Nightlife
@@ -1340,7 +1392,14 @@
 		[MAIN::ia-viatges_Class40067]
 		[MAIN::ia-viatges_Class40068]
 		[MAIN::ia-viatges_Class40069]
-		[MAIN::ia-viatges_Class40077])
+		[MAIN::ia-viatges_Class40077]
+		[MAIN::ia-viatges_Class50011]
+		[MAIN::ia-viatges_Class50025]
+		[MAIN::ia-viatges_Class50033]
+		[MAIN::ia-viatges_Class50034]
+		[MAIN::ia-viatges_Class50035]
+		[MAIN::ia-viatges_Class50050]
+		[MAIN::ia-viatges_Class50058])
 	(can_go_to
 		[MAIN::ia-viatges_Class40046]
 		[MAIN::ia-viatges_Class40047]
@@ -1355,7 +1414,12 @@
 		[MAIN::ia-viatges_Class40057]
 		[MAIN::ia-viatges_Class40058]
 		[MAIN::ia-viatges_Class40059]
-		[MAIN::ia-viatges_Class40078])
+		[MAIN::ia-viatges_Class40078]
+		[MAIN::ia-viatges_Class50001]
+		[MAIN::ia-viatges_Class50004]
+		[MAIN::ia-viatges_Class50020]
+		[MAIN::ia-viatges_Class50066]
+		[MAIN::ia-viatges_Class50073])
 	(has_climate [MAIN::ia-viatges_Class10005])
 	(is_in_continent [MAIN::ia-viatges_Class1])
 	(name_city "Barcelona")
@@ -1568,11 +1632,583 @@
 
 	(has_destinations
 		[MAIN::ia-viatges_Class30061]
-		[MAIN::ia-viatges_Class30049])
+		[MAIN::ia-viatges_Class30049]
+		[MAIN::ia-viatges_Class30000]
+		[MAIN::ia-viatges_Class50010])
 	(name_continent "NorthAmerica"))
+
+([MAIN::ia-viatges_Class50001] of  Plane
+
+	(arrival [MAIN::ia-viatges_Class30000])
+	(departure [MAIN::ia-viatges_Class40045]))
+
+([MAIN::ia-viatges_Class50002] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class30000])
+	(name_accom "Hotel Muntanya 1")
+	(price_per_night 15)
+	(rating 2))
+
+([MAIN::ia-viatges_Class50003] of  Mountain
+
+	(accomodations_are [MAIN::ia-viatges_Class50012])
+	(can_be_reached
+		[MAIN::ia-viatges_Class50004]
+		[MAIN::ia-viatges_Class50017]
+		[MAIN::ia-viatges_Class50030])
+	(has_climate [MAIN::ia-viatges_Class10008])
+	(is_in_continent [MAIN::ia-viatges_Class4])
+	(name_city "Rancho Relaxo")
+	(poi_are
+		[MAIN::ia-viatges_Class50006]
+		[MAIN::ia-viatges_Class50007]
+		[MAIN::ia-viatges_Class50008]
+		[MAIN::ia-viatges_Class50009])
+	(popularity "baixa")
+	(type_destination_is [MAIN::ia-viatges_Class20004]))
+
+([MAIN::ia-viatges_Class50004] of  Train
+
+	(arrival [MAIN::ia-viatges_Class50003])
+	(departure [MAIN::ia-viatges_Class40045]))
+
+([MAIN::ia-viatges_Class50005] of  TuristPoint
+
+	(name_poi "Arbre Centenari")
+	(poi_is_in [MAIN::ia-viatges_Class30000]))
+
+([MAIN::ia-viatges_Class50006] of  FamiliarPlace
+
+	(name_poi "Llac Familiar")
+	(poi_is_in [MAIN::ia-viatges_Class50003]))
+
+([MAIN::ia-viatges_Class50007] of  TuristPoint
+
+	(name_poi "Llac turistic")
+	(poi_is_in [MAIN::ia-viatges_Class50003]))
+
+([MAIN::ia-viatges_Class50008] of  Nightlife
+
+	(name_poi "Club nocturn turistic")
+	(poi_is_in [MAIN::ia-viatges_Class50003]))
+
+([MAIN::ia-viatges_Class50009] of  Cultural
+
+	(name_poi "Llac cultural")
+	(poi_is_in [MAIN::ia-viatges_Class50003]))
+
+([MAIN::ia-viatges_Class50010] of  Mountain
+
+	(accomodations_are [MAIN::ia-viatges_Class50013])
+	(can_be_reached
+		[MAIN::ia-viatges_Class50046]
+		[MAIN::ia-viatges_Class50055])
+	(can_go_to
+		[MAIN::ia-viatges_Class50011]
+		[MAIN::ia-viatges_Class50017]
+		[MAIN::ia-viatges_Class50018])
+	(has_climate [MAIN::ia-viatges_Class10007])
+	(is_in_continent [MAIN::ia-viatges_Class5])
+	(name_city "Muntanya OP")
+	(poi_are
+		[MAIN::ia-viatges_Class50014]
+		[MAIN::ia-viatges_Class50015]
+		[MAIN::ia-viatges_Class50016])
+	(popularity "alta")
+	(type_destination_is [MAIN::ia-viatges_Class20004]))
+
+([MAIN::ia-viatges_Class50011] of  Train
+
+	(arrival [MAIN::ia-viatges_Class40045])
+	(departure [MAIN::ia-viatges_Class50010]))
+
+([MAIN::ia-viatges_Class50012] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50003])
+	(name_accom "Hotel relax")
+	(price_per_night 200)
+	(rating 3))
+
+([MAIN::ia-viatges_Class50013] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50010])
+	(name_accom "Hotel Mega de OP")
+	(price_per_night 150)
+	(rating 5))
+
+([MAIN::ia-viatges_Class50014] of  Cultural
+
+	(name_poi "Cosa OP")
+	(poi_is_in [MAIN::ia-viatges_Class50010]))
+
+([MAIN::ia-viatges_Class50015] of  Sport
+
+	(name_poi "Club D'esports UPC")
+	(poi_is_in [MAIN::ia-viatges_Class50010]))
+
+([MAIN::ia-viatges_Class50016] of  TuristPoint
+
+	(name_poi "Edifici Omega")
+	(poi_is_in [MAIN::ia-viatges_Class50010]))
+
+([MAIN::ia-viatges_Class50017] of  Train
+
+	(arrival [MAIN::ia-viatges_Class50003])
+	(departure [MAIN::ia-viatges_Class50010]))
+
+([MAIN::ia-viatges_Class50018] of  Train
+
+	(arrival [MAIN::ia-viatges_Class30000])
+	(departure [MAIN::ia-viatges_Class50010]))
+
+([MAIN::ia-viatges_Class50019] of  Town
+
+	(accomodations_are [MAIN::ia-viatges_Class50026])
+	(can_be_reached
+		[MAIN::ia-viatges_Class50020]
+		[MAIN::ia-viatges_Class50029]
+		[MAIN::ia-viatges_Class50085])
+	(can_go_to [MAIN::ia-viatges_Class50084])
+	(has_climate [MAIN::ia-viatges_Class10007])
+	(is_in_continent [MAIN::ia-viatges_Class6])
+	(name_city "Pueblo Paleta")
+	(poi_are
+		[MAIN::ia-viatges_Class50021]
+		[MAIN::ia-viatges_Class50022]
+		[MAIN::ia-viatges_Class50023])
+	(popularity "baixa")
+	(type_destination_is [MAIN::ia-viatges_Class20004]))
+
+([MAIN::ia-viatges_Class50020] of  Train
+
+	(arrival [MAIN::ia-viatges_Class50019])
+	(departure [MAIN::ia-viatges_Class40045]))
+
+([MAIN::ia-viatges_Class50021] of  TuristPoint
+
+	(name_poi "Casa de Gary")
+	(poi_is_in [MAIN::ia-viatges_Class50019]))
+
+([MAIN::ia-viatges_Class50022] of  Cultural
+
+	(name_poi "Laboratorio de Oak")
+	(poi_is_in [MAIN::ia-viatges_Class50019]))
+
+([MAIN::ia-viatges_Class50023] of  FamiliarPlace
+
+	(name_poi "Casa de Ash")
+	(poi_is_in [MAIN::ia-viatges_Class50019]))
+
+([MAIN::ia-viatges_Class50024] of  Town
+
+	(accomodations_are [MAIN::ia-viatges_Class50027])
+	(can_go_to
+		[MAIN::ia-viatges_Class50025]
+		[MAIN::ia-viatges_Class50029]
+		[MAIN::ia-viatges_Class50030]
+		[MAIN::ia-viatges_Class50031])
+	(has_climate [MAIN::ia-viatges_Class10007])
+	(is_in_continent [MAIN::ia-viatges_Class6])
+	(name_city "Pueblo verde")
+	(poi_are [MAIN::ia-viatges_Class50028])
+	(popularity "alta")
+	(type_destination_is [MAIN::ia-viatges_Class20004]))
+
+([MAIN::ia-viatges_Class50025] of  Plane
+
+	(arrival [MAIN::ia-viatges_Class40045])
+	(departure [MAIN::ia-viatges_Class50024]))
+
+([MAIN::ia-viatges_Class50026] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50019])
+	(name_accom "Centro Pokemon")
+	(price_per_night 1)
+	(rating 1))
+
+([MAIN::ia-viatges_Class50027] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50024])
+	(name_accom "Centre Pokemon verde")
+	(price_per_night 25)
+	(rating 4))
+
+([MAIN::ia-viatges_Class50028] of  Cultural
+
+	(name_poi "Tienda Pokemon")
+	(poi_is_in [MAIN::ia-viatges_Class50024]))
+
+([MAIN::ia-viatges_Class50029] of  Train
+
+	(arrival [MAIN::ia-viatges_Class50019])
+	(departure [MAIN::ia-viatges_Class50024]))
+
+([MAIN::ia-viatges_Class50030] of  Train
+
+	(arrival [MAIN::ia-viatges_Class50003])
+	(departure [MAIN::ia-viatges_Class50024]))
+
+([MAIN::ia-viatges_Class50031] of  Plane
+
+	(arrival [MAIN::ia-viatges_Class30028])
+	(departure [MAIN::ia-viatges_Class50024]))
+
+([MAIN::ia-viatges_Class50032] of  Town
+
+	(accomodations_are
+		[MAIN::ia-viatges_Class50040]
+		[MAIN::ia-viatges_Class50042])
+	(can_go_to
+		[MAIN::ia-viatges_Class50033]
+		[MAIN::ia-viatges_Class50034]
+		[MAIN::ia-viatges_Class50035]
+		[MAIN::ia-viatges_Class50043]
+		[MAIN::ia-viatges_Class50044]
+		[MAIN::ia-viatges_Class50045])
+	(has_climate [MAIN::ia-viatges_Class10004])
+	(is_in_continent [MAIN::ia-viatges_Class1])
+	(name_city "Caldes de Montbui")
+	(poi_are
+		[MAIN::ia-viatges_Class50036]
+		[MAIN::ia-viatges_Class50037]
+		[MAIN::ia-viatges_Class50038]
+		[MAIN::ia-viatges_Class50039]
+		[MAIN::ia-viatges_Class50041])
+	(popularity "alta")
+	(type_destination_is [MAIN::ia-viatges_Class20004]))
+
+([MAIN::ia-viatges_Class50033] of  Train
+
+	(arrival [MAIN::ia-viatges_Class40045])
+	(departure [MAIN::ia-viatges_Class50032]))
+
+([MAIN::ia-viatges_Class50034] of  Plane
+
+	(arrival [MAIN::ia-viatges_Class40045])
+	(departure [MAIN::ia-viatges_Class50032]))
+
+([MAIN::ia-viatges_Class50035] of  Boat
+
+	(arrival [MAIN::ia-viatges_Class40045])
+	(departure [MAIN::ia-viatges_Class50032]))
+
+([MAIN::ia-viatges_Class50036] of  Cultural
+
+	(name_poi "Biblioteca Municipal")
+	(poi_is_in [MAIN::ia-viatges_Class50032]))
+
+([MAIN::ia-viatges_Class50037] of  Nightlife
+
+	(name_poi "Club Soko")
+	(poi_is_in [MAIN::ia-viatges_Class50032]))
+
+([MAIN::ia-viatges_Class50038] of  TuristPoint
+
+	(name_poi "Termes Romanes")
+	(poi_is_in [MAIN::ia-viatges_Class50032]))
+
+([MAIN::ia-viatges_Class50039] of  Leisure
+
+	(name_poi "Chiquipark")
+	(poi_is_in [MAIN::ia-viatges_Class50032]))
+
+([MAIN::ia-viatges_Class50040] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50032])
+	(name_accom "Hotel Broquetes")
+	(price_per_night 24)
+	(rating 3))
+
+([MAIN::ia-viatges_Class50041] of  Spa
+
+	(name_poi "Balneari Broquetes")
+	(poi_is_in [MAIN::ia-viatges_Class50032]))
+
+([MAIN::ia-viatges_Class50042] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50032])
+	(name_accom "Hotel Victoria")
+	(price_per_night 100)
+	(rating 3))
+
+([MAIN::ia-viatges_Class50043] of  Boat
+
+	(arrival [MAIN::ia-viatges_Class30049])
+	(departure [MAIN::ia-viatges_Class50032]))
+
+([MAIN::ia-viatges_Class50044] of  Boat
+
+	(arrival [MAIN::ia-viatges_Class30016])
+	(departure [MAIN::ia-viatges_Class50032]))
+
+([MAIN::ia-viatges_Class50045] of  Boat
+
+	(arrival [MAIN::ia-viatges_Class30061])
+	(departure [MAIN::ia-viatges_Class50032]))
+
+([MAIN::ia-viatges_Class50046] of  Train
+
+	(arrival [MAIN::ia-viatges_Class50010])
+	(departure [MAIN::ia-viatges_Class30034]))
+
+([MAIN::ia-viatges_Class50047] of  Train
+
+	(arrival [MAIN::ia-viatges_Class30022])
+	(departure [MAIN::ia-viatges_Class30034]))
+
+([MAIN::ia-viatges_Class50048] of  Boat
+
+	(arrival [MAIN::ia-viatges_Class30034])
+	(departure [MAIN::ia-viatges_Class30034]))
+
+([MAIN::ia-viatges_Class50049] of  Town
+
+	(accomodations_are [MAIN::ia-viatges_Class50051])
+	(can_go_to
+		[MAIN::ia-viatges_Class50050]
+		[MAIN::ia-viatges_Class50055]
+		[MAIN::ia-viatges_Class50076])
+	(has_climate [MAIN::ia-viatges_Class10007])
+	(is_in_continent [MAIN::ia-viatges_Class6])
+	(name_city "Pueblo lavanda")
+	(poi_are
+		[MAIN::ia-viatges_Class50052]
+		[MAIN::ia-viatges_Class50053]
+		[MAIN::ia-viatges_Class50054])
+	(popularity "baixa")
+	(type_destination_is [MAIN::ia-viatges_Class20004]))
+
+([MAIN::ia-viatges_Class50050] of  Train
+
+	(arrival [MAIN::ia-viatges_Class40045])
+	(departure [MAIN::ia-viatges_Class50049]))
+
+([MAIN::ia-viatges_Class50051] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50049])
+	(name_accom "Hotel Cementiri")
+	(price_per_night 1)
+	(rating 2))
+
+([MAIN::ia-viatges_Class50052] of  Cultural
+
+	(name_poi "Biblioteca Lavanda")
+	(poi_is_in [MAIN::ia-viatges_Class50049]))
+
+([MAIN::ia-viatges_Class50053] of  Leisure
+
+	(name_poi "Torre Pokemon")
+	(poi_is_in [MAIN::ia-viatges_Class50049]))
+
+([MAIN::ia-viatges_Class50054] of  Spa
+
+	(name_poi "Balneari")
+	(poi_is_in [MAIN::ia-viatges_Class50049]))
+
+([MAIN::ia-viatges_Class50055] of  Plane
+
+	(arrival [MAIN::ia-viatges_Class50010])
+	(departure [MAIN::ia-viatges_Class50049]))
+
+([MAIN::ia-viatges_Class50056] of  Town
+
+	(accomodations_are
+		[MAIN::ia-viatges_Class50063]
+		[MAIN::ia-viatges_Class50064])
+	(can_go_to [MAIN::ia-viatges_Class50058])
+	(has_climate [MAIN::ia-viatges_Class10004])
+	(is_in_continent [MAIN::ia-viatges_Class3])
+	(name_city "Pueblo Verdegal")
+	(poi_are
+		[MAIN::ia-viatges_Class50059]
+		[MAIN::ia-viatges_Class50060]
+		[MAIN::ia-viatges_Class50061]
+		[MAIN::ia-viatges_Class50062])
+	(popularity "alta")
+	(type_destination_is [MAIN::ia-viatges_Class30002]))
+
+([MAIN::ia-viatges_Class50058] of  Boat
+
+	(arrival [MAIN::ia-viatges_Class40045])
+	(departure [MAIN::ia-viatges_Class50056]))
+
+([MAIN::ia-viatges_Class50059] of  FamiliarPlace
+
+	(name_poi "Casa de Blasco")
+	(poi_is_in [MAIN::ia-viatges_Class50056]))
+
+([MAIN::ia-viatges_Class50060] of  FamiliarPlace
+
+	(name_poi "Cosa per a nens 1")
+	(poi_is_in [MAIN::ia-viatges_Class50056]))
+
+([MAIN::ia-viatges_Class50061] of  Sport
+
+	(name_poi "Pista d'esqui")
+	(poi_is_in [MAIN::ia-viatges_Class50056]))
+
+([MAIN::ia-viatges_Class50062] of  TuristPoint
+
+	(name_poi "Estatua de Turing")
+	(poi_is_in [MAIN::ia-viatges_Class50056]))
+
+([MAIN::ia-viatges_Class50063] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50056])
+	(name_accom "Hotel ABE")
+	(price_per_night 1)
+	(rating 1))
+
+([MAIN::ia-viatges_Class50064] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50056])
+	(name_accom "Hotel Wololo")
+	(price_per_night 30)
+	(rating 2))
+
+([MAIN::ia-viatges_Class50065] of  Mountain
+
+	(accomodations_are [MAIN::ia-viatges_Class50067])
+	(can_be_reached [MAIN::ia-viatges_Class50066])
+	(can_go_to [MAIN::ia-viatges_Class50075])
+	(has_climate [MAIN::ia-viatges_Class10005])
+	(is_in_continent [MAIN::ia-viatges_Class6])
+	(name_city "Muntanya nyan cat")
+	(poi_are
+		[MAIN::ia-viatges_Class50068]
+		[MAIN::ia-viatges_Class50069]
+		[MAIN::ia-viatges_Class50070]
+		[MAIN::ia-viatges_Class50071])
+	(popularity "alta")
+	(type_destination_is [MAIN::ia-viatges_Class20004]))
+
+([MAIN::ia-viatges_Class50066] of  Train
+
+	(arrival [MAIN::ia-viatges_Class50065])
+	(departure [MAIN::ia-viatges_Class40045]))
+
+([MAIN::ia-viatges_Class50067] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50065])
+	(name_accom "Hotel Wololo OP")
+	(price_per_night 1337)
+	(rating 5))
+
+([MAIN::ia-viatges_Class50068] of  Beach
+
+	(name_poi "Platja de muntanya")
+	(poi_is_in [MAIN::ia-viatges_Class50065]))
+
+([MAIN::ia-viatges_Class50069] of  Cultural
+
+	(name_poi "Biblioteca muntanyal")
+	(poi_is_in [MAIN::ia-viatges_Class50065]))
+
+([MAIN::ia-viatges_Class50070] of  Sport
+
+	(name_poi "Barranc d'escalar")
+	(poi_is_in [MAIN::ia-viatges_Class50065]))
+
+([MAIN::ia-viatges_Class50071] of  Spa
+
+	(name_poi "Spa natural de muntanya")
+	(poi_is_in [MAIN::ia-viatges_Class50065]))
+
+([MAIN::ia-viatges_Class50072] of  Mountain
+
+	(accomodations_are
+		[MAIN::ia-viatges_Class50077]
+		[MAIN::ia-viatges_Class50083])
+	(can_be_reached
+		[MAIN::ia-viatges_Class50073]
+		[MAIN::ia-viatges_Class50075]
+		[MAIN::ia-viatges_Class50076])
+	(has_climate [MAIN::ia-viatges_Class10008])
+	(is_in_continent [MAIN::ia-viatges_Class4])
+	(name_city "Muntanya Turing")
+	(poi_are
+		[MAIN::ia-viatges_Class50078]
+		[MAIN::ia-viatges_Class50079]
+		[MAIN::ia-viatges_Class50080]
+		[MAIN::ia-viatges_Class50081]
+		[MAIN::ia-viatges_Class50082])
+	(popularity "baixa")
+	(type_destination_is [MAIN::ia-viatges_Class30001]))
+
+([MAIN::ia-viatges_Class50073] of  Plane
+
+	(arrival [MAIN::ia-viatges_Class50072])
+	(departure [MAIN::ia-viatges_Class40045]))
+
+([MAIN::ia-viatges_Class50074] of  Boat
+)
+
+([MAIN::ia-viatges_Class50075] of  Train
+
+	(arrival [MAIN::ia-viatges_Class50072])
+	(departure [MAIN::ia-viatges_Class50065]))
+
+([MAIN::ia-viatges_Class50076] of  Train
+
+	(arrival [MAIN::ia-viatges_Class50072])
+	(departure [MAIN::ia-viatges_Class50049]))
+
+([MAIN::ia-viatges_Class50077] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50072])
+	(name_accom "Hotel sense nom")
+	(price_per_night 1337)
+	(rating 2))
+
+([MAIN::ia-viatges_Class50078] of  Nightlife
+
+	(name_poi "Discoteca Hardcore")
+	(poi_is_in [MAIN::ia-viatges_Class50072]))
+
+([MAIN::ia-viatges_Class50079] of  Cultural
+
+	(name_poi "Museu de turing")
+	(poi_is_in [MAIN::ia-viatges_Class50072]))
+
+([MAIN::ia-viatges_Class50080] of  Sport
+
+	(name_poi "Pista d'esports")
+	(poi_is_in [MAIN::ia-viatges_Class50072]))
+
+([MAIN::ia-viatges_Class50081] of  Leisure
+
+	(name_poi "Cinema d'entreteniment")
+	(poi_is_in [MAIN::ia-viatges_Class50072]))
+
+([MAIN::ia-viatges_Class50082] of  FamiliarPlace
+
+	(name_poi "Llac familiar")
+	(poi_is_in [MAIN::ia-viatges_Class50072]))
+
+([MAIN::ia-viatges_Class50083] of  Accomodation
+
+	(is_in [MAIN::ia-viatges_Class50072])
+	(name_accom "Hotel cansino")
+	(price_per_night 10)
+	(rating 1))
+
+([MAIN::ia-viatges_Class50084] of  Boat
+
+	(arrival [MAIN::ia-viatges_Class30040])
+	(departure [MAIN::ia-viatges_Class50019]))
+
+([MAIN::ia-viatges_Class50085] of  Boat
+
+	(arrival [MAIN::ia-viatges_Class50019])
+	(departure [MAIN::ia-viatges_Class30061]))
 
 ([MAIN::ia-viatges_Class6] of  Continent
 
+	(has_destinations
+		[MAIN::ia-viatges_Class50019]
+		[MAIN::ia-viatges_Class50024]
+		[MAIN::ia-viatges_Class50049]
+		[MAIN::ia-viatges_Class50065])
 	(name_continent "SouthAmerica"))
 
 )
